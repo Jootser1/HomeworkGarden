@@ -1,0 +1,30 @@
+{
+  "name": "homework-garden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Le Jardin des Devoirs — une PWA qui transforme les devoirs en collection de créatures.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^4.0.84",
+    "ai": "^7.0.128",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

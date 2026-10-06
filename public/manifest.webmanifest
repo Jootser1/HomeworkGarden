@@ -1,0 +1,11 @@
+{
+  "name": "Le Jardin des Devoirs",
+  "short_name": "Jardin Devoirs",
+  "description": "Transforme les devoirs en collection de créatures.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf7ec",
+  "theme_color": "#8fd86a",
+  "lang": "fr",
+  "icons": []
+}
