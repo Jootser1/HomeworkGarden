@@ -5,7 +5,16 @@ import { useEffect, useMemo, useState } from 'react'
 import { CreatureView } from '@/components/CreatureView'
 import { gardenTiles, isoPosition, randomAllowedTile, tileAt } from '@/lib/garden/map'
 import { loadAppState, resetAppState, saveAppState } from '@/lib/storage/app-state'
-import type { AppState, Creature, Direction, GardenPlacement } from '@/lib/types'
+import type { AppState, Creature, Direction, GardenPlacement, MovementType } from '@/lib/types'
+
+const movementLabels: Record<MovementType, string> = {
+  walking: 'marche doucement',
+  hopping: 'sautille',
+  flying: 'vole tranquillement',
+  floating: 'flotte dans l’air',
+  swimming: 'nage',
+  amphibious: 'va sur la terre et dans l’eau',
+}
 
 function directionFromDelta(dx: number, dy: number): Direction {
   if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? 'right' : 'left'
@@ -20,6 +29,8 @@ function nextPlacement(placement: GardenPlacement, creature: Creature): GardenPl
     [0, -1],
     [1, -1],
     [-1, 1],
+    [1, 1],
+    [-1, -1],
   ].sort(() => Math.random() - .5)
 
   for (const [dx, dy] of deltas) {
@@ -29,12 +40,13 @@ function nextPlacement(placement: GardenPlacement, creature: Creature): GardenPl
     }
   }
 
-  const fallback = randomAllowedTile(creature.movement.allowedTerrain)
+  const fallback = randomAllowedTile(creature.movement.allowedTerrain, creature.movement.preferredBiomes)
   return { ...placement, x: fallback.x, y: fallback.y, direction: 'down' }
 }
 
 export default function GardenPage() {
   const [state, setState] = useState<AppState | null>(null)
+  const [selectedCreature, setSelectedCreature] = useState<Creature | null>(null)
 
   useEffect(() => {
     const loaded = loadAppState()
@@ -42,7 +54,7 @@ export default function GardenPage() {
     let changed = false
     for (const creature of completedCreatures) {
       if (!loaded.garden.placements.some((placement) => placement.creatureId === creature.id)) {
-        const tile = randomAllowedTile(creature.movement.allowedTerrain)
+        const tile = randomAllowedTile(creature.movement.allowedTerrain, creature.movement.preferredBiomes)
         loaded.garden.placements.push({ creatureId: creature.id, x: tile.x, y: tile.y, direction: 'down' })
         changed = true
       }
@@ -94,32 +106,37 @@ export default function GardenPage() {
         </div>
       </section>
 
-      <section className="garden-wrap card">
+      <section className="garden-wrap card" aria-label="Jardin, fais glisser pour te déplacer">
         <div className="iso-world">
           {gardenTiles.map((tile) => {
             const pos = isoPosition(tile.x, tile.y)
             return <div key={`${tile.x}-${tile.y}`} className={`iso-tile tile-${tile.terrain}`} style={{ left: pos.left, top: pos.top }} title={tile.terrain} />
           })}
-          <span className="garden-deco" style={{ left: 378, top: 72 }}>🌳</span>
-          <span className="garden-deco" style={{ left: 618, top: 126 }}>🍄</span>
-          <span className="garden-deco" style={{ left: 500, top: 262 }}>🌼</span>
-          <span className="garden-deco" style={{ left: 702, top: 286 }}>🌲</span>
+          <span className="garden-deco" style={{ left: 430, top: 72 }}>🌳</span>
+          <span className="garden-deco" style={{ left: 668, top: 126 }}>🍄</span>
+          <span className="garden-deco" style={{ left: 548, top: 262 }}>🌼</span>
+          <span className="garden-deco" style={{ left: 786, top: 286 }}>🌲</span>
           <span className="garden-deco" style={{ left: 356, top: 342 }}>🌸</span>
+          <span className="garden-deco" style={{ left: 908, top: 188 }}>🪨</span>
+          <span className="garden-deco" style={{ left: 244, top: 238 }}>🌿</span>
+          <span className="garden-deco" style={{ left: 626, top: 430 }}>🪷</span>
+          <span className="garden-deco" style={{ left: 858, top: 420 }}>✨</span>
 
           {placements.map((placement) => {
             const creature = creaturesById.get(placement.creatureId)
             if (!creature) return null
             const pos = isoPosition(placement.x, placement.y)
-            const transform = placement.direction === 'left' ? 'scaleX(-1)' : 'none'
             return (
-              <div
+              <button
                 className="garden-creature"
                 key={placement.creatureId}
-                style={{ left: pos.left + 4, top: pos.top - 42, transform }}
+                style={{ left: pos.left + 4, top: pos.top - 42 }}
                 title={`${creature.name} · ${creature.movement.type}`}
+                type="button"
+                onClick={() => setSelectedCreature(creature)}
               >
-                <CreatureView creature={creature} compact alive />
-              </div>
+                <CreatureView creature={creature} compact alive direction={placement.direction} />
+              </button>
             )
           })}
         </div>
@@ -130,6 +147,22 @@ export default function GardenPage() {
           <h2>Aucune créature</h2>
           <Link className="btn btn-magic" href="/parent">Créer une session</Link>
         </section>
+      ) : null}
+
+      {selectedCreature ? (
+        <div className="info-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="garden-creature-info" onClick={() => setSelectedCreature(null)}>
+          <div className="info-modal card panel stack" onClick={(event) => event.stopPropagation()}>
+            <div className="spread">
+              <h2 id="garden-creature-info">{selectedCreature.name}</h2>
+              <button className="info-close" type="button" aria-label="Fermer" onClick={() => setSelectedCreature(null)}>×</button>
+            </div>
+            <CreatureView creature={selectedCreature} alive direction="down" />
+            <p>{selectedCreature.description}</p>
+            <div className="info-fact">🚶 {movementLabels[selectedCreature.movement.type]}</div>
+            <div className="info-fact">✨ {selectedCreature.personality}</div>
+            <div className="info-fact">💎 {selectedCreature.rarity}</div>
+          </div>
+        </div>
       ) : null}
     </main>
   )

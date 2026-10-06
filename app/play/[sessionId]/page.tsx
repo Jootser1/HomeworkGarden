@@ -27,6 +27,8 @@ export default function PlayPage() {
   const [feedback, setFeedback] = useState<string | null>(null)
   const [justRevealed, setJustRevealed] = useState<string | null>(null)
   const [infoOpen, setInfoOpen] = useState(false)
+  const [isAdvancing, setIsAdvancing] = useState(false)
+  const [answerState, setAnswerState] = useState<'idle' | 'correct' | 'wrong'>('idle')
 
   useEffect(() => {
     const found = getSession(sessionId)
@@ -76,17 +78,30 @@ export default function PlayPage() {
         exercise.revealedPartId = part.id
         setJustRevealed(part.label)
       }
-      const nextIndex = next.exercises.findIndex((item) => item.status === 'pending')
-      next.currentExerciseIndex = nextIndex === -1 ? next.exercises.length : nextIndex
       if (next.exercises.every((item) => item.status === 'correct')) next.creature.state = 'complete_static'
-      setFeedback('Bravo ! Une nouvelle partie apparaît dans un éclat de magie.')
+      setFeedback('Bravo !')
       setAnswer('')
+      setAnswerState('correct')
+      setIsAdvancing(true)
+      if (navigator.vibrate) navigator.vibrate(35)
       persist(next)
+
+      window.setTimeout(() => {
+        const advanced: HomeworkSession = structuredClone(next)
+        const nextIndex = advanced.exercises.findIndex((item) => item.status === 'pending')
+        advanced.currentExerciseIndex = nextIndex === -1 ? advanced.exercises.length : nextIndex
+        setAnswerState('idle')
+        setIsAdvancing(false)
+        persist(advanced)
+      }, 850)
     } else {
       const hint = exercise.attempts >= 2 ? ` Indice : ${getCrossingTenHint(exercise)}` : ''
       setFeedback(`Presque, essaie encore.${hint}`)
       setAnswer('')
+      setAnswerState('wrong')
+      if (navigator.vibrate) navigator.vibrate([20, 30, 20])
       persist(next)
+      window.setTimeout(() => setAnswerState('idle'), 420)
     }
   }
 
@@ -114,12 +129,12 @@ export default function PlayPage() {
           </div>
         ) : currentExercise ? (
           <>
-            <div className="exercise-card card stack play-current-exercise">
+            <div className={`exercise-card card stack play-current-exercise answer-${answerState}`}>
               <div className="exercise-prompt">{currentExercise.prompt}</div>
               <div className="answer-display">{answer || ' '}</div>
               {feedback ? <p>{feedback}</p> : null}
             </div>
-            <NumericKeypad value={answer} onChange={setAnswer} onSubmit={submit} />
+            <NumericKeypad value={answer} onChange={setAnswer} onSubmit={submit} disabled={isAdvancing} />
           </>
         ) : null}
       </section>

@@ -61,6 +61,7 @@ export function addCreatureToGarden(creature: Creature) {
 export function resetAppState() {
   if (typeof window !== 'undefined') {
     window.localStorage.removeItem(STORAGE_KEY)
+    window.localStorage.removeItem('homework-garden-used-local-creatures-v2')
     window.dispatchEvent(new Event('homework-garden-state-change'))
   }
 }

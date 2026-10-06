@@ -26,7 +26,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY
 
   if (!apiKey) {
-    const creature = creatureFromManifest(fallbackCreatureManifest(exerciseCount), exerciseCount)
+    const creature = creatureFromManifest(fallbackCreatureManifest(), exerciseCount)
     return NextResponse.json({ creature, source: 'fallback', warning: 'OPENAI_API_KEY absente : créature locale de secours.' })
   }
 
@@ -44,14 +44,14 @@ export async function POST(req: Request) {
         'Réponds uniquement avec un objet conforme au schéma.',
         'Les couleurs doivent être des hex RGB complets.',
       ].join(' '),
-      prompt: `Génère une créature unique pour une session de ${exerciseCount} additions avec passage de dizaine. Difficulté: ${difficulty}. La liste parts doit contenir exactement ${exerciseCount} éléments, avec body et eyes au début, puis des éléments révélables variés. Choisis un biome cohérent et un mouvement compatible. Donne un nom français court en rapport avec son profil.`,
+      prompt: `Génère une créature unique pour une session de ${exerciseCount} additions avec passage de dizaine. Difficulté: ${difficulty}. La liste parts doit contenir exactement ${exerciseCount} éléments, avec body et eyes au début, puis des éléments révélables variés. Renseigne aussi rarity et visuals avec des valeurs du schéma. Choisis un biome cohérent, un mouvement compatible, une palette douce et un nom français court en rapport avec son profil.`,
     })
 
     const creature = creatureFromManifest(result.object, exerciseCount)
     return NextResponse.json({ creature, source: 'openai' })
   } catch (error) {
     console.error('Creature generation failed', error)
-    const creature = creatureFromManifest(fallbackCreatureManifest(exerciseCount), exerciseCount)
+    const creature = creatureFromManifest(fallbackCreatureManifest(), exerciseCount)
     return NextResponse.json({ creature, source: 'fallback', warning: 'La génération IA a échoué : créature locale de secours.' })
   }
 }

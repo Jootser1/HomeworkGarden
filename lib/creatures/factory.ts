@@ -1,24 +1,9 @@
 import type { CreatureManifest } from '@/lib/creatures/schema'
+import { localCreatureCatalog, type LocalCreatureBlueprint } from '@/lib/creatures/local-catalog'
 import type { BiomeId, Creature, CreatureMovement, CreaturePartKind, TerrainType } from '@/lib/types'
 
 const uid = (prefix: string) => `${prefix}_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`
-
-const namesA = ['Moussi', 'Brindi', 'Lumi', 'Ploof', 'Nébuli', 'Roseli', 'Bambou', 'Flori', 'Dodu', 'Zibou', 'Miro', 'Plumi']
-const namesB = ['bulle', 'lune', 'mousse', 'pollen', 'doux', 'fleur', 'grelot', 'plume', 'saule', 'luciole', 'ronde', 'champi']
-const personalities = [
-  'douce, curieuse et un peu malicieuse',
-  'timide, rêveuse et très attentive aux fleurs',
-  'joyeuse, sautillante et rassurante',
-  'calme, bizarre juste comme il faut, et jamais pressée',
-  'nocturne, tendre et fascinée par les petites lumières',
-]
-const palettes = [
-  { primary: '#8EE6C8', secondary: '#F7D6FF', accent: '#FFE66D', dark: '#315C55' },
-  { primary: '#A5D86A', secondary: '#FFF1A8', accent: '#FF9FB2', dark: '#3C6134' },
-  { primary: '#A4C8FF', secondary: '#F2E6FF', accent: '#FFD166', dark: '#334767' },
-  { primary: '#D9A7FF', secondary: '#B8F2E6', accent: '#FFCF70', dark: '#4C3A68' },
-  { primary: '#FFB7A3', secondary: '#FFF3C4', accent: '#8EE3EF', dark: '#70403B' },
-]
+const USED_CREATURES_KEY = 'homework-garden-used-local-creatures-v2'
 
 const partLabels: Record<CreaturePartKind, string> = {
   body: 'Corps',
@@ -73,12 +58,12 @@ export function normalizeParts(parts: CreaturePartKind[], count: number): Creatu
 function movementFor(type: CreatureManifest['movementType'], biome: BiomeId): CreatureMovement {
   const preferredBiomes: BiomeId[] = [biome]
   const byType: Record<CreatureManifest['movementType'], TerrainType[]> = {
-    walking: ['grass', 'flower', 'forest', 'mushroom', 'dirt'],
-    hopping: ['grass', 'flower', 'forest', 'mushroom', 'dirt'],
-    flying: ['grass', 'flower', 'pond', 'forest', 'mushroom', 'dirt'],
-    floating: ['grass', 'flower', 'pond', 'forest', 'mushroom', 'dirt'],
+    walking: ['grass', 'flower', 'forest', 'mushroom', 'dirt', 'stone', 'glow'],
+    hopping: ['grass', 'flower', 'forest', 'mushroom', 'dirt', 'stone', 'glow'],
+    flying: ['grass', 'flower', 'pond', 'forest', 'mushroom', 'dirt', 'stone', 'glow'],
+    floating: ['grass', 'flower', 'pond', 'forest', 'mushroom', 'dirt', 'stone', 'glow'],
     swimming: ['pond'],
-    amphibious: ['grass', 'flower', 'pond', 'dirt'],
+    amphibious: ['grass', 'flower', 'pond', 'dirt', 'glow'],
   }
   return {
     type,
@@ -88,19 +73,47 @@ function movementFor(type: CreatureManifest['movementType'], biome: BiomeId): Cr
   }
 }
 
-export function creatureFromManifest(manifest: CreatureManifest, exerciseCount: number): Creature {
+function readUsedCreatureIds() {
+  if (typeof window === 'undefined') return []
+  try {
+    const raw = window.localStorage.getItem(USED_CREATURES_KEY)
+    return raw ? (JSON.parse(raw) as string[]) : []
+  } catch {
+    return []
+  }
+}
+
+function writeUsedCreatureIds(ids: string[]) {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(USED_CREATURES_KEY, JSON.stringify(ids))
+}
+
+export function pickLocalCreatureBlueprint(): LocalCreatureBlueprint {
+  const used = readUsedCreatureIds()
+  const available = localCreatureCatalog.filter((creature) => !used.includes(creature.catalogId))
+  const pool = available.length > 0 ? available : localCreatureCatalog
+  const picked = pool[Math.floor(Math.random() * pool.length)]
+  const nextUsed = available.length > 0 ? [...used, picked.catalogId] : [picked.catalogId]
+  writeUsedCreatureIds(nextUsed)
+  return picked
+}
+
+export function creatureFromManifest(manifest: CreatureManifest, exerciseCount: number, catalogId?: string): Creature {
   const parts = normalizeParts(manifest.parts, exerciseCount)
   return {
     id: uid('creature'),
+    catalogId,
     name: manifest.name,
     description: manifest.description,
     personality: manifest.personality,
+    rarity: manifest.rarity,
     biome: manifest.biome,
     bodyShape: manifest.bodyShape,
     earShape: manifest.earShape,
     tailShape: manifest.tailShape,
     pattern: manifest.pattern,
     palette: manifest.palette,
+    visuals: manifest.visuals,
     movement: movementFor(manifest.movementType, manifest.biome),
     parts: parts.map((kind, index) => ({
       id: `${kind}_${index + 1}`,
@@ -114,28 +127,15 @@ export function creatureFromManifest(manifest: CreatureManifest, exerciseCount: 
   }
 }
 
-export function fallbackCreatureManifest(exerciseCount: number): CreatureManifest {
-  const index = Math.floor(Math.random() * namesA.length)
-  const movementTypes: CreatureManifest['movementType'][] = ['walking', 'hopping', 'flying', 'floating', 'amphibious']
-  const biomes: CreatureManifest['biome'][] = ['meadow', 'pond', 'forest', 'mushroom_grove', 'moon_clearing']
-  const movementType = movementTypes[Math.floor(Math.random() * movementTypes.length)]
-  const biome = movementType === 'amphibious' ? 'pond' : biomes[Math.floor(Math.random() * biomes.length)]
-  const parts = normalizeParts([...basePartOrder].sort(() => Math.random() - .5), exerciseCount)
-  return {
-    name: `${namesA[index]}${namesB[Math.floor(Math.random() * namesB.length)]}`,
-    description: 'Une petite créature unique du Jardin des Devoirs, douce, expressive et impatiente de découvrir son écosystème.',
-    personality: personalities[Math.floor(Math.random() * personalities.length)],
-    biome,
-    bodyShape: ['round', 'bean', 'leaf', 'mushroom', 'droplet'][Math.floor(Math.random() * 5)] as CreatureManifest['bodyShape'],
-    earShape: ['leaf', 'round', 'horns', 'none'][Math.floor(Math.random() * 4)] as CreatureManifest['earShape'],
-    tailShape: ['glow', 'leaf', 'curl', 'none'][Math.floor(Math.random() * 4)] as CreatureManifest['tailShape'],
-    pattern: ['spots', 'moon', 'stripes', 'freckles', 'none'][Math.floor(Math.random() * 5)] as CreatureManifest['pattern'],
-    movementType,
-    palette: palettes[Math.floor(Math.random() * palettes.length)],
-    parts,
-  }
+export function createLocalCatalogCreature(exerciseCount: number): Creature {
+  const blueprint = pickLocalCreatureBlueprint()
+  return creatureFromManifest(blueprint, exerciseCount, blueprint.catalogId)
+}
+
+export function fallbackCreatureManifest(): CreatureManifest {
+  return localCreatureCatalog[Math.floor(Math.random() * localCreatureCatalog.length)]
 }
 
 export function createFallbackCreature(exerciseCount: number): Creature {
-  return creatureFromManifest(fallbackCreatureManifest(exerciseCount), exerciseCount)
+  return createLocalCatalogCreature(exerciseCount)
 }

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Creature, Exercise, ExerciseDifficulty, HomeworkSession } from '@/lib/types'
-import { createFallbackCreature } from '@/lib/creatures/factory'
+import { createLocalCatalogCreature } from '@/lib/creatures/factory'
 import { defaultAdditionOptions, generateAdditionCrossingTen, parseManualAdditions } from '@/lib/exercises/additions'
 import { upsertSession } from '@/lib/storage/app-state'
 import { loadSettings } from '@/lib/storage/settings'
@@ -149,14 +149,14 @@ export default function ParentPage() {
       let usedFallback = false
 
       if (!aiCreatureGeneration) {
-        creature = createFallbackCreature(selectedExercises.length)
+        creature = createLocalCatalogCreature(selectedExercises.length)
       } else {
         try {
           const generated = await generateCreature(selectedExercises.length, difficulty)
           creature = generated.creature
           usedFallback = generated.source === 'fallback'
         } catch {
-          creature = createFallbackCreature(selectedExercises.length)
+          creature = createLocalCatalogCreature(selectedExercises.length)
           usedFallback = true
         }
       }
