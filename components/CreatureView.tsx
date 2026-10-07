@@ -67,25 +67,36 @@ function earsNode(creature: Creature, side: boolean, back: boolean) {
 
 function eyesNode(creature: Creature, side: boolean) {
   const p = creature.palette
+  const eyeStyle = creature.visuals?.eyeStyle ?? 'round'
   if (side) {
-    if (creature.visuals.eyeStyle === 'sleepy') return <path d="M172 126 C183 119 194 119 205 126" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" />
-    if (creature.visuals.eyeStyle === 'crescent') return <path d="M178 116 C199 122 201 145 181 151 C193 139 192 126 178 116Z" fill={p.dark} />
+    if (eyeStyle === 'sleepy') return <path d="M172 126 C183 119 194 119 205 126" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" />
+    if (eyeStyle === 'crescent') return <path d="M178 116 C199 122 201 145 181 151 C193 139 192 126 178 116Z" fill={p.dark} />
     return <><ellipse cx="188" cy="129" rx="13" ry="17" fill={p.dark} /><circle cx="192" cy="123" r="4" fill="#fff" /></>
   }
-  if (creature.visuals.eyeStyle === 'sleepy') return <><path d="M110 128 C121 121 132 121 143 128" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /><path d="M165 128 C176 121 187 121 198 128" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /></>
-  if (creature.visuals.eyeStyle === 'crescent') return <><path d="M115 116 C136 122 138 145 118 151 C130 139 129 126 115 116Z" fill={p.dark} /><path d="M170 116 C191 122 193 145 173 151 C185 139 184 126 170 116Z" fill={p.dark} /></>
-  if (creature.visuals.eyeStyle === 'dot') return <><circle cx="123" cy="132" r="8" fill={p.dark} /><circle cx="177" cy="132" r="8" fill={p.dark} /></>
-  if (creature.visuals.eyeStyle === 'glow') return <><circle cx="123" cy="129" r="15" fill={p.accent} opacity=".9" /><circle cx="177" cy="129" r="15" fill={p.accent} opacity=".9" /><circle cx="123" cy="129" r="8" fill={p.dark} /><circle cx="177" cy="129" r="8" fill={p.dark} /></>
-  const rx = creature.visuals.eyeStyle === 'wide' ? 16 : 13
+  if (eyeStyle === 'sleepy') return <><path d="M110 128 C121 121 132 121 143 128" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /><path d="M165 128 C176 121 187 121 198 128" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /></>
+  if (eyeStyle === 'crescent') return <><path d="M115 116 C136 122 138 145 118 151 C130 139 129 126 115 116Z" fill={p.dark} /><path d="M170 116 C191 122 193 145 173 151 C185 139 184 126 170 116Z" fill={p.dark} /></>
+  if (eyeStyle === 'dot') return <><circle cx="123" cy="132" r="8" fill={p.dark} /><circle cx="177" cy="132" r="8" fill={p.dark} /></>
+  if (eyeStyle === 'glow') return <><circle cx="123" cy="129" r="15" fill={p.accent} opacity=".9" /><circle cx="177" cy="129" r="15" fill={p.accent} opacity=".9" /><circle cx="123" cy="129" r="8" fill={p.dark} /><circle cx="177" cy="129" r="8" fill={p.dark} /></>
+  const rx = eyeStyle === 'wide' ? 16 : 13
   return <><ellipse cx="123" cy="129" rx={rx} ry="17" fill={p.dark} /><ellipse cx="177" cy="129" rx={rx} ry="17" fill={p.dark} /><circle cx="127" cy="123" r="4" fill="#fff" /><circle cx="181" cy="123" r="4" fill="#fff" /></>
 }
 
 export function CreatureView({ creature, compact = false, alive = false, direction = 'down', className = '' }: CreatureViewProps) {
   const p = creature.palette
+  const visuals = creature.visuals ?? {
+    eyeStyle: 'round',
+    mouthStyle: 'smile',
+    wingStyle: creature.movement.type === 'flying' ? 'small' : 'none',
+    antennaStyle: 'none',
+    legStyle: creature.movement.type === 'swimming' || creature.movement.type === 'floating' ? 'none' : 'tiny',
+    auraStyle: 'sparkles',
+    size: 'medium',
+    tilt: 0,
+  }
   const side = direction === 'left' || direction === 'right'
   const back = direction === 'up'
   const scaleX = direction === 'left' ? -1 : 1
-  const sizeScale = compact ? 0.92 : creature.visuals.size === 'tiny' ? 0.88 : creature.visuals.size === 'large' ? 1.08 : 1
+  const sizeScale = compact ? 0.92 : visuals.size === 'tiny' ? 0.88 : visuals.size === 'large' ? 1.08 : 1
 
   const bodyVisible = isRevealed(creature, 'body')
   const eyesVisible = isRevealed(creature, 'eyes')
@@ -93,7 +104,7 @@ export function CreatureView({ creature, compact = false, alive = false, directi
   const earsVisible = isRevealed(creature, 'ears') || isRevealed(creature, 'horns')
   const legsVisible = isRevealed(creature, 'legs')
   const tailVisible = isRevealed(creature, 'tail')
-  const wingsVisible = isRevealed(creature, 'wings') || creature.visuals.wingStyle !== 'none'
+  const wingsVisible = isRevealed(creature, 'wings') || visuals.wingStyle !== 'none'
   const spotsVisible = isRevealed(creature, 'spots') || isRevealed(creature, 'sparkles') || isRevealed(creature, 'shadow_glow')
   const auraVisible = isRevealed(creature, 'aura')
   const bellyVisible = isRevealed(creature, 'belly')
@@ -119,28 +130,28 @@ export function CreatureView({ creature, compact = false, alive = false, directi
           <stop offset="100%" stopColor={p.primary} stopOpacity="0.4" />
         </radialGradient>
       </defs>
-      <g transform={`translate(${direction === 'left' ? 300 : 0} 0) scale(${scaleX} 1) rotate(${creature.visuals.tilt} 150 145)`}>
+      <g transform={`translate(${direction === 'left' ? 300 : 0} 0) scale(${scaleX} 1) rotate(${visuals.tilt} 150 145)`}>
         <g className={partClass(auraVisible)}>
           <ellipse cx="150" cy="145" rx="104" ry="104" fill={p.accent} opacity="0.12" />
-          {creature.visuals.auraStyle !== 'none' ? <ellipse cx="150" cy="145" rx="88" ry="88" fill="none" stroke={p.accent} strokeWidth="3" strokeDasharray="5 12" opacity="0.55" /> : null}
+          {visuals.auraStyle !== 'none' ? <ellipse cx="150" cy="145" rx="88" ry="88" fill="none" stroke={p.accent} strokeWidth="3" strokeDasharray="5 12" opacity="0.55" /> : null}
         </g>
         <g className={partClass(tailVisible)}>
           {creature.tailShape === 'fin' ? <path d="M215 150 C264 120 271 184 221 180Z" fill={p.accent} stroke={p.dark} strokeWidth="5" /> : creature.tailShape === 'leaf' ? <path d="M215 147 C265 116 270 177 222 179 C235 165 235 153 215 147Z" fill={p.secondary} stroke={p.dark} strokeWidth="5" /> : creature.tailShape === 'curl' ? <path d="M217 154 C268 145 260 207 226 190 C207 180 230 159 244 175" fill="none" stroke={p.dark} strokeWidth="13" strokeLinecap="round" /> : creature.tailShape === 'star' ? <path d="M237 157 L248 174 L268 177 L255 191 L258 211 L239 202 L221 211 L224 191 L211 177 L231 174Z" fill={p.accent} stroke={p.dark} strokeWidth="4" /> : creature.tailShape === 'puff' ? <circle cx="236" cy="177" r="24" fill={p.secondary} stroke={p.dark} strokeWidth="5" /> : creature.tailShape === 'ribbon' ? <path d="M215 154 C250 130 261 168 288 151 C269 182 246 181 224 170" fill={p.accent} opacity=".78" stroke={p.dark} strokeWidth="4" /> : creature.tailShape === 'glow' ? <g><path d="M215 150 C255 132 266 168 231 184" fill="none" stroke={p.dark} strokeWidth="11" strokeLinecap="round" /><circle cx="238" cy="184" r="17" fill={p.accent} opacity=".85" /></g> : null}
         </g>
         <g className={partClass(wingsVisible)} opacity={compact ? 0.78 : 1}>
-          {creature.visuals.wingStyle !== 'none' ? <><path d="M93 119 C40 84 37 159 89 157" fill={p.secondary} opacity=".72" stroke={p.dark} strokeWidth="4" /><path d="M207 119 C260 84 263 159 211 157" fill={p.secondary} opacity=".72" stroke={p.dark} strokeWidth="4" /></> : null}
+          {visuals.wingStyle !== 'none' ? <><path d="M93 119 C40 84 37 159 89 157" fill={p.secondary} opacity=".72" stroke={p.dark} strokeWidth="4" /><path d="M207 119 C260 84 263 159 211 157" fill={p.secondary} opacity=".72" stroke={p.dark} strokeWidth="4" /></> : null}
         </g>
         <g className={partClass(earsVisible)}>{earsNode(creature, side, back)}</g>
         <g className={partClass(bodyVisible)}>{bodyNode(creature, side)}<ellipse cx="128" cy="101" rx="38" ry="30" fill={`url(#${creature.id}-shine)`} opacity=".38" /></g>
         <g className={partClass(bellyVisible)}>{!back ? <ellipse cx={side ? 156 : 150} cy="166" rx={side ? 34 : 43} ry="39" fill={p.secondary} opacity=".62" /> : <path d="M111 134 C130 118 174 118 194 134" fill="none" stroke={p.secondary} strokeWidth="9" opacity=".44" />}</g>
-        <g className={partClass(antennaeVisible)}>{creature.visuals.antennaStyle !== 'none' ? <><path d="M126 71 C114 42 91 44 88 24" fill="none" stroke={p.dark} strokeWidth="5" strokeLinecap="round" /><path d="M174 71 C186 42 209 44 212 24" fill="none" stroke={p.dark} strokeWidth="5" strokeLinecap="round" /><circle cx="87" cy="22" r="9" fill={p.accent} /><circle cx="213" cy="22" r="9" fill={p.accent} /></> : null}</g>
+        <g className={partClass(antennaeVisible)}>{visuals.antennaStyle !== 'none' ? <><path d="M126 71 C114 42 91 44 88 24" fill="none" stroke={p.dark} strokeWidth="5" strokeLinecap="round" /><path d="M174 71 C186 42 209 44 212 24" fill="none" stroke={p.dark} strokeWidth="5" strokeLinecap="round" /><circle cx="87" cy="22" r="9" fill={p.accent} /><circle cx="213" cy="22" r="9" fill={p.accent} /></> : null}</g>
         <g className={partClass(spotsVisible)}>
           {creature.pattern === 'stripes' || creature.pattern === 'waves' ? <><path d="M96 132 C131 147 169 148 205 132" stroke={p.dark} strokeWidth="7" opacity=".18" fill="none" /><path d="M92 158 C129 176 170 177 208 158" stroke={p.dark} strokeWidth="7" opacity=".18" fill="none" /></> : creature.pattern !== 'none' ? <><circle cx="113" cy="132" r="9" fill={p.accent} opacity=".68" /><circle cx="190" cy="146" r="7" fill={p.accent} opacity=".68" /><circle cx="145" cy="190" r="6" fill={p.accent} opacity=".68" /></> : null}
         </g>
         <g className={partClass(eyesVisible)}>{back ? <path d="M120 93 C140 82 163 82 184 93" fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" opacity=".28" /> : eyesNode(creature, side)}</g>
         <g className={partClass(cheeksVisible)}>{!back ? <><ellipse cx={side ? 170 : 101} cy="151" rx="15" ry="9" fill="#ff91b1" opacity=".42" />{!side ? <ellipse cx="199" cy="151" rx="15" ry="9" fill="#ff91b1" opacity=".42" /> : null}</> : null}</g>
-        <g className={partClass(mouthVisible)}>{!back && creature.visuals.mouthStyle !== 'none' ? <path d={side ? 'M176 158 C184 166 194 166 202 158' : 'M134 158 C143 169 158 169 167 158'} fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /> : null}</g>
-        <g className={partClass(legsVisible)}>{creature.visuals.legStyle !== 'none' ? <><ellipse cx={side ? 126 : 117} cy="216" rx="24" ry="13" fill={p.dark} opacity=".82" /><ellipse cx={side ? 185 : 183} cy="216" rx="24" ry="13" fill={p.dark} opacity=".82" /></> : null}</g>
+        <g className={partClass(mouthVisible)}>{!back && visuals.mouthStyle !== 'none' ? <path d={side ? 'M176 158 C184 166 194 166 202 158' : 'M134 158 C143 169 158 169 167 158'} fill="none" stroke={p.dark} strokeWidth="6" strokeLinecap="round" /> : null}</g>
+        <g className={partClass(legsVisible)}>{visuals.legStyle !== 'none' ? <><ellipse cx={side ? 126 : 117} cy="216" rx="24" ry="13" fill={p.dark} opacity=".82" /><ellipse cx={side ? 185 : 183} cy="216" rx="24" ry="13" fill={p.dark} opacity=".82" /></> : null}</g>
       </g>
     </svg>
   )
