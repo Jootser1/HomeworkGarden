@@ -808,3 +808,35 @@ p { color: var(--muted); line-height: 1.55; }
   outline-offset: 4px;
   border-radius: 24px;
 }
+
+.garden-camera {
+  width: 1180px;
+  height: 820px;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.garden-camera .iso-world {
+  margin: 0;
+  transform: none;
+  left: auto;
+}
+
+.garden-wrap {
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+
+@media (max-width: 760px) {
+  .garden-camera .iso-world {
+    transform: none;
+    height: 820px;
+  }
+}
+
+@media (max-width: 420px) {
+  .garden-camera .iso-world {
+    transform: none;
+  }
+}

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CreatureView } from '@/components/CreatureView'
 import { gardenTiles, isoPosition, randomAllowedTile, tileAt } from '@/lib/garden/map'
 import { loadAppState, resetAppState, saveAppState } from '@/lib/storage/app-state'
@@ -44,9 +44,30 @@ function nextPlacement(placement: GardenPlacement, creature: Creature): GardenPl
   return { ...placement, x: fallback.x, y: fallback.y, direction: 'down' }
 }
 
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
+const distance = (a: PointerPoint, b: PointerPoint) => Math.hypot(a.x - b.x, a.y - b.y)
+const midpoint = (a: PointerPoint, b: PointerPoint) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 })
+
+type PointerPoint = { x: number; y: number }
+type Camera = { x: number; y: number; zoom: number }
+
+type GestureState =
+  | { type: 'none' }
+  | { type: 'drag'; pointerId: number; startPoint: PointerPoint; startCamera: Camera }
+  | { type: 'pinch'; startDistance: number; startCamera: Camera; contentPoint: PointerPoint }
+
 export default function GardenPage() {
   const [state, setState] = useState<AppState | null>(null)
   const [selectedCreature, setSelectedCreature] = useState<Creature | null>(null)
+  const [camera, setCamera] = useState<Camera>({ x: 0, y: 20, zoom: 1 })
+  const pointersRef = useRef(new Map<number, PointerPoint>())
+  const gestureRef = useRef<GestureState>({ type: 'none' })
+  const movedRef = useRef(false)
+
+  useEffect(() => {
+    const mobile = window.innerWidth < 760
+    setCamera({ x: mobile ? -220 : 0, y: mobile ? 14 : 20, zoom: mobile ? 0.72 : 1 })
+  }, [])
 
   useEffect(() => {
     const loaded = loadAppState()
@@ -96,6 +117,88 @@ export default function GardenPage() {
     setState(loadAppState())
   }
 
+  const pointFromEvent = (event: React.PointerEvent<HTMLElement>): PointerPoint => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    return { x: event.clientX - rect.left, y: event.clientY - rect.top }
+  }
+
+  const startGesture = (pointers: Map<number, PointerPoint>, currentCamera: Camera) => {
+    movedRef.current = false
+    if (pointers.size === 1) {
+      const [pointerId, startPoint] = [...pointers.entries()][0]
+      gestureRef.current = { type: 'drag', pointerId, startPoint, startCamera: currentCamera }
+      return
+    }
+    if (pointers.size >= 2) {
+      const [first, second] = [...pointers.values()]
+      const mid = midpoint(first, second)
+      gestureRef.current = {
+        type: 'pinch',
+        startDistance: distance(first, second),
+        startCamera: currentCamera,
+        contentPoint: {
+          x: (mid.x - currentCamera.x) / currentCamera.zoom,
+          y: (mid.y - currentCamera.y) / currentCamera.zoom,
+        },
+      }
+      return
+    }
+    gestureRef.current = { type: 'none' }
+  }
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId)
+    pointersRef.current.set(event.pointerId, pointFromEvent(event))
+    startGesture(pointersRef.current, camera)
+  }
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
+    if (!pointersRef.current.has(event.pointerId)) return
+    pointersRef.current.set(event.pointerId, pointFromEvent(event))
+    const gesture = gestureRef.current
+
+    if (gesture.type === 'drag' && pointersRef.current.size === 1) {
+      const point = pointersRef.current.get(gesture.pointerId)
+      if (!point) return
+      const dx = point.x - gesture.startPoint.x
+      const dy = point.y - gesture.startPoint.y
+      if (Math.abs(dx) + Math.abs(dy) > 4) movedRef.current = true
+      setCamera({ ...gesture.startCamera, x: gesture.startCamera.x + dx, y: gesture.startCamera.y + dy })
+      return
+    }
+
+    if (gesture.type === 'pinch' && pointersRef.current.size >= 2) {
+      const [first, second] = [...pointersRef.current.values()]
+      const mid = midpoint(first, second)
+      const nextZoom = clamp(gesture.startCamera.zoom * (distance(first, second) / gesture.startDistance), 0.45, 1.85)
+      movedRef.current = true
+      setCamera({
+        zoom: nextZoom,
+        x: mid.x - gesture.contentPoint.x * nextZoom,
+        y: mid.y - gesture.contentPoint.y * nextZoom,
+      })
+    }
+  }
+
+  const handlePointerEnd = (event: React.PointerEvent<HTMLElement>) => {
+    pointersRef.current.delete(event.pointerId)
+    startGesture(pointersRef.current, camera)
+  }
+
+  const handleWheel = (event: React.WheelEvent<HTMLElement>) => {
+    event.preventDefault()
+    const rect = event.currentTarget.getBoundingClientRect()
+    const point = { x: event.clientX - rect.left, y: event.clientY - rect.top }
+    const nextZoom = clamp(camera.zoom * (event.deltaY > 0 ? 0.92 : 1.08), 0.45, 1.85)
+    const contentPoint = { x: (point.x - camera.x) / camera.zoom, y: (point.y - camera.y) / camera.zoom }
+    setCamera({ zoom: nextZoom, x: point.x - contentPoint.x * nextZoom, y: point.y - contentPoint.y * nextZoom })
+  }
+
+  const openCreature = (creature: Creature) => {
+    if (movedRef.current) return
+    setSelectedCreature(creature)
+  }
+
   return (
     <main className="stack">
       <section className="card panel spread">
@@ -106,7 +209,16 @@ export default function GardenPage() {
         </div>
       </section>
 
-      <section className="garden-wrap card" aria-label="Jardin, fais glisser pour te déplacer">
+      <section
+        className="garden-wrap card"
+        aria-label="Jardin, fais glisser pour te déplacer. Écarte deux doigts pour zoomer."
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+        onWheel={handleWheel}
+      >
+        <div className="garden-camera" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
         <div className="iso-world">
           {gardenTiles.map((tile) => {
             const pos = isoPosition(tile.x, tile.y)
@@ -133,12 +245,13 @@ export default function GardenPage() {
                 style={{ left: pos.left + 4, top: pos.top - 42 }}
                 title={`${creature.name} · ${creature.movement.type}`}
                 type="button"
-                onClick={() => setSelectedCreature(creature)}
+                onClick={() => openCreature(creature)}
               >
                 <CreatureView creature={creature} compact alive direction={placement.direction} />
               </button>
             )
           })}
+        </div>
         </div>
       </section>
 
