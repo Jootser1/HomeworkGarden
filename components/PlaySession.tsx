@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CreatureView } from '@/components/CreatureView'
 import { NumericKeypad } from '@/components/NumericKeypad'
 import { getCrossingTenHint } from '@/lib/exercises/additions'
@@ -29,10 +29,13 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
   const [infoOpen, setInfoOpen] = useState(false)
   const [isAdvancing, setIsAdvancing] = useState(false)
   const [answerState, setAnswerState] = useState<'idle' | 'correct' | 'wrong'>('idle')
+  const advanceTimer = useRef<number | null>(null)
 
   useEffect(() => {
     const found = getSession(sessionId)
-    setSession(found ?? null)
+    const pendingIndex = found?.exercises.findIndex((exercise) => exercise.status === 'pending') ?? -1
+    setSession(found ? { ...found, currentExerciseIndex: pendingIndex === -1 ? found.exercises.length : pendingIndex } : null)
+    return () => { if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current) }
   }, [sessionId])
 
   const currentExercise = useMemo(() => {
@@ -63,7 +66,7 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
   }
 
   const submit = () => {
-    if (!currentExercise || !answer) return
+    if (!currentExercise || !answer || isAdvancing || currentExercise.status !== 'pending') return
     const numeric = Number(answer)
     const next: HomeworkSession = structuredClone(session)
     const exercise = next.exercises[next.currentExerciseIndex]
@@ -78,7 +81,10 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
         exercise.revealedPartId = part.id
         setJustRevealed(part.label)
       }
-      if (next.exercises.every((item) => item.status === 'correct')) next.creature.state = 'complete_static'
+      if (next.exercises.every((item) => item.status === 'correct')) {
+        next.creature.state = 'complete_static'
+        next.solvedAt ??= new Date().toISOString()
+      }
       setFeedback('Bravo !')
       setAnswer('')
       setAnswerState('correct')
@@ -86,7 +92,8 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
       if (navigator.vibrate) navigator.vibrate(35)
       persist(next)
 
-      window.setTimeout(() => {
+      advanceTimer.current = window.setTimeout(() => {
+        advanceTimer.current = null
         const advanced: HomeworkSession = structuredClone(next)
         const nextIndex = advanced.exercises.findIndex((item) => item.status === 'pending')
         advanced.currentExerciseIndex = nextIndex === -1 ? advanced.exercises.length : nextIndex
@@ -106,6 +113,8 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
   }
 
   const sendToGarden = () => {
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current)
+    advanceTimer.current = null
     const next: HomeworkSession = structuredClone(session)
     next.status = 'completed'
     next.creature.state = 'alive_in_garden'

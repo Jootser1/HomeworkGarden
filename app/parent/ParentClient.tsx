@@ -1,37 +1,44 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import type { Creature, Exercise, ExerciseDifficulty, HomeworkSession } from '@/lib/types'
+import type { AdditionGenerationOptions, Creature, Exercise, ExerciseDifficulty, HomeworkSession } from '@/lib/types'
 import { createLocalCatalogCreature } from '@/lib/creatures/factory'
 import { defaultAdditionOptions, generateAdditionCrossingTen, parseManualAdditions } from '@/lib/exercises/additions'
-import { upsertSession } from '@/lib/storage/app-state'
+import { recommendAdditionSession, type SessionRecommendation } from '@/lib/exercises/adaptive-session'
+import { loadAppState, upsertSession } from '@/lib/storage/app-state'
 import { loadSettings } from '@/lib/storage/settings'
 
 const uid = (prefix: string) => `${prefix}_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`
 const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms))
-const initialPreviewExercises: Exercise[] = [
-  { id: 'initial_1', kind: 'addition_crossing_ten', prompt: '115 + 9', operands: [115, 9], expectedAnswer: 124, attempts: 0, status: 'pending' },
-  { id: 'initial_2', kind: 'addition_crossing_ten', prompt: '127 + 8', operands: [127, 8], expectedAnswer: 135, attempts: 0, status: 'pending' },
-  { id: 'initial_3', kind: 'addition_crossing_ten', prompt: '136 + 7', operands: [136, 7], expectedAnswer: 143, attempts: 0, status: 'pending' },
-  { id: 'initial_4', kind: 'addition_crossing_ten', prompt: '148 + 6', operands: [148, 6], expectedAnswer: 154, attempts: 0, status: 'pending' },
-  { id: 'initial_5', kind: 'addition_crossing_ten', prompt: '159 + 8', operands: [159, 8], expectedAnswer: 167, attempts: 0, status: 'pending' },
-  { id: 'initial_6', kind: 'addition_crossing_ten', prompt: '172 + 9', operands: [172, 9], expectedAnswer: 181, attempts: 0, status: 'pending' },
-  { id: 'initial_7', kind: 'addition_crossing_ten', prompt: '184 + 7', operands: [184, 7], expectedAnswer: 191, attempts: 0, status: 'pending' },
-  { id: 'initial_8', kind: 'addition_crossing_ten', prompt: '196 + 5', operands: [196, 5], expectedAnswer: 201, attempts: 0, status: 'pending' },
-  { id: 'initial_9', kind: 'addition_crossing_ten', prompt: '208 + 6', operands: [208, 6], expectedAnswer: 214, attempts: 0, status: 'pending' },
-  { id: 'initial_10', kind: 'addition_crossing_ten', prompt: '219 + 4', operands: [219, 4], expectedAnswer: 223, attempts: 0, status: 'pending' },
-]
-
-type CreationState = 'idle' | 'invalid' | 'generating' | 'success' | 'fallback'
-
-type CreationFeedback = {
-  state: CreationState
-  title: string
-  detail: string
+const recommendationMessages: Record<SessionRecommendation['reason'], string> = {
+  first: 'Un premier niveau pour commencer en douceur.',
+  steady: 'Un niveau proche de la dernière session.',
+  support: 'Des calculs plus accessibles pour consolider.',
+  advance: 'Un cran de plus, après plusieurs sessions faciles.',
+  custom: 'Les réglages de la dernière session sont conservés.',
 }
 
-async function generateCreature(exerciseCount: number, difficulty: ExerciseDifficulty): Promise<{ creature: Creature; source: string; warning?: string }> {
+type CreationState = 'idle' | 'invalid' | 'generating' | 'success' | 'fallback'
+type CreationFeedback = { state: CreationState; title: string; detail: string }
+
+function normalizeOptions(options: AdditionGenerationOptions): AdditionGenerationOptions {
+  const defaults = defaultAdditionOptions(options.difficulty)
+  const integer = (key: 'minBase' | 'maxBase' | 'addendMin' | 'addendMax') => Number.isFinite(options[key]) ? Math.floor(options[key]) : defaults[key]
+  const minBase = Math.max(0, Math.min(integer('minBase'), integer('maxBase')))
+  const maxBase = Math.max(minBase, integer('minBase'), integer('maxBase'))
+  const addendMin = Math.max(1, Math.min(99, integer('addendMin'), integer('addendMax')))
+  return {
+    difficulty: options.difficulty,
+    count: Math.max(1, Math.min(40, Math.floor(options.count) || 1)),
+    minBase,
+    maxBase,
+    addendMin,
+    addendMax: Math.max(addendMin, Math.min(99, Math.max(integer('addendMin'), integer('addendMax')))),
+  }
+}
+
+async function generateCreature(exerciseCount: number, difficulty: ExerciseDifficulty): Promise<{ creature: Creature; source: string }> {
   const response = await fetch('/api/creatures/generate', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -43,9 +50,7 @@ async function generateCreature(exerciseCount: number, difficulty: ExerciseDiffi
 
 function CreatureCreationOverlay({ feedback }: { feedback: CreationFeedback }) {
   if (feedback.state === 'idle') return null
-
   const icon = feedback.state === 'invalid' ? '🌧️' : feedback.state === 'success' ? '✨' : feedback.state === 'fallback' ? '🌱' : '🪄'
-
   return (
     <div className="creation-overlay" role="status" aria-live="polite">
       <div className={`creation-modal creation-${feedback.state}`}>
@@ -67,92 +72,75 @@ function CreatureCreationOverlay({ feedback }: { feedback: CreationFeedback }) {
 
 export default function ParentPage({ offline = false, onStart }: { offline?: boolean; onStart?: (sessionId: string) => void }) {
   const router = useRouter()
-  const [difficulty, setDifficulty] = useState<ExerciseDifficulty>('medium')
   const [options, setOptions] = useState(defaultAdditionOptions('medium'))
+  const [countText, setCountText] = useState('10')
+  const [recommendation, setRecommendation] = useState<SessionRecommendation>(() => recommendAdditionSession([]))
+  const [personalized, setPersonalized] = useState(false)
   const [manual, setManual] = useState('')
   const [mode, setMode] = useState<'generate' | 'manual'>('generate')
-  const [preview, setPreview] = useState<Exercise[]>(initialPreviewExercises)
+  const [preview, setPreview] = useState<Exercise[]>([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
-  const [generationFlash, setGenerationFlash] = useState(0)
   const [creationFeedback, setCreationFeedback] = useState<CreationFeedback>({ state: 'idle', title: '', detail: '' })
   const [clientReady, setClientReady] = useState(false)
   const [aiCreatureGeneration, setAiCreatureGeneration] = useState(false)
-  const lastGenerateTapRef = useRef(0)
 
   useEffect(() => {
+    const suggested = recommendAdditionSession(loadAppState().sessions)
+    setRecommendation(suggested)
+    setOptions(suggested.options)
+    setCountText(String(suggested.options.count))
+    setPreview(generateAdditionCrossingTen(suggested.options))
     setAiCreatureGeneration(loadSettings().aiCreatureGeneration)
     setClientReady(true)
   }, [])
 
   const parsedManual = useMemo(() => parseManualAdditions(manual), [manual])
   const selectedExercises = mode === 'manual' ? parsedManual : preview
+  const validCount = countText.trim() !== '' && Number.isInteger(Number(countText)) && Number(countText) >= 1 && Number(countText) <= 40
 
-  const updateDifficulty = (value: ExerciseDifficulty) => {
-    const next = defaultAdditionOptions(value)
-    setDifficulty(value)
-    setOptions(next)
-    setPreview(generateAdditionCrossingTen(next))
+  const applyOptions = (next: AdditionGenerationOptions) => {
+    const safe = normalizeOptions(next)
+    setOptions(safe)
+    setPreview(generateAdditionCrossingTen(safe))
+    setMessage(null)
   }
 
-  const updateOption = (key: keyof typeof options, value: number) => {
-    setOptions((current) => ({ ...current, [key]: value }))
+  const changeCount = (value: string) => {
+    setCountText(value)
+    const count = Number(value)
+    if (value.trim() && Number.isInteger(count) && count >= 1 && count <= 40) applyOptions({ ...options, count })
   }
 
-  const regenerate = () => {
-    const safeOptions = {
-      ...options,
-      count: Math.max(1, Math.min(40, Math.floor(options.count))),
-      minBase: Math.floor(options.minBase),
-      maxBase: Math.floor(options.maxBase),
-      addendMin: Math.max(1, Math.floor(options.addendMin)),
-      addendMax: Math.max(1, Math.floor(options.addendMax)),
-      difficulty,
-    }
-    const nextExercises = generateAdditionCrossingTen(safeOptions)
-    setOptions(safeOptions)
-    setPreview(nextExercises)
-    setGenerationFlash((value) => value + 1)
-    setMessage(`${nextExercises.length} nouvelles additions générées ✨`)
+  const updateDifficulty = (difficulty: ExerciseDifficulty) => {
+    applyOptions({ ...defaultAdditionOptions(difficulty), count: options.count })
+    setPersonalized(true)
   }
 
-  const handleRegenerateTap = () => {
-    const now = Date.now()
-    if (now - lastGenerateTapRef.current < 350) return
-    lastGenerateTapRef.current = now
-    regenerate()
+  const updateOption = (key: 'minBase' | 'maxBase' | 'addendMin' | 'addendMax', value: number) => {
+    applyOptions({ ...options, [key]: value })
+    setPersonalized(true)
   }
 
   const startSession = async () => {
+    if (loading || (mode === 'generate' && !validCount)) return
     if (selectedExercises.length === 0) {
-      setMessage('Ajoute ou génère au moins une addition valide.')
-      setCreationFeedback({
-        state: 'invalid',
-        title: 'Ajoute une addition',
-        detail: 'La créature a besoin d’au moins un calcul.',
-      })
+      setCreationFeedback({ state: 'invalid', title: 'Ajoute une addition', detail: 'La créature a besoin d’au moins un calcul.' })
       await wait(1400)
       setCreationFeedback({ state: 'idle', title: '', detail: '' })
       return
     }
 
     setLoading(true)
-    setMessage('Création de la créature...')
-    setCreationFeedback({
-      state: 'generating',
-      title: 'Création...',
-      detail: `${selectedExercises.length} addition${selectedExercises.length > 1 ? 's' : ''} pour une créature.`,
-    })
-
+    setCreationFeedback({ state: 'generating', title: 'Création...', detail: `${selectedExercises.length} addition${selectedExercises.length > 1 ? 's' : ''} pour une créature.` })
     try {
       let creature: Creature
       let usedFallback = false
-
       if (offline || !navigator.onLine || !aiCreatureGeneration) {
         creature = createLocalCatalogCreature(selectedExercises.length)
       } else {
         try {
-          const generated = await generateCreature(selectedExercises.length, difficulty)
+          const generated = await generateCreature(selectedExercises.length, options.difficulty)
           creature = generated.creature
           usedFallback = generated.source === 'fallback'
         } catch {
@@ -160,24 +148,18 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
           usedFallback = true
         }
       }
-
-      setCreationFeedback({
-        state: usedFallback ? 'fallback' : 'success',
-        title: usedFallback ? 'Créature créée' : `${creature.name} apparaît !`,
-        detail: 'C’est parti.',
-      })
-
+      setCreationFeedback({ state: usedFallback ? 'fallback' : 'success', title: usedFallback ? 'Créature créée' : `${creature.name} apparaît !`, detail: 'C’est parti.' })
       const session: HomeworkSession = {
         id: uid('session'),
         createdAt: new Date().toISOString(),
         status: 'active',
         title: 'Additions avec passage de dizaine',
         exerciseKind: 'addition_crossing_ten',
+        generationOptions: mode === 'generate' ? { ...options } : undefined,
         exercises: selectedExercises.map((exercise, index) => ({ ...exercise, id: uid(`exercise_${index + 1}`), status: 'pending', attempts: 0, childAnswer: undefined, revealedPartId: undefined })),
         creature,
         currentExerciseIndex: 0,
       }
-
       upsertSession(session)
       await wait(950)
       if (onStart) onStart(session.id)
@@ -190,96 +172,85 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
     }
   }
 
-  if (!clientReady) {
-    return null
-  }
+  if (!clientReady) return null
 
   return (
     <>
       <CreatureCreationOverlay feedback={creationFeedback} />
-      <main className="grid grid-2">
+      <main className="session-setup">
         <section className="card panel stack">
-          <div className="spread">
-            <div>
+          <div className="session-heading">
+            <span aria-hidden="true" className="session-mark">🌱</span>
+            <div className="stack">
               <h2>Créer une session</h2>
+              <p className="session-recommendation" aria-live="polite">
+                {mode === 'manual' ? 'Les devoirs du jour, à ton rythme.' : personalized ? 'Tes réglages personnalisés sont utilisés.' : recommendationMessages[recommendation.reason]}
+              </p>
             </div>
-            <select className="select" style={{ width: 150 }} value={mode} onChange={(event) => setMode(event.target.value as 'generate' | 'manual')}>
-              <option value="generate">Générer</option>
-              <option value="manual">Saisir</option>
-            </select>
           </div>
 
           {mode === 'generate' ? (
-            <div className="stack">
-              <div className="grid grid-2">
-                <label className="form-row">
-                  <span className="label">Difficulté</span>
-                  <select className="select" value={difficulty} onChange={(event) => updateDifficulty(event.target.value as ExerciseDifficulty)}>
-                    <option value="easy">Facile</option>
-                    <option value="medium">Moyen</option>
-                    <option value="hard">Costaud</option>
-                  </select>
-                </label>
-                <label className="form-row">
-                  <span className="label">Nombre d&apos;additions</span>
-                  <input className="input" type="number" min={1} max={40} value={options.count} onChange={(event) => updateOption('count', Number(event.target.value))} />
-                </label>
-                <label className="form-row">
-                  <span className="label">Nombre minimum</span>
-                  <input className="input" type="number" value={options.minBase} onChange={(event) => updateOption('minBase', Number(event.target.value))} />
-                </label>
-                <label className="form-row">
-                  <span className="label">Nombre maximum</span>
-                  <input className="input" type="number" value={options.maxBase} onChange={(event) => updateOption('maxBase', Number(event.target.value))} />
-                </label>
-                <label className="form-row">
-                  <span className="label">Deuxième terme min.</span>
-                  <input className="input" type="number" min={1} value={options.addendMin} onChange={(event) => updateOption('addendMin', Number(event.target.value))} />
-                </label>
-                <label className="form-row">
-                  <span className="label">Deuxième terme max.</span>
-                  <input className="input" type="number" min={1} value={options.addendMax} onChange={(event) => updateOption('addendMax', Number(event.target.value))} />
-                </label>
-              </div>
-              <button
-                className="btn btn-primary generate-button"
-                type="button"
-                onClick={handleRegenerateTap}
-                onPointerUp={handleRegenerateTap}
-                onTouchEnd={(event) => {
-                  event.preventDefault()
-                  handleRegenerateTap()
-                }}
-              >
-                <span>🎲 Générer les additions</span>
-                {generationFlash > 0 ? <small>Liste mise à jour</small> : null}
-              </button>
-            </div>
+            <label className="form-row session-count">
+              <span className="label">Nombre de calculs</span>
+              <input className="input" type="number" inputMode="numeric" min={1} max={40} step={1} value={countText}
+                aria-invalid={!validCount} aria-describedby={!validCount ? 'count-error' : undefined}
+                onChange={(event) => changeCount(event.target.value)} />
+              {!validCount ? <span id="count-error" className="small" role="status">Choisis entre 1 et 40 calculs.</span> : null}
+            </label>
           ) : (
             <label className="form-row">
-              <span className="label">Colle les calculs, un par ligne</span>
+              <span className="label">Les calculs, un par ligne</span>
               <textarea className="textarea" value={manual} onChange={(event) => setManual(event.target.value)} placeholder={'115 + 9\n127 + 8\n136 + 7'} />
             </label>
           )}
 
-          {message ? <p className="badge">{message}</p> : null}
-          <button className="btn btn-magic" type="button" disabled={loading} onClick={startSession}>
-            {loading ? 'Préparation magique...' : `Lancer avec ${selectedExercises.length} addition${selectedExercises.length > 1 ? 's' : ''}`}
+          {message ? <p className="badge" role="status">{message}</p> : null}
+          <button className="btn btn-magic session-start" type="button" disabled={loading || (mode === 'generate' && !validCount)} onClick={startSession}>
+            {loading ? 'Préparation magique...' : 'Commencer'}
           </button>
-        </section>
+          <button className="btn btn-ghost session-mode" type="button" disabled={loading} onClick={() => { setMode(mode === 'generate' ? 'manual' : 'generate'); setMessage(null) }}>
+            {mode === 'generate' ? 'Saisir mes calculs' : 'Revenir aux calculs proposés'}
+          </button>
 
-        <section className="card panel stack">
-          <h2>{selectedExercises.length} addition{selectedExercises.length > 1 ? 's' : ''}</h2>
-          {message ? <p className="badge">{message}</p> : null}
-          <div className={`grid exercise-preview ${generationFlash > 0 ? 'preview-flash' : ''}`} key={generationFlash} style={{ maxHeight: 520, overflow: 'auto', paddingRight: 4 }}>
-            {selectedExercises.map((exercise, index) => (
-              <div className="card panel spread" key={`${exercise.prompt}-${index}`}>
-                <strong>{index + 1}. {exercise.prompt}</strong>
-                <span className="badge">= {exercise.expectedAnswer}</span>
+          {mode === 'generate' ? (
+            <details className="session-details">
+              <summary>Réglages personnalisés</summary>
+              <div className="stack session-details-content">
+                <div className="form-row">
+                  <label className="label" htmlFor="session-difficulty">Difficulté</label>
+                  <select id="session-difficulty" className="select" value={options.difficulty} onChange={(event) => updateDifficulty(event.target.value as ExerciseDifficulty)}>
+                    <option value="easy">Facile</option>
+                    <option value="medium">Moyen</option>
+                    <option value="hard">Costaud</option>
+                  </select>
+                </div>
+                <div className="grid grid-2">
+                  <label className="form-row"><span className="label">Nombre minimum</span><input className="input" type="number" min={0} value={options.minBase} onChange={(event) => updateOption('minBase', Number(event.target.value))} /></label>
+                  <label className="form-row"><span className="label">Nombre maximum</span><input className="input" type="number" min={0} value={options.maxBase} onChange={(event) => updateOption('maxBase', Number(event.target.value))} /></label>
+                  <label className="form-row"><span className="label">Deuxième terme min.</span><input className="input" type="number" min={1} max={99} value={options.addendMin} onChange={(event) => updateOption('addendMin', Number(event.target.value))} /></label>
+                  <label className="form-row"><span className="label">Deuxième terme max.</span><input className="input" type="number" min={1} max={99} value={options.addendMax} onChange={(event) => updateOption('addendMax', Number(event.target.value))} /></label>
+                </div>
+                {personalized ? <button className="btn btn-ghost" type="button" onClick={() => { applyOptions({ ...recommendation.options, count: options.count }); setPersonalized(false) }}>Revenir au niveau proposé</button> : null}
               </div>
-            ))}
-            {selectedExercises.length === 0 ? <p>Aucune addition valide pour l&apos;instant.</p> : null}
-          </div>
+            </details>
+          ) : null}
+
+          {selectedExercises.length > 0 ? (
+            <details className="session-details">
+              <summary>Voir les {selectedExercises.length} calculs</summary>
+              <div className="stack session-details-content">
+                {mode === 'generate' ? <button className="btn btn-ghost" type="button" onClick={() => { applyOptions(options); setMessage('De nouveaux calculs sont prêts.') }}>🎲 Autres calculs</button> : null}
+                <div className="grid exercise-preview">
+                  {selectedExercises.map((exercise, index) => (
+                    <div className="spread" key={`${exercise.prompt}-${index}`}>
+                      <strong>{index + 1}. {exercise.prompt}</strong>
+                      <span className="badge">= {exercise.expectedAnswer}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </details>
+          ) : null}
         </section>
       </main>
     </>

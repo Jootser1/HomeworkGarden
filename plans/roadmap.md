@@ -539,3 +539,15 @@ Implémenté :
 - tests navigateur de production pour installation/métadonnées, parcours hors ligne et mise à jour conservant les données locales.
 
 Limites : première ouverture avec Internet nécessaire ; IA et futur OCR nécessitent le réseau ; persistance locale uniquement. Installation native et mode avion à confirmer sur les téléphones cibles après déploiement.
+
+## Avancement — création rapide et difficulté proposée
+
+- Écran simplifié : nombre de calculs visible, bouton Commencer ; difficulté/bornes numériques et aperçu repliés.
+- Aucun clic Générer obligatoire : la liste est prête dès l’ouverture et suit les changements du nombre choisi.
+- Saisie manuelle toujours disponible ; réglages personnalisés facultatifs et retour à la proposition.
+- Proposition basée sur la dernière session entièrement résolue, en ignorant les sessions inachevées ; longueur conservée, jamais augmentée automatiquement.
+- À partir de 5 calculs avec données d’essais exploitables : au moins 40 % de calculs réessayés propose un palier plus doux ; 3 sessions consécutives au même palier avec au plus 10 % chacune permettent un palier supérieur. Sinon, maintien.
+- Une difficulté isolée ne pèse qu’un calcul, quel que soit le nombre de nouvelles tentatives ; les bornes personnalisées restent sous le contrôle du parent.
+- Réglages de génération et date de résolution enregistrés pour les nouvelles sessions ; lecture compatible de l’ancien historique, avec estimation du palier quand les réglages manquent.
+- Adaptation entièrement locale, sans appel IA, disponible hors ligne. Heuristique V1 à ajuster selon l’usage, pas un diagnostic scolaire ni un parcours imposé.
+- Tests des règles, de l’interface mobile, du parcours manuel et de la persistance hors ligne. Protection de la résolution lors d’un retour immédiat au jardin après la dernière réponse.

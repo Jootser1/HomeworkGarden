@@ -2,6 +2,15 @@ export type ExerciseKind = 'addition_crossing_ten'
 
 export type ExerciseDifficulty = 'easy' | 'medium' | 'hard'
 
+export type AdditionGenerationOptions = {
+  count: number
+  minBase: number
+  maxBase: number
+  addendMin: number
+  addendMax: number
+  difficulty: ExerciseDifficulty
+}
+
 export type TerrainType = 'grass' | 'flower' | 'pond' | 'forest' | 'mushroom' | 'dirt' | 'stone' | 'glow'
 
 export type BiomeId = 'meadow' | 'pond' | 'forest' | 'mushroom_grove' | 'moon_clearing'
@@ -112,6 +121,8 @@ export type HomeworkSession = {
   status: 'draft' | 'active' | 'completed'
   title: string
   exerciseKind: ExerciseKind
+  generationOptions?: AdditionGenerationOptions
+  solvedAt?: string
   exercises: Exercise[]
   creature: Creature
   currentExerciseIndex: number

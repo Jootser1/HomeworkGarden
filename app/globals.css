@@ -149,6 +149,23 @@ p { color: var(--muted); line-height: 1.55; }
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
+.session-setup { width: min(100%, 620px); margin: clamp(12px, 4vh, 40px) auto; }
+.session-heading { display: flex; gap: 14px; align-items: flex-start; padding-bottom: 12px; }
+.session-heading h2 { font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.1; }
+.session-heading .stack { gap: 8px; }
+.session-mark { display: grid; place-items: center; flex: 0 0 48px; height: 48px; font-size: 1.8rem; background: #e3f1d7; border-radius: 16px; }
+.session-recommendation { margin: 0; font-size: .95rem; }
+.session-count { grid-template-columns: 1fr 112px; align-items: center; padding: 10px 0; }
+.session-count .input { text-align: center; font-size: 1.4rem; min-height: 56px; }
+.session-count #count-error { grid-column: 1 / -1; }
+.session-start { min-height: 56px; font-size: 1.1rem; }
+.session-mode { min-height: 44px; background: transparent; box-shadow: none; }
+.session-details { border-top: 1px solid rgba(83, 122, 71, .16); padding-top: 4px; }
+.session-details summary { min-height: 44px; padding: 12px 0; cursor: pointer; font-weight: 700; color: var(--muted); }
+.session-details summary:focus-visible { outline: 2px solid #5da053; outline-offset: 3px; border-radius: 4px; }
+.session-details-content { padding: 12px 0 4px; }
+.session-details .exercise-preview { max-height: 380px; overflow: auto; padding: 4px; }
+
 .form-row { display: grid; gap: 7px; }
 .label { color: #3c5138; font-size: .9rem; font-weight: 900; }
 .input, .textarea, .select {

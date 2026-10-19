@@ -1,13 +1,6 @@
-import type { Exercise, ExerciseDifficulty } from '@/lib/types'
+import type { AdditionGenerationOptions, Exercise, ExerciseDifficulty } from '@/lib/types'
 
-export type AdditionGenerationOptions = {
-  count: number
-  minBase: number
-  maxBase: number
-  addendMin: number
-  addendMax: number
-  difficulty: ExerciseDifficulty
-}
+export type { AdditionGenerationOptions } from '@/lib/types'
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 

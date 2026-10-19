@@ -48,11 +48,27 @@ Le service worker est **désactivé en développement**. Pour tester la PWA : `n
 
 Les données restent sur l’appareil et pour l’origine utilisée : ni synchronisation ni sauvegarde distante. Changer de domaine, effacer les données du navigateur ou supprimer l’app peut rendre le jardin indisponible. Le comportement exact entre Safari et l’app installée dépend du système ; vérifier sur l’appareil cible.
 
-Les tests Chromium vérifient manifeste/icônes, contrôle du service worker, parcours complet hors ligne après une seule visite initiale, liens et absence d’appels IA en mode local, aide d’installation avec user-agent iPhone et activation explicite d’une mise à jour. Ils ne remplacent pas un essai réel sur Safari/iOS.
+Les tests couvrent les règles d’adaptation et, dans Chromium, la création rapide/personnalisée/manuelle, la persistance des essais et de la résolution, manifeste/icônes, contrôle du service worker, parcours complet hors ligne après une seule visite initiale, liens et absence d’appels IA en mode local, aide d’installation avec user-agent iPhone et activation explicite d’une mise à jour. Ils ne remplacent pas un essai réel sur Safari/iOS.
+
+## Création rapide et adaptation locale
+
+L’écran propose directement une session : seul le nombre de calculs est visible (1–40), avec un bouton **Commencer**. Modifier ce nombre actualise immédiatement les calculs. La difficulté et les bornes numériques restent disponibles dans **Réglages personnalisés**, la liste dans **Voir les calculs**, et la saisie des devoirs dans **Saisir mes calculs**.
+
+La proposition utilise la dernière session dont tous les calculs sont résolus, même si la créature n’a pas encore été réveillée. Elle conserve sa longueur ; une session inachevée ne sert pas à ajuster le niveau. Les sessions récentes enregistrent leurs réglages et la date de résolution ; pour l’ancien historique sans réglages, le palier est estimé à partir des opérandes.
+
+Heuristique V1, locale et sans IA (pas une évaluation scolaire) :
+- au moins 5 calculs et des compteurs d’essais exploitables pour ajuster le niveau ;
+- au moins 40 % de calculs ayant nécessité plusieurs essais : un palier plus accessible, sans descendre sous Facile ;
+- au plus 10 % sur chacune des 3 dernières sessions résolues au même palier : un palier supérieur, sans dépasser Costaud ;
+- sinon, niveau conservé. Les répétitions d’erreurs sur un seul calcul ne sont pas additionnées comme autant de calculs en difficulté ;
+- les bornes numériques explicitement personnalisées sont conservées plutôt que remplacées par un palier automatique ;
+- le nombre de calculs n’augmente jamais automatiquement (les anciennes listes de plus de 40 sont limitées à 40 pour la génération).
+
+Sans historique exploitable, le réglage de départ est Moyen / 10 calculs. L’ensemble fonctionne aussi dans la coquille hors ligne et ne nécessite aucune migration des anciennes sessions.
 
 ## Fonctionnalités V1
 
-- Génération d'un nombre libre d'additions avec passage de dizaine.
+- Génération de 1 à 40 additions avec passage de dizaine.
 - Saisie manuelle alternative des calculs.
 - Une créature par session ; catalogue local par défaut, génération optionnelle via `/api/creatures/generate`.
 - Schéma Zod strict pour contrôler la sortie IA.
@@ -64,10 +80,10 @@ Les tests Chromium vérifient manifeste/icônes, contrôle du service worker, pa
 
 ## Variables d'environnement
 
-```env
-OPENAI_API_KEY=
-OPENAI_MODEL=gpt-4.1-mini
-```
+| Variable | Utilisation |
+| --- | --- |
+| `OPENAI_API_KEY` | Facultative, uniquement pour la génération IA ; laisser vide en mode local. |
+| `OPENAI_MODEL` | Modèle de génération, `gpt-4.1-mini` par défaut. |
 
 La clé reste côté serveur dans la route Next.js. Ne pas utiliser `NEXT_PUBLIC_`.
 
