@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { InstallApp } from '@/components/InstallApp'
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
           <Link className="btn btn-ghost" href="/garden">Jardin</Link>
           <Link className="btn btn-ghost" href="/settings">Settings</Link>
         </div>
+        <InstallApp />
       </section>
 
       <section className="card panel stack">

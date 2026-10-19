@@ -65,7 +65,7 @@ function CreatureCreationOverlay({ feedback }: { feedback: CreationFeedback }) {
   )
 }
 
-export default function ParentPage() {
+export default function ParentPage({ offline = false, onStart }: { offline?: boolean; onStart?: (sessionId: string) => void }) {
   const router = useRouter()
   const [difficulty, setDifficulty] = useState<ExerciseDifficulty>('medium')
   const [options, setOptions] = useState(defaultAdditionOptions('medium'))
@@ -148,7 +148,7 @@ export default function ParentPage() {
       let creature: Creature
       let usedFallback = false
 
-      if (!aiCreatureGeneration) {
+      if (offline || !navigator.onLine || !aiCreatureGeneration) {
         creature = createLocalCatalogCreature(selectedExercises.length)
       } else {
         try {
@@ -180,7 +180,11 @@ export default function ParentPage() {
 
       upsertSession(session)
       await wait(950)
-      router.push(`/play/${session.id}`)
+      if (onStart) onStart(session.id)
+      // Use the precached document shell, not an uncached App Router RSC request.
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+      else if (!navigator.onLine) window.location.assign(`/offline#/play/${session.id}`)
+      else router.push(`/play/${session.id}`)
     } finally {
       setLoading(false)
     }

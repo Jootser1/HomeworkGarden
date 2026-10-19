@@ -524,3 +524,18 @@ Implémenté :
 - créatures contraintes par terrain et biomes préférés ;
 - fiche créature dans le jardin ;
 - polish bonne réponse / mauvaise réponse : vibration si disponible, animation visuelle, courte pause après révélation.
+
+## Avancement — PWA installable et hors ligne
+
+Implémenté :
+
+- manifeste complet, icônes PNG et Apple, zones de sécurité mobile ;
+- aide d’installation Android/Chrome et Safari/iOS ;
+- service worker Serwist en production, précache des ressources et coquille locale `/offline` ;
+- création, calculs, reprise et jardin disponibles sans réseau après préparation initiale du cache ;
+- navigation hors ligne dédiée, y compris pour les nouveaux identifiants de session ;
+- génération locale automatique hors ligne, API IA non mise en cache ;
+- proposition de mise à jour avec activation explicite, sans rechargement automatique au retour du réseau ;
+- tests navigateur de production pour installation/métadonnées, parcours hors ligne et mise à jour conservant les données locales.
+
+Limites : première ouverture avec Internet nécessaire ; IA et futur OCR nécessitent le réseau ; persistance locale uniquement. Installation native et mode avion à confirmer sur les téléphones cibles après déploiement.

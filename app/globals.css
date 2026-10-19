@@ -15,6 +15,25 @@
   --shadow: 0 22px 70px rgba(65, 92, 52, 0.16);
 }
 
+.pwa-install { max-width: 440px; }
+.pwa-update {
+  position: fixed;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  width: min(94vw, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 22px;
+  background: #fff8e8;
+  box-shadow: var(--shadow);
+}
+.pwa-update .btn { flex-shrink: 0; }
+
 * { box-sizing: border-box; }
 html { min-height: 100%; background: var(--bg); }
 body {
@@ -35,6 +54,8 @@ button { cursor: pointer; }
 .app-shell {
   min-height: 100vh;
   padding: 18px;
+  /* Installed app: avoid the home indicator and display cutouts. */
+  padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
 }
 
 .container {
@@ -304,7 +325,9 @@ p { color: var(--muted); line-height: 1.55; }
 @keyframes burst { 0% { transform: scale(.6); opacity: 0; } 45% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
 
 @media (max-width: 760px) {
-  .app-shell { padding: 12px; }
+  .app-shell {
+    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  }
   .topbar { align-items: flex-start; }
   .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
   .panel { padding: 16px; }

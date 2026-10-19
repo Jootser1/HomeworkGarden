@@ -14,6 +14,14 @@ function findActiveSessionId() {
 export function Header() {
   const pathname = usePathname()
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null)
+  const [offlinePath, setOfflinePath] = useState('')
+
+  useEffect(() => {
+    const refresh = () => setOfflinePath(pathname === '/offline' ? window.location.hash.slice(1) : '')
+    refresh()
+    window.addEventListener('hashchange', refresh)
+    return () => window.removeEventListener('hashchange', refresh)
+  }, [pathname])
 
   useEffect(() => {
     const refresh = () => setActiveSessionId(findActiveSessionId())
@@ -35,7 +43,7 @@ export function Header() {
         <span>Le Jardin des Devoirs</span>
       </Link>
       <nav className="nav-links" aria-label="Navigation principale">
-        {activeSessionId && !pathname.startsWith('/play') ? (
+        {activeSessionId && !(offlinePath || pathname).startsWith('/play') ? (
           <Link className="nav-link" href={`/play/${activeSessionId}`}>Calcul</Link>
         ) : (
           <Link className="nav-link" href="/garden">Jardin</Link>
