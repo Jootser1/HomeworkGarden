@@ -1,11 +1,13 @@
 export type AppSettings = {
   aiCreatureGeneration: boolean
+  aiDecorGeneration: boolean
 }
 
 const SETTINGS_KEY = 'homework-garden-settings-v1'
 
 export const defaultSettings: AppSettings = {
   aiCreatureGeneration: false,
+  aiDecorGeneration: false,
 }
 
 export function loadSettings(): AppSettings {

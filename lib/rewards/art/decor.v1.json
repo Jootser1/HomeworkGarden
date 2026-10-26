@@ -1,0 +1,6449 @@
+[
+  {
+    "compositionId": "decor-campanules-des-pierres-10",
+    "format": 10,
+    "variant": "bells",
+    "drawing": {
+      "version": 1,
+      "id": "campanules-des-pierres-10",
+      "name": "Les campanules des pierres",
+      "description": "De grandes clochettes douces se dressent dans un petit jardin de pierres et de fougères.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#a7b9b2",
+        "#d9dec4",
+        "#719472",
+        "#d89caa",
+        "#f1dfb5",
+        "#b6a3c8"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Le socle de pierres",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 115,
+                "cy": 258,
+                "rx": 53,
+                "ry": 17,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M77.9 254Q115 236 149.45 253",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 207,
+                "cy": 255,
+                "rx": 49,
+                "ry": 19,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M172.7 251Q207 231 238.85 250",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "La campanule 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M90 220Q100 190 90 153",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M71 160Q67 128 90 129Q115 128 110 160Q90 173 71 160Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 90,
+                "cy": 162,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M90 208Q60 180 65 205Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "La campanule 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M145 166Q155 136 145 99",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M126 106Q122 74 145 75Q170 74 165 106Q145 119 126 106Z",
+                "fill": "#b6a3c8"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 145,
+                "cy": 108,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M145 154Q115 126 120 151Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La campanule 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M210 206Q220 176 210 139",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M191 146Q187 114 210 115Q235 114 230 146Q210 159 191 146Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 210,
+                "cy": 148,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M210 194Q180 166 185 191Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "La campanule 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M122 245Q132 215 122 178",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M103 185Q99 153 122 154Q147 153 142 185Q122 198 103 185Z",
+                "fill": "#b6a3c8"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 122,
+                "cy": 187,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M122 233Q92 205 97 230Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "La campanule 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M239 240Q249 210 239 173",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M220 180Q216 148 239 149Q264 148 259 180Q239 193 220 180Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 239,
+                "cy": 182,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M239 228Q209 200 214 225Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "La campanule 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M180 250Q190 220 180 183",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M161 190Q157 158 180 159Q205 158 200 190Q180 203 161 190Z",
+                "fill": "#b6a3c8"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 180,
+                "cy": 192,
+                "rx": 14,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M180 238Q150 210 155 235Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "La fougère de gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M58 270Q48 246 64 227M58 270Q37 238 27 248M58 270Q81 236 89 245",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M55 256L43 246L45 260ZM60 246L71 234L73 248ZM40 258L26 253L33 267ZM72 257L87 249L83 265Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "La fougère de droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M270 264Q260 240 276 221M270 264Q249 232 239 242M270 264Q293 230 301 239",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M267 250L255 240L257 254ZM272 240L283 228L285 242ZM252 252L238 247L245 261ZM284 251L299 243L295 259Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "La fleur du premier plan",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M167 278Q172 261 167 243",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M167 268Q143 246 150 269ZM169 260Q191 242 184 264Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 176,
+                "cy": 243,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 170,
+                "cy": 252,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 160,
+                "cy": 248,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 160,
+                "cy": 238,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 170,
+                "cy": 234,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 167,
+                "cy": 243,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-pommier-trois-couronnes-10",
+    "format": 10,
+    "variant": "fruit",
+    "drawing": {
+      "version": 1,
+      "id": "pommier-trois-couronnes-10",
+      "name": "Le pommier aux trois couronnes",
+      "description": "Un pommier ramifié porte trois couronnes rondes et de gros fruits dorés.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#916c52",
+        "#719472",
+        "#d1d9a6",
+        "#b5c995",
+        "#e4b16f",
+        "#d89178"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Le tronc",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M143 267Q157 212 147 137L174 135Q168 221 184 267Z",
+                "fill": "#916c52"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "Les racines",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M151 247L90 273Q119 282 159 267L224 273Q208 259 175 249Z",
+                "fill": "#916c52"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "La branche gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M156 188Q109 162 85 113",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 12,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La branche droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M169 189Q221 159 238 117",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 12,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "La couronne 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 85,
+                "cy": 116,
+                "rx": 49,
+                "ry": 43,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M60 106Q85 77 113 98",
+                "fill": "none",
+                "stroke": "#d1d9a6",
+                "stroke-width": 5,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "La couronne 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 161,
+                "cy": 76,
+                "rx": 55,
+                "ry": 48,
+                "fill": "#b5c995"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M136 66Q161 37 189 58",
+                "fill": "none",
+                "stroke": "#d1d9a6",
+                "stroke-width": 5,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "La couronne 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 238,
+                "cy": 121,
+                "rx": 49,
+                "ry": 43,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M213 111Q238 82 266 103",
+                "fill": "none",
+                "stroke": "#d1d9a6",
+                "stroke-width": 5,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "Les fruits de la couronne 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 65,
+                "cy": 121,
+                "rx": 9,
+                "ry": 11,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 101,
+                "cy": 131,
+                "rx": 10,
+                "ry": 12,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 88,
+                "cy": 101,
+                "rx": 8,
+                "ry": 10,
+                "fill": "#d89178"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "Les fruits de la couronne 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 141,
+                "cy": 81,
+                "rx": 9,
+                "ry": 11,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 177,
+                "cy": 91,
+                "rx": 10,
+                "ry": 12,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 164,
+                "cy": 61,
+                "rx": 8,
+                "ry": 10,
+                "fill": "#d89178"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "Les fruits de la couronne 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 218,
+                "cy": 126,
+                "rx": 9,
+                "ry": 11,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 254,
+                "cy": 136,
+                "rx": 10,
+                "ry": 12,
+                "fill": "#e4b16f"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 241,
+                "cy": 106,
+                "rx": 8,
+                "ry": 10,
+                "fill": "#d89178"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-arches-jumelles-10",
+    "format": 10,
+    "variant": "arch",
+    "drawing": {
+      "version": 1,
+      "id": "arches-jumelles-10",
+      "name": "Les arches jumelles",
+      "description": "Deux arches de pierre se rejoignent au-dessus d’un jardin miniature.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#a7b9b2",
+        "#d9dec4",
+        "#91aaa8",
+        "#719472",
+        "#b5c995",
+        "#d89caa",
+        "#f1dfb5"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Le pilier de gauche",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 69,
+                "cy": 239,
+                "rx": 30,
+                "ry": 30,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M48 235Q69 204 88.5 234",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "Le pilier central",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 160,
+                "cy": 237,
+                "rx": 30,
+                "ry": 31,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M139 233Q160 201 179.5 232",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "Le pilier de droite",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 251,
+                "cy": 239,
+                "rx": 30,
+                "ry": 30,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M230 235Q251 204 270.5 234",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La pierre centrale haute",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 160,
+                "cy": 185,
+                "rx": 26,
+                "ry": 29,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M141.8 181Q160 151 176.9 180",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "L’arche gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M43 223Q76 112 173 158L172 183Q97 149 68 234Z",
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M55 216Q86 140 157 169",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 6,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "L’arche droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M148 165Q239 107 277 225L250 234Q222 153 169 188Z",
+                "fill": "#91aaa8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M173 170Q229 138 262 216",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 6,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "La mousse de gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M61 225Q57 209 72 212Q81 195 91 210Q112 207 106 225Q84 238 61 225Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M71 222Q81 210 95 220",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "La mousse de droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M219 223Q215 207 230 210Q239 193 249 208Q270 205 264 223Q242 236 219 223Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M229 220Q239 208 253 218",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "La fougère du pied",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M112 279Q102 255 118 236M112 279Q91 247 81 257M112 279Q135 245 143 254",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M109 265L97 255L99 269ZM114 255L125 243L127 257ZM94 267L80 262L87 276ZM126 266L141 258L137 274Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "La fleur sous les arches",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M202 279Q207 262 202 244",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M202 269Q178 247 185 270ZM204 261Q226 243 219 265Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 211,
+                "cy": 244,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 205,
+                "cy": 253,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 195,
+                "cy": 249,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 195,
+                "cy": 239,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 205,
+                "cy": 235,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 202,
+                "cy": 244,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-souche-habitee-15",
+    "format": 15,
+    "variant": "stump",
+    "drawing": {
+      "version": 1,
+      "id": "souche-habitee-15",
+      "name": "La souche aux ombrelles",
+      "description": "Une souche unique avec des champignons implantés sur ses flancs et sur le bois coupé. Les raccords sont dessinés dans la recette, sans moteur d’assemblage.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#9B7E5C",
+        "#80674D",
+        "#BE9F76",
+        "#D6BA91",
+        "#E4D7B8",
+        "#BC8E7B",
+        "#D0A58A",
+        "#F1DDBD",
+        "#7C985E",
+        "#AEC482",
+        "#E1B9AE"
+      ],
+      "parts": [
+        {
+          "id": "souche",
+          "label": "Le volume de la souche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M96 249L101 143Q153 118 214 141L223 250Q172 275 96 249Z",
+                "fill": "#9B7E5C"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M188 146L214 141L223 250Q208 261 189 262Q201 203 188 146Z",
+                "fill": "#80674D"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bois-coupe",
+          "label": "Le bois coupé et ses cernes",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 158,
+                "cy": 142,
+                "rx": 57,
+                "ry": 20,
+                "fill": "#D6BA91"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 158,
+                "cy": 142,
+                "rx": 39,
+                "ry": 12,
+                "fill": "none",
+                "stroke": "#BE9F76",
+                "stroke-width": 3
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 158,
+                "cy": 142,
+                "rx": 19,
+                "ry": 6,
+                "fill": "none",
+                "stroke": "#BE9F76",
+                "stroke-width": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "racine-gauche",
+          "label": "La racine gauche prolonge la souche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M111 222Q104 251 67 267Q63 276 84 274Q121 268 137 251Z",
+                "fill": "#9B7E5C"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M108 249L87 263",
+                "fill": "none",
+                "stroke": "#BE9F76",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "racine-droite",
+          "label": "La racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M201 229Q216 250 247 263Q263 275 239 275Q205 271 183 252Z",
+                "fill": "#9B7E5C"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M211 250L237 265",
+                "fill": "none",
+                "stroke": "#BE9F76",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ecorce",
+          "label": "Les reliefs de l’écorce",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 165Q113 204 121 238M143 174L140 246M174 164Q182 197 171 233",
+                "fill": "none",
+                "stroke": "#80674D",
+                "stroke-width": 5,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M127 169L129 224M157 183L155 244",
+                "fill": "none",
+                "stroke": "#BE9F76",
+                "stroke-width": 5,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pied-gauche",
+          "label": "Un pied de champignon sort du flanc gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M105 211Q85 192 73 161L85 157Q91 185 114 200Z",
+                "fill": "#E4D7B8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M104 203Q91 187 85 174",
+                "fill": "none",
+                "stroke": "#D6BA91",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chapeau-gauche",
+          "label": "Son grand chapeau abricot",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M43 160Q43 125 75 120Q106 117 117 157Q86 177 43 160Z",
+                "fill": "#BC8E7B"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M45 160Q82 173 114 158",
+                "fill": "none",
+                "stroke": "#F1DDBD",
+                "stroke-width": 5,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 65,
+                "cy": 141,
+                "rx": 5,
+                "ry": 3,
+                "fill": "#F1DDBD"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 86,
+                "cy": 133,
+                "rx": 5,
+                "ry": 3,
+                "fill": "#F1DDBD"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 98,
+                "cy": 150,
+                "rx": 4,
+                "ry": 3,
+                "fill": "#F1DDBD"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pied-droit",
+          "label": "Un pied courbe rejoint le flanc droit",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M209 216Q236 206 241 178L253 179Q247 211 217 227Z",
+                "fill": "#E4D7B8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M221 216Q239 204 243 190",
+                "fill": "none",
+                "stroke": "#D6BA91",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chapeau-droit",
+          "label": "Le chapeau de droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M219 180Q225 145 249 143Q274 148 283 178Q257 193 219 180Z",
+                "fill": "#D0A58A"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M221 181Q252 191 280 179",
+                "fill": "none",
+                "stroke": "#F1DDBD",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 242,
+                "cy": 160,
+                "rx": 5,
+                "ry": 3,
+                "fill": "#F1DDBD"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 261,
+                "cy": 170,
+                "rx": 4,
+                "ry": 3,
+                "fill": "#F1DDBD"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pied-dessus",
+          "label": "Un petit pied pousse sur le bois coupé",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M137 144Q139 126 132 105L144 103Q150 126 148 144Z",
+                "fill": "#E4D7B8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M141 117L144 136",
+                "fill": "none",
+                "stroke": "#D6BA91",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chapeau-dessus",
+          "label": "Une ombrelle au sommet",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M107 105Q107 78 136 75Q158 76 168 104Q143 117 107 105Z",
+                "fill": "#BC8E7B"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M110 106Q140 115 165 105",
+                "fill": "none",
+                "stroke": "#F1DDBD",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 130,
+                "cy": 90,
+                "r": 4,
+                "fill": "#F1DDBD"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 148,
+                "cy": 97,
+                "r": 3,
+                "fill": "#F1DDBD"
+              }
+            }
+          ]
+        },
+        {
+          "id": "mousse",
+          "label": "La mousse épouse le pied de la souche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M146 249Q137 238 149 230Q153 215 166 224Q181 211 188 227Q207 224 208 240Q210 256 189 255Q171 266 156 255Z",
+                "fill": "#7C985E"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M151 240Q159 228 167 237M178 240Q185 230 194 237",
+                "fill": "none",
+                "stroke": "#AEC482",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fougere",
+          "label": "Une fougère s’enracine dans la racine gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M83 264Q70 237 82 220M83 264Q59 242 49 246M83 264Q97 239 104 235",
+                "fill": "none",
+                "stroke": "#7C985E",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M77 245L68 238L69 251M78 232L74 224L85 229M65 251L55 247L56 257M94 249L94 238L103 243",
+                "fill": "none",
+                "stroke": "#7C985E",
+                "stroke-width": 5,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "champignon-face",
+          "label": "Un champignon en éventail pousse sur l’écorce",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M154 213Q147 212 146 202Q125 210 122 196Q126 177 145 184Q157 171 172 185Q192 183 194 199Q190 214 170 208Q164 220 154 213Z",
+                "fill": "#D0A58A"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M129 198Q146 204 158 195Q171 205 186 199",
+                "fill": "none",
+                "stroke": "#F1DDBD",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleurs-racine",
+          "label": "Deux fleurs au creux de la racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M235 270L232 245M244 270L252 253",
+                "fill": "none",
+                "stroke": "#7C985E",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M231 244Q217 235 226 228Q235 224 238 236Q249 233 249 243Q246 253 237 248Q232 261 225 252Q220 248 231 244Z",
+                "fill": "#E1B9AE"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 233,
+                "cy": 243,
+                "r": 4,
+                "fill": "#D6BA91"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M250 252Q240 245 247 239Q256 236 257 246Q267 243 268 252Q265 259 258 257Q255 267 249 260Q245 257 250 252Z",
+                "fill": "#F1DDBD"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-lotus-du-miroir-15",
+    "format": 15,
+    "variant": "lilies",
+    "drawing": {
+      "version": 1,
+      "id": "lotus-du-miroir-15",
+      "name": "Les lotus du miroir",
+      "description": "Des fleurs nacrées et leurs feuilles occupent un miroir d’eau, avec trois libellules.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#719472",
+        "#b5c995",
+        "#d89caa",
+        "#f1dfb5",
+        "#d4b67c",
+        "#b5cbd1",
+        "#668a8c",
+        "#916c52"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "La feuille flottante 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 77,
+                "cy": 228,
+                "rx": 35,
+                "ry": 14,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M77 228L54 216L68 231Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "La feuille flottante 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 146,
+                "cy": 203,
+                "rx": 35,
+                "ry": 14,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M146 203L123 191L137 206Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "La feuille flottante 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 226,
+                "cy": 225,
+                "rx": 35,
+                "ry": 14,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M226 225L203 213L217 228Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La feuille flottante 4",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 118,
+                "cy": 265,
+                "rx": 35,
+                "ry": 14,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M118 265L95 253L109 268Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "La feuille flottante 5",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 209,
+                "cy": 268,
+                "rx": 35,
+                "ry": 14,
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M209 268L186 256L200 271Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "Le lotus 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 77,
+                "cy": 205,
+                "rx": 11,
+                "ry": 23,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 62,
+                "cy": 214,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 92,
+                "cy": 214,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 77,
+                "cy": 223,
+                "rx": 19,
+                "ry": 8,
+                "fill": "#d4b67c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "Le lotus 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 146,
+                "cy": 180,
+                "rx": 11,
+                "ry": 23,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 131,
+                "cy": 189,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 161,
+                "cy": 189,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 146,
+                "cy": 198,
+                "rx": 19,
+                "ry": 8,
+                "fill": "#d4b67c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "Le lotus 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 226,
+                "cy": 202,
+                "rx": 11,
+                "ry": 23,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 211,
+                "cy": 211,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 241,
+                "cy": 211,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 226,
+                "cy": 220,
+                "rx": 19,
+                "ry": 8,
+                "fill": "#d4b67c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "Le lotus 4",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 118,
+                "cy": 242,
+                "rx": 11,
+                "ry": 23,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 103,
+                "cy": 251,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 133,
+                "cy": 251,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 118,
+                "cy": 260,
+                "rx": 19,
+                "ry": 8,
+                "fill": "#d4b67c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "Le lotus 5",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 209,
+                "cy": 245,
+                "rx": 11,
+                "ry": 23,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 194,
+                "cy": 254,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 224,
+                "cy": 254,
+                "rx": 17,
+                "ry": 13,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 209,
+                "cy": 263,
+                "rx": 19,
+                "ry": 8,
+                "fill": "#d4b67c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-11",
+          "label": "La libellule 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 71,
+                "cy": 132,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 95,
+                "cy": 132,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M83 124L83 155",
+                "fill": "none",
+                "stroke": "#668a8c",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 83,
+                "cy": 124,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#668a8c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-12",
+          "label": "La libellule 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 183,
+                "cy": 106,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 207,
+                "cy": 106,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M195 98L195 129",
+                "fill": "none",
+                "stroke": "#668a8c",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 195,
+                "cy": 98,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#668a8c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-13",
+          "label": "La libellule 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 248,
+                "cy": 165,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 272,
+                "cy": 165,
+                "rx": 16,
+                "ry": 6,
+                "fill": "#b5cbd1"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M260 157L260 188",
+                "fill": "none",
+                "stroke": "#668a8c",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 260,
+                "cy": 157,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#668a8c"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-14",
+          "label": "Les roseaux 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M43 255L35 186M53 255L56 204",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M35 186L34 167M56 204L57 183",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 7,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-15",
+          "label": "Les roseaux 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M278 254L270 185M288 254L291 203",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M270 185L269 166M291 203L292 182",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 7,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-saule-lanternes-15",
+    "format": 15,
+    "variant": "willow",
+    "drawing": {
+      "version": 1,
+      "id": "saule-lanternes-15",
+      "name": "Le saule aux lanternes",
+      "description": "Un tronc courbe porte une voûte retombante et six fleurs-lanternes.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#916c52",
+        "#719472",
+        "#b5c995",
+        "#d89caa",
+        "#f1dfb5"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Les racines du saule",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M155 251Q118 251 86 277L153 268L217 279Q197 256 174 248Z",
+                "fill": "#916c52"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "Le tronc courbe",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M149 265Q182 209 156 164Q131 125 164 78L181 86Q154 125 176 158Q211 217 179 267Z",
+                "fill": "#916c52"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "La branche basse gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M167 160Q104 155 66 111",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 10,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La branche droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M171 142Q237 121 256 83",
+                "fill": "none",
+                "stroke": "#916c52",
+                "stroke-width": 10,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "Le rideau de feuilles 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M44 98Q34 54 89 75Q112 103 86 193Q64 156 59 120Q46 170 43 191Q23 168 44 98Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "Le rideau de feuilles 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M86 65Q76 21 128 42Q151 70 125 176Q103 139 101 87Q88 137 85 174Q65 151 86 65Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "Le rideau de feuilles 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M134 46Q124 2 180 23Q203 51 177 169Q155 132 149 68Q136 118 133 167Q113 144 134 46Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "Le rideau de feuilles 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M181 54Q171 10 229 31Q252 59 226 181Q204 144 196 76Q183 126 180 179Q160 156 181 54Z",
+                "fill": "#b5c995"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "Le rideau de feuilles 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M225 87Q215 43 278 64Q301 92 275 203Q253 166 240 109Q227 159 224 201Q204 178 225 87Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "La lanterne fleurie 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M57 166L57 190",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M45 185Q57 167 69 185L71 205Q57 215 43 205Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 57,
+                "cy": 204,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-11",
+          "label": "La lanterne fleurie 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M100 147L100 171",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M88 166Q100 148 112 166L114 186Q100 196 86 186Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 100,
+                "cy": 185,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-12",
+          "label": "La lanterne fleurie 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M141 143L141 167",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M129 162Q141 144 153 162L155 182Q141 192 127 182Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 141,
+                "cy": 181,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-13",
+          "label": "La lanterne fleurie 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M187 145L187 169",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M175 164Q187 146 199 164L201 184Q187 194 173 184Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 187,
+                "cy": 183,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-14",
+          "label": "La lanterne fleurie 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M232 157L232 181",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M220 176Q232 158 244 176L246 196Q232 206 218 196Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 232,
+                "cy": 195,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-15",
+          "label": "La lanterne fleurie 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M269 184L269 208",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M257 203Q269 185 281 203L283 223Q269 233 255 223Z",
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 269,
+                "cy": 222,
+                "rx": 8,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-grotte-lucioles-20",
+    "format": 20,
+    "variant": "standing",
+    "drawing": {
+      "version": 1,
+      "id": "grotte-lucioles-20",
+      "name": "La grotte des lucioles",
+      "description": "Une voûte minérale encadre des cristaux, des fougères et des fleurs lumineuses.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#a7b9b2",
+        "#d9dec4",
+        "#9caeaa",
+        "#c3cebb",
+        "#8ab3bd",
+        "#c1d7ce",
+        "#e8ecd7",
+        "#9f9fbd",
+        "#719472",
+        "#b5c995",
+        "#f1dfb5"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Le socle de la grotte",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 116,
+                "cy": 254,
+                "rx": 62,
+                "ry": 22,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M72.6 250Q116 227 156.3 249",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 208,
+                "cy": 253,
+                "rx": 63,
+                "ry": 23,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M163.9 249Q208 225 248.95 248",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "La voûte",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M52 225Q41 56 158 45Q279 51 270 225L239 230Q250 88 159 85Q79 94 84 231Z",
+                "fill": "#9caeaa"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M65 210Q61 74 158 65Q259 70 257 208",
+                "fill": "none",
+                "stroke": "#c3cebb",
+                "stroke-width": 7,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "Le cristal 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M84 242L79 190L98 173L117 190L112 242Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M98 173L103 193L101 242L112 242L117 190Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M87 196L90 232",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "Le cristal 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M121 248L116 158L135 141L154 158L149 248Z",
+                "fill": "#9f9fbd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M135 141L140 161L138 248L149 248L154 158Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M124 164L127 238",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "Le cristal 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M165 251L160 202L179 185L198 202L193 251Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M179 185L184 205L182 251L193 251L198 202Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M168 208L171 241",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "Le cristal 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M202 239L197 162L216 145L235 162L230 239Z",
+                "fill": "#9f9fbd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M216 145L221 165L219 239L230 239L235 162Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M205 168L208 229",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "Le cristal 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M63 250L58 224L77 207L96 224L91 250Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M77 207L82 227L80 250L91 250L96 224Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M66 230L69 240",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "Le cristal 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M234 253L229 221L248 204L267 221L262 253Z",
+                "fill": "#9f9fbd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M248 204L253 224L251 253L262 253L267 221Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M237 227L240 243",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "La mousse 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M62 251Q58 235 73 238Q82 221 92 236Q113 233 107 251Q85 264 62 251Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M72 248Q82 236 96 246",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "La mousse 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M109 255Q105 239 120 242Q129 225 139 240Q160 237 154 255Q132 268 109 255Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 252Q129 240 143 250",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-11",
+          "label": "La mousse 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M199 250Q195 234 210 237Q219 220 229 235Q250 232 244 250Q222 263 199 250Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M209 247Q219 235 233 245",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-12",
+          "label": "La mousse 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M237 258Q233 242 248 245Q257 228 267 243Q288 240 282 258Q260 271 237 258Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M247 255Q257 243 271 253",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-13",
+          "label": "La fougère 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M44 265Q34 241 50 222M44 265Q23 233 13 243M44 265Q67 231 75 240",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M41 251L29 241L31 255ZM46 241L57 229L59 243ZM26 253L12 248L19 262ZM58 252L73 244L69 260Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-14",
+          "label": "La fougère 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M102 282Q92 258 108 239M102 282Q81 250 71 260M102 282Q125 248 133 257",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M99 268L87 258L89 272ZM104 258L115 246L117 260ZM84 270L70 265L77 279ZM116 269L131 261L127 277Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-15",
+          "label": "La fougère 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M226 283Q216 259 232 240M226 283Q205 251 195 261M226 283Q249 249 257 258",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M223 269L211 259L213 273ZM228 259L239 247L241 261ZM208 271L194 266L201 280ZM240 270L255 262L251 278Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-16",
+          "label": "La fougère 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M281 266Q271 242 287 223M281 266Q260 234 250 244M281 266Q304 232 312 241",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M278 252L266 242L268 256ZM283 242L294 230L296 244ZM263 254L249 249L256 263ZM295 253L310 245L306 261Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-17",
+          "label": "La fleur lumineuse 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M78 283Q83 266 78 248",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M78 273Q54 251 61 274ZM80 265Q102 247 95 269Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 87,
+                "cy": 248,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 81,
+                "cy": 257,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 71,
+                "cy": 253,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 71,
+                "cy": 243,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 81,
+                "cy": 239,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 78,
+                "cy": 248,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-18",
+          "label": "La fleur lumineuse 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M147 285Q152 268 147 250",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M147 275Q123 253 130 276ZM149 267Q171 249 164 271Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 156,
+                "cy": 250,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 150,
+                "cy": 259,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 140,
+                "cy": 255,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 140,
+                "cy": 245,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 150,
+                "cy": 241,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 147,
+                "cy": 250,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-19",
+          "label": "La fleur lumineuse 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M195 282Q200 265 195 247",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M195 272Q171 250 178 273ZM197 264Q219 246 212 268Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 204,
+                "cy": 247,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 198,
+                "cy": 256,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 188,
+                "cy": 252,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 188,
+                "cy": 242,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 198,
+                "cy": 238,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 195,
+                "cy": 247,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-20",
+          "label": "La fleur lumineuse 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M258 284Q263 267 258 249",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M258 274Q234 252 241 275ZM260 266Q282 248 275 270Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 267,
+                "cy": 249,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 261,
+                "cy": 258,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 251,
+                "cy": 254,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 251,
+                "cy": 244,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 261,
+                "cy": 240,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 258,
+                "cy": 249,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-village-ombrelles-20",
+    "format": 20,
+    "variant": "cluster",
+    "drawing": {
+      "version": 1,
+      "id": "village-ombrelles-20",
+      "name": "Le village des ombrelles",
+      "description": "Une colonie de champignons étagés habite un grand bois couché, entre fleurs et fougères.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#916c52",
+        "#c5a47c",
+        "#f1dfb5",
+        "#c49085",
+        "#719472",
+        "#b5c995"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "Le bois couché",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M47 242Q93 206 260 228L279 260Q174 283 48 268Z",
+                "fill": "#916c52"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 53,
+                "cy": 254,
+                "rx": 18,
+                "ry": 20,
+                "fill": "#c5a47c"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 53,
+                "cy": 254,
+                "rx": 10,
+                "ry": 13,
+                "fill": "#916c52"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "L’ombrelle 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M67 224L67.8 200.8L75 200.8L77.4 224Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M50.2 204Q52.599999999999994 177.6 71 181.6Q91 181.6 93.4 204Q71 213.6 50.2 204Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 65.4,
+                "cy": 193.6,
+                "rx": 4.800000000000001,
+                "ry": 4,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 81.4,
+                "cy": 198.4,
+                "rx": 3.2,
+                "ry": 2.4000000000000004,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "L’ombrelle 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M113.5 219L114.6 187.1L124.5 187.1L127.8 219Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M90.4 191.5Q93.7 155.2 119 160.7Q146.5 160.7 149.8 191.5Q119 204.7 90.4 191.5Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 111.3,
+                "cy": 177.2,
+                "rx": 6.6000000000000005,
+                "ry": 5.5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 133.3,
+                "cy": 183.8,
+                "rx": 4.4,
+                "ry": 3.3000000000000003,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "L’ombrelle 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M166.5 217L168 173.5L181.5 173.5L186 217Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M135 179.5Q139.5 130 174 137.5Q211.5 137.5 216 179.5Q174 197.5 135 179.5Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 163.5,
+                "cy": 160,
+                "rx": 9,
+                "ry": 7.5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 193.5,
+                "cy": 169,
+                "rx": 6,
+                "ry": 4.5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "L’ombrelle 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M225.75 228L226.8 197.55L236.25 197.55L239.4 228Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M203.7 201.75Q206.85 167.1 231 172.35Q257.25 172.35 260.4 201.75Q231 214.35 203.7 201.75Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 223.65,
+                "cy": 188.1,
+                "rx": 6.300000000000001,
+                "ry": 5.25,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 244.65,
+                "cy": 194.4,
+                "rx": 4.2,
+                "ry": 3.1500000000000004,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "L’ombrelle 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M269 244L269.6 226.6L275 226.6L276.8 244Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M256.4 229Q258.2 209.2 272 212.2Q287 212.2 288.8 229Q272 236.2 256.4 229Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 267.8,
+                "cy": 221.2,
+                "rx": 3.5999999999999996,
+                "ry": 3,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 279.8,
+                "cy": 224.8,
+                "rx": 2.4,
+                "ry": 1.7999999999999998,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "L’ombrelle 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M93.25 257L93.8 241.05L98.75 241.05L100.4 257Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M81.7 243.25Q83.35 225.1 96 227.85Q109.75 227.85 111.4 243.25Q96 249.85 81.7 243.25Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 92.15,
+                "cy": 236.1,
+                "rx": 3.3000000000000003,
+                "ry": 2.75,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 103.15,
+                "cy": 239.4,
+                "rx": 2.2,
+                "ry": 1.6500000000000001,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "L’ombrelle 7",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M137 258L137.6 240.6L143 240.6L144.8 258Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M124.4 243Q126.2 223.2 140 226.2Q155 226.2 156.8 243Q140 250.2 124.4 243Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 135.8,
+                "cy": 235.2,
+                "rx": 3.5999999999999996,
+                "ry": 3,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 147.8,
+                "cy": 238.8,
+                "rx": 2.4,
+                "ry": 1.7999999999999998,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "L’ombrelle 8",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M193.75 257L194.4 238.15L200.25 238.15L202.2 257Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M180.1 240.75Q182.05 219.3 197 222.55Q213.25 222.55 215.2 240.75Q197 248.55 180.1 240.75Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 192.45,
+                "cy": 232.3,
+                "rx": 3.9000000000000004,
+                "ry": 3.25,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 205.45,
+                "cy": 236.2,
+                "rx": 2.6,
+                "ry": 1.9500000000000002,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "L’ombrelle 9",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M240.5 267L241 252.5L245.5 252.5L247 267Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M230 254.5Q231.5 238 243 240.5Q255.5 240.5 257 254.5Q243 260.5 230 254.5Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 239.5,
+                "cy": 248,
+                "rx": 3,
+                "ry": 2.5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 249.5,
+                "cy": 251,
+                "rx": 2,
+                "ry": 1.5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-11",
+          "label": "L’ombrelle 10",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M51.5 271L52 256.5L56.5 256.5L58 271Z",
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M41 258.5Q42.5 242 54 244.5Q66.5 244.5 68 258.5Q54 264.5 41 258.5Z",
+                "fill": "#c49085"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 50.5,
+                "cy": 252,
+                "rx": 3,
+                "ry": 2.5,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 60.5,
+                "cy": 255,
+                "rx": 2,
+                "ry": 1.5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-12",
+          "label": "La mousse du bois 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M62 260Q58 244 73 247Q82 230 92 245Q113 242 107 260Q85 273 62 260Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M72 257Q82 245 96 255",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-13",
+          "label": "La mousse du bois 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M139 260Q135 244 150 247Q159 230 169 245Q190 242 184 260Q162 273 139 260Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M149 257Q159 245 173 255",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-14",
+          "label": "La mousse du bois 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M220 274Q216 258 231 261Q240 244 250 259Q271 256 265 274Q243 287 220 274Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M230 271Q240 259 254 269",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-15",
+          "label": "La fougère 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M36 265Q26 241 42 222M36 265Q15 233 5 243M36 265Q59 231 67 240",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M33 251L21 241L23 255ZM38 241L49 229L51 243ZM18 253L4 248L11 262ZM50 252L65 244L61 260Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-16",
+          "label": "La fougère 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M111 285Q101 261 117 242M111 285Q90 253 80 263M111 285Q134 251 142 260",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M108 271L96 261L98 275ZM113 261L124 249L126 263ZM93 273L79 268L86 282ZM125 272L140 264L136 280Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-17",
+          "label": "La fougère 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M286 279Q276 255 292 236M286 279Q265 247 255 257M286 279Q309 245 317 254",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M283 265L271 255L273 269ZM288 255L299 243L301 257ZM268 267L254 262L261 276ZM300 266L315 258L311 274Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-18",
+          "label": "La fleur 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M63 285Q68 268 63 250",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M63 275Q39 253 46 276ZM65 267Q87 249 80 271Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 72,
+                "cy": 250,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 66,
+                "cy": 259,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 56,
+                "cy": 255,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 56,
+                "cy": 245,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 66,
+                "cy": 241,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 63,
+                "cy": 250,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-19",
+          "label": "La fleur 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M213 285Q218 268 213 250",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M213 275Q189 253 196 276ZM215 267Q237 249 230 271Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 222,
+                "cy": 250,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 216,
+                "cy": 259,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 206,
+                "cy": 255,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 206,
+                "cy": 245,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 216,
+                "cy": 241,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 213,
+                "cy": 250,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-20",
+          "label": "La fleur 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M265 286Q270 269 265 251",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M265 276Q241 254 248 277ZM267 268Q289 250 282 272Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 274,
+                "cy": 251,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 268,
+                "cy": 260,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 258,
+                "cy": 256,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 258,
+                "cy": 246,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 268,
+                "cy": 242,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 265,
+                "cy": 251,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-arbre-jardin-40",
+    "format": 40,
+    "variant": "round",
+    "drawing": {
+      "version": 1,
+      "id": "arbre-jardin-40",
+      "name": "L’arbre aux petites ombrelles",
+      "description": "Un seul arbre, de ses racines à sa couronne, enrichi de fleurs, fruits, mousse et champignons enracinés. Quarante groupes graphiques conçus ensemble et révélés dans cet ordre.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#8B6D4E",
+        "#AF8D65",
+        "#6F583F",
+        "#7F9D66",
+        "#A9BE7B",
+        "#C4D29A",
+        "#617C50",
+        "#E1B9AE",
+        "#EFDBB6",
+        "#CBA569",
+        "#D3AC83",
+        "#E4D7B8"
+      ],
+      "parts": [
+        {
+          "id": "tronc-bas",
+          "label": "Le pied du tronc",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M143 265Q152 228 148 174L173 174Q171 224 181 265Q162 276 143 265Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "tronc-haut",
+          "label": "Le tronc se prolonge",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M148 180Q151 144 149 111L164 106Q165 142 173 180Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "racine-gauche",
+          "label": "La racine gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M150 249Q126 254 104 270Q95 282 117 277Q143 276 161 263Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "racine-droite",
+          "label": "La racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M170 249Q194 252 217 269Q231 282 208 279Q184 276 164 263Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "branche-basse-gauche",
+          "label": "Une branche basse à gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M154 197Q126 184 98 160L106 151Q133 175 158 180Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "branche-basse-droite",
+          "label": "Une branche basse à droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M166 197Q196 182 220 159L213 150Q188 174 162 181Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "branche-haute-gauche",
+          "label": "Une branche haute à gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M154 161Q126 145 111 118L120 112Q136 136 159 145Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "branche-haute-droite",
+          "label": "Une branche haute à droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M163 161Q191 145 212 118L204 112Q184 135 160 146Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rameau-central",
+          "label": "Le rameau du sommet",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M154 120L155 76L162 76L164 120Z",
+                "fill": "#8B6D4E"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ecorce-claire",
+          "label": "Un relief clair sur l’écorce",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M155 186Q151 222 157 249L164 248Q158 217 163 188Z",
+                "fill": "#AF8D65"
+              }
+            }
+          ]
+        },
+        {
+          "id": "noeud-bois",
+          "label": "Le nœud du bois",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 166,
+                "cy": 219,
+                "rx": 10,
+                "ry": 14,
+                "fill": "#6F583F"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M165 211Q157 220 165 228",
+                "fill": "none",
+                "stroke": "#AF8D65",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rameau-gauche",
+          "label": "Une bifurcation sur la branche gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M125 147Q104 140 88 118",
+                "fill": "none",
+                "stroke": "#8B6D4E",
+                "stroke-width": 7,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-gauche-bas",
+          "label": "Le premier bouquet de feuilles",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M108 169Q76 166 84 142Q81 124 103 124Q122 113 132 133Q149 146 132 162Q122 175 108 169Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-droite-bas",
+          "label": "Le bouquet de feuilles à droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M212 170Q185 169 190 146Q182 130 203 125Q222 112 233 132Q253 143 238 160Q226 177 212 170Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-centre",
+          "label": "Le feuillage central",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M160 173Q131 170 137 148Q129 129 150 121Q170 112 182 131Q198 146 184 163Q173 178 160 173Z",
+                "fill": "#617C50"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-haut-gauche",
+          "label": "Un bouquet sur la branche haute gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M122 135Q95 132 100 109Q94 91 115 86Q137 75 148 96Q161 114 143 129Q135 140 122 135Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-haut-droite",
+          "label": "Un bouquet sur la branche haute droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M198 135Q173 135 175 111Q167 92 189 87Q208 76 221 96Q239 111 221 128Q211 142 198 135Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-sommet",
+          "label": "La couronne du sommet",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M159 108Q132 105 137 83Q130 66 149 59Q170 48 182 69Q198 85 181 101Q171 114 159 108Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-exterieur-gauche",
+          "label": "Le feuillage s’étend à gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M80 156Q54 156 59 134Q54 115 74 110Q93 101 105 121Q119 136 103 151Q91 165 80 156Z",
+                "fill": "#A9BE7B"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-exterieur-droite",
+          "label": "Le feuillage s’étend à droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M244 158Q218 158 221 135Q216 117 236 111Q255 102 267 122Q284 137 268 152Q257 168 244 158Z",
+                "fill": "#A9BE7B"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuille-retombante-gauche",
+          "label": "Une feuille retombe à gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M83 146Q94 174 67 194Q56 162 83 146Z",
+                "fill": "#7F9D66"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M80 156L69 184",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuille-retombante-droite",
+          "label": "Une feuille retombe à droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M242 147Q270 163 255 195Q232 177 242 147Z",
+                "fill": "#7F9D66"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M245 157L254 184",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "jeunes-feuilles-gauche",
+          "label": "Trois jeunes feuilles sur le bouquet gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M104 147Q77 132 91 121Q105 124 104 147M105 145Q95 115 111 115Q126 128 105 145M106 147Q118 121 131 132Q127 147 106 147Z",
+                "fill": "#A9BE7B"
+              }
+            }
+          ]
+        },
+        {
+          "id": "jeunes-feuilles-droite",
+          "label": "Trois jeunes feuilles sur le bouquet droit",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M214 147Q187 132 200 121Q214 125 214 147M215 145Q207 115 221 115Q236 129 215 145M216 147Q228 121 242 132Q237 148 216 147Z",
+                "fill": "#A9BE7B"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuillage-avant",
+          "label": "Le bouquet de feuilles du premier plan",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M160 194Q137 193 137 175Q129 163 145 153Q158 144 169 153Q193 151 188 173Q188 191 170 191Z",
+                "fill": "#A9BE7B"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M148 173Q159 160 174 169",
+                "fill": "none",
+                "stroke": "#C4D29A",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuille-branche-gauche",
+          "label": "Une feuille sur la branche basse gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M114 173Q142 175 137 197Q115 195 114 173Z",
+                "fill": "#617C50"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 179L132 190",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feuille-branche-droite",
+          "label": "Une feuille sur la branche basse droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M208 173Q208 198 185 198Q180 177 208 173Z",
+                "fill": "#617C50"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M202 180L190 191",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleurs-gauche",
+          "label": "La floraison du bouquet gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M100 124Q84 113 95 105Q106 102 109 115Q124 108 126 122Q123 135 111 130Q107 145 96 137Q91 131 100 124Z",
+                "fill": "#E1B9AE"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 107,
+                "cy": 123,
+                "r": 5,
+                "fill": "#CBA569"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleurs-droite",
+          "label": "La floraison du bouquet droit",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M212 126Q198 114 208 106Q221 104 223 117Q237 111 240 124Q237 138 224 132Q220 147 209 139Q205 133 212 126Z",
+                "fill": "#EFDBB6"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 220,
+                "cy": 125,
+                "r": 5,
+                "fill": "#CBA569"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleur-sommet",
+          "label": "Une fleur au sommet",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M153 72Q137 59 148 51Q160 49 163 62Q178 55 180 69Q178 82 165 77Q162 92 150 83Q146 77 153 72Z",
+                "fill": "#E1B9AE"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 160,
+                "cy": 71,
+                "r": 5,
+                "fill": "#CBA569"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fruits-gauche",
+          "label": "Deux petits fruits sous la branche gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M115 168L110 184M130 173L132 197",
+                "fill": "none",
+                "stroke": "#8B6D4E",
+                "stroke-width": 3
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 110,
+                "cy": 188,
+                "r": 8,
+                "fill": "#D3AC83"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 132,
+                "cy": 200,
+                "r": 8,
+                "fill": "#D3AC83"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fruits-droite",
+          "label": "Deux petits fruits sous la branche droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M211 169L215 184M194 174L189 199",
+                "fill": "none",
+                "stroke": "#8B6D4E",
+                "stroke-width": 3
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 215,
+                "cy": 188,
+                "r": 8,
+                "fill": "#D3AC83"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 189,
+                "cy": 201,
+                "r": 8,
+                "fill": "#D3AC83"
+              }
+            }
+          ]
+        },
+        {
+          "id": "mousse-racine-gauche",
+          "label": "La mousse sur la racine gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M121 267Q113 256 125 250Q129 238 140 247Q153 238 156 251Q168 260 153 269Q137 278 121 267Z",
+                "fill": "#617C50"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M126 258Q134 249 142 258",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "mousse-racine-droite",
+          "label": "La mousse sur la racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M174 268Q165 255 177 249Q184 237 192 248Q205 241 208 254Q219 263 202 270Q185 280 174 268Z",
+                "fill": "#617C50"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M180 259Q188 250 197 259",
+                "fill": "none",
+                "stroke": "#A9BE7B",
+                "stroke-width": 3,
+                "stroke-linecap": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "champignon-racine-gauche",
+          "label": "Un champignon attaché à la racine gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M102 270Q106 256 100 241L108 240Q116 255 112 270Z",
+                "fill": "#E4D7B8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M85 242Q86 221 104 220Q123 222 126 242Q106 251 85 242Z",
+                "fill": "#D3AC83"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 101,
+                "cy": 232,
+                "r": 3,
+                "fill": "#EFDBB6"
+              }
+            }
+          ]
+        },
+        {
+          "id": "champignon-racine-droite",
+          "label": "Un champignon attaché à la racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M214 271Q214 258 220 246L227 248Q222 258 225 271Z",
+                "fill": "#E4D7B8"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M202 247Q205 229 223 228Q239 230 242 247Q222 255 202 247Z",
+                "fill": "#D3AC83"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 222,
+                "cy": 238,
+                "r": 3,
+                "fill": "#EFDBB6"
+              }
+            }
+          ]
+        },
+        {
+          "id": "liane-gauche",
+          "label": "Une liane descend du feuillage gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M64 143Q46 180 64 220",
+                "fill": "none",
+                "stroke": "#617C50",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M57 172Q32 164 43 151Q58 155 57 172M55 192Q73 168 82 182Q73 196 55 192M60 211Q37 208 44 193Q59 194 60 211Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "liane-droite",
+          "label": "Une liane descend du feuillage droit",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M265 144Q282 178 263 220",
+                "fill": "none",
+                "stroke": "#617C50",
+                "stroke-width": 4,
+                "stroke-linecap": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M272 173Q275 148 291 155Q295 173 272 173M273 193Q248 190 255 175Q271 176 273 193M267 211Q270 189 286 195Q291 212 267 211Z",
+                "fill": "#7F9D66"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleur-racine-gauche",
+          "label": "Une fleur au creux de la racine gauche",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M137 278L135 253",
+                "fill": "none",
+                "stroke": "#617C50",
+                "stroke-width": 3
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M128 251Q116 242 124 234Q135 231 138 243Q150 237 153 249Q149 261 139 256Q135 270 125 261Q121 256 128 251Z",
+                "fill": "#EFDBB6"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 135,
+                "cy": 250,
+                "r": 4,
+                "fill": "#CBA569"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fleur-racine-droite",
+          "label": "Une fleur au creux de la racine droite",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M187 278L190 253",
+                "fill": "none",
+                "stroke": "#617C50",
+                "stroke-width": 3
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M183 251Q170 240 180 233Q191 231 194 243Q207 237 209 249Q206 262 195 256Q191 270 181 261Q176 256 183 251Z",
+                "fill": "#E1B9AE"
+              }
+            },
+            {
+              "tag": "circle",
+              "attrs": {
+                "cx": 190,
+                "cy": 250,
+                "r": 4,
+                "fill": "#CBA569"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "compositionId": "decor-cascade-cristal-40",
+    "format": 40,
+    "variant": "moss",
+    "drawing": {
+      "version": 1,
+      "id": "cascade-cristal-40",
+      "name": "La cascade de cristal",
+      "description": "Une haute cascade traverse trois terrasses minérales, entourées de cristaux et d’un jardin luxuriant.",
+      "viewBox": [
+        0,
+        0,
+        320,
+        300
+      ],
+      "palette": [
+        "#a7b9b2",
+        "#d9dec4",
+        "#8fbec9",
+        "#b6d8d7",
+        "#8ab3bd",
+        "#c1d7ce",
+        "#e8ecd7",
+        "#b0a6bd",
+        "#719472",
+        "#f1dfb5",
+        "#d89caa",
+        "#b5c995"
+      ],
+      "parts": [
+        {
+          "id": "part-1",
+          "label": "La terrasse de pierre 1",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 99,
+                "cy": 250,
+                "rx": 58,
+                "ry": 22,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M58.400000000000006 246Q99 223 136.7 245",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-2",
+          "label": "La terrasse de pierre 2",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 214,
+                "cy": 252,
+                "rx": 62,
+                "ry": 23,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M170.6 248Q214 224 254.3 247",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-3",
+          "label": "La terrasse de pierre 3",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 111,
+                "cy": 194,
+                "rx": 46,
+                "ry": 25,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M78.80000000000001 190Q111 164 140.9 189",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-4",
+          "label": "La terrasse de pierre 4",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 210,
+                "cy": 194,
+                "rx": 47,
+                "ry": 26,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M177.1 190Q210 163 240.55 189",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-5",
+          "label": "La terrasse de pierre 5",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 139,
+                "cy": 133,
+                "rx": 39,
+                "ry": 22,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M111.7 129Q139 106 164.35 128",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-6",
+          "label": "La terrasse de pierre 6",
+          "shapes": [
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 193,
+                "cy": 130,
+                "rx": 35,
+                "ry": 24,
+                "fill": "#a7b9b2"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M168.5 126Q193 101 215.75 125",
+                "fill": "none",
+                "stroke": "#d9dec4",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-7",
+          "label": "L’eau de la cascade 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M154 115Q138 146 153 175L168 186Q145 143 172 118Z",
+                "fill": "#8fbec9"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-8",
+          "label": "L’eau de la cascade 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M171 177Q182 203 166 227L182 247Q201 203 189 177Z",
+                "fill": "#b6d8d7"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-9",
+          "label": "L’eau de la cascade 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M153 245Q109 239 88 257Q139 277 207 264L181 251Z",
+                "fill": "#8fbec9"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-10",
+          "label": "L’eau de la cascade 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M158 105Q169 91 186 103L193 120L170 130L151 122Z",
+                "fill": "#b6d8d7"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-11",
+          "label": "Le cristal de rive 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M61 238L56 199L75 182L94 199L89 238Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M75 182L80 202L78 238L89 238L94 199Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M64 205L67 228",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-12",
+          "label": "Le cristal de rive 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M87 225L82 199L101 182L120 199L115 225Z",
+                "fill": "#b0a6bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M101 182L106 202L104 225L115 225L120 199Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M90 205L93 215",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-13",
+          "label": "Le cristal de rive 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M215 233L210 191L229 174L248 191L243 233Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M229 174L234 194L232 233L243 233L248 191Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M218 197L221 223",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-14",
+          "label": "Le cristal de rive 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M245 246L240 221L259 204L278 221L273 246Z",
+                "fill": "#b0a6bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M259 204L264 224L262 246L273 246L278 221Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M248 227L251 236",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-15",
+          "label": "Le cristal de rive 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M89 174L84 149L103 132L122 149L117 174Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M103 132L108 152L106 174L117 174L122 149Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M92 155L95 164",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-16",
+          "label": "Le cristal de rive 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M208 173L203 142L222 125L241 142L236 173Z",
+                "fill": "#b0a6bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M222 125L227 145L225 173L236 173L241 142Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M211 148L214 163",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-17",
+          "label": "Le cristal de rive 7",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 119L114 80L133 63L152 80L147 119Z",
+                "fill": "#8ab3bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M133 63L138 83L136 119L147 119L152 80Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M122 86L125 109",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-18",
+          "label": "Le cristal de rive 8",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M181 113L176 83L195 66L214 83L209 113Z",
+                "fill": "#b0a6bd"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M195 66L200 86L198 113L209 113L214 83Z",
+                "fill": "#c1d7ce"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M184 89L187 103",
+                "fill": "none",
+                "stroke": "#e8ecd7",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-19",
+          "label": "La grande fougère 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M41 264Q31 240 47 221M41 264Q20 232 10 242M41 264Q64 230 72 239",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M38 250L26 240L28 254ZM43 240L54 228L56 242ZM23 252L9 247L16 261ZM55 251L70 243L66 259Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-20",
+          "label": "La grande fougère 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M79 282Q69 258 85 239M79 282Q58 250 48 260M79 282Q102 248 110 257",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M76 268L64 258L66 272ZM81 258L92 246L94 260ZM61 270L47 265L54 279ZM93 269L108 261L104 277Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-21",
+          "label": "La grande fougère 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M128 280Q118 256 134 237M128 280Q107 248 97 258M128 280Q151 246 159 255",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M125 266L113 256L115 270ZM130 256L141 244L143 258ZM110 268L96 263L103 277ZM142 267L157 259L153 275Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-22",
+          "label": "La grande fougère 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M213 284Q203 260 219 241M213 284Q192 252 182 262M213 284Q236 250 244 259",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M210 270L198 260L200 274ZM215 260L226 248L228 262ZM195 272L181 267L188 281ZM227 271L242 263L238 279Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-23",
+          "label": "La grande fougère 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M260 281Q250 257 266 238M260 281Q239 249 229 259M260 281Q283 247 291 256",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M257 267L245 257L247 271ZM262 257L273 245L275 259ZM242 269L228 264L235 278ZM274 268L289 260L285 276Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-24",
+          "label": "La grande fougère 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M285 262Q275 238 291 219M285 262Q264 230 254 240M285 262Q308 228 316 237",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M282 248L270 238L272 252ZM287 238L298 226L300 240ZM267 250L253 245L260 259ZM299 249L314 241L310 257Z",
+                "fill": "#719472"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-25",
+          "label": "La fleur de terrasse 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M54 220Q59 203 54 185",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M54 210Q30 188 37 211ZM56 202Q78 184 71 206Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 63,
+                "cy": 185,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 57,
+                "cy": 194,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 47,
+                "cy": 190,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 47,
+                "cy": 180,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 57,
+                "cy": 176,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 54,
+                "cy": 185,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-26",
+          "label": "La fleur de terrasse 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M91 185Q96 168 91 150",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M91 175Q67 153 74 176ZM93 167Q115 149 108 171Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 100,
+                "cy": 150,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 94,
+                "cy": 159,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 84,
+                "cy": 155,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 84,
+                "cy": 145,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 94,
+                "cy": 141,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 91,
+                "cy": 150,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-27",
+          "label": "La fleur de terrasse 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M228 185Q233 168 228 150",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M228 175Q204 153 211 176ZM230 167Q252 149 245 171Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 237,
+                "cy": 150,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 231,
+                "cy": 159,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 221,
+                "cy": 155,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 221,
+                "cy": 145,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 231,
+                "cy": 141,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 228,
+                "cy": 150,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-28",
+          "label": "La fleur de terrasse 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M270 227Q275 210 270 192",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M270 217Q246 195 253 218ZM272 209Q294 191 287 213Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 279,
+                "cy": 192,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 273,
+                "cy": 201,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 263,
+                "cy": 197,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 263,
+                "cy": 187,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 273,
+                "cy": 183,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 270,
+                "cy": 192,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-29",
+          "label": "La fleur de terrasse 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M117 133Q122 116 117 98",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M117 123Q93 101 100 124ZM119 115Q141 97 134 119Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 126,
+                "cy": 98,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 120,
+                "cy": 107,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 110,
+                "cy": 103,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 110,
+                "cy": 93,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 120,
+                "cy": 89,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 117,
+                "cy": 98,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-30",
+          "label": "La fleur de terrasse 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M218 134Q223 117 218 99",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M218 124Q194 102 201 125ZM220 116Q242 98 235 120Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 227,
+                "cy": 99,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 221,
+                "cy": 108,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 211,
+                "cy": 104,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 211,
+                "cy": 94,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 221,
+                "cy": 90,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 218,
+                "cy": 99,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-31",
+          "label": "La fleur de terrasse 7",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 278Q124 261 119 243",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M119 268Q95 246 102 269ZM121 260Q143 242 136 264Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 128,
+                "cy": 243,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 122,
+                "cy": 252,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 112,
+                "cy": 248,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 112,
+                "cy": 238,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 122,
+                "cy": 234,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#f1dfb5"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 119,
+                "cy": 243,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-32",
+          "label": "La fleur de terrasse 8",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M240 281Q245 264 240 246",
+                "fill": "none",
+                "stroke": "#719472",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M240 271Q216 249 223 272ZM242 263Q264 245 257 267Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 249,
+                "cy": 246,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 243,
+                "cy": 255,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 233,
+                "cy": 251,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 233,
+                "cy": 241,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 243,
+                "cy": 237,
+                "rx": 8,
+                "ry": 8,
+                "fill": "#d89caa"
+              }
+            },
+            {
+              "tag": "ellipse",
+              "attrs": {
+                "cx": 240,
+                "cy": 246,
+                "rx": 5,
+                "ry": 5,
+                "fill": "#f1dfb5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-33",
+          "label": "Le coussin de mousse 1",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M45 263Q41 247 56 250Q65 233 75 248Q96 245 90 263Q68 276 45 263Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M55 260Q65 248 79 258",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-34",
+          "label": "Le coussin de mousse 2",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M82 272Q78 256 93 259Q102 242 112 257Q133 254 127 272Q105 285 82 272Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M92 269Q102 257 116 267",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-35",
+          "label": "Le coussin de mousse 3",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M133 279Q129 263 144 266Q153 249 163 264Q184 261 178 279Q156 292 133 279Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M143 276Q153 264 167 274",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-36",
+          "label": "Le coussin de mousse 4",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M182 277Q178 261 193 264Q202 247 212 262Q233 259 227 277Q205 290 182 277Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M192 274Q202 262 216 272",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-37",
+          "label": "Le coussin de mousse 5",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M233 269Q229 253 244 256Q253 239 263 254Q284 251 278 269Q256 282 233 269Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M243 266Q253 254 267 264",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-38",
+          "label": "Le coussin de mousse 6",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M75 194Q71 178 86 181Q95 164 105 179Q126 176 120 194Q98 207 75 194Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M85 191Q95 179 109 189",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-39",
+          "label": "Le coussin de mousse 7",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M211 196Q207 180 222 183Q231 166 241 181Q262 178 256 196Q234 209 211 196Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M221 193Q231 181 245 191",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        },
+        {
+          "id": "part-40",
+          "label": "Le coussin de mousse 8",
+          "shapes": [
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M146 119Q142 103 157 106Q166 89 176 104Q197 101 191 119Q169 132 146 119Z",
+                "fill": "#719472"
+              }
+            },
+            {
+              "tag": "path",
+              "attrs": {
+                "d": "M156 116Q166 104 180 114",
+                "fill": "none",
+                "stroke": "#b5c995",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -10,7 +10,6 @@ export const maxDuration = 30
 
 const requestSchema = z.object({
   exerciseCount: z.number().int().min(1).max(40),
-  exerciseKind: z.literal('addition_crossing_ten'),
   difficulty: z.enum(['easy', 'medium', 'hard']).default('medium'),
 })
 
@@ -44,7 +43,7 @@ export async function POST(req: Request) {
         'Réponds uniquement avec un objet conforme au schéma.',
         'Les couleurs doivent être des hex RGB complets.',
       ].join(' '),
-      prompt: `Génère une créature unique pour une session de ${exerciseCount} additions avec passage de dizaine. Difficulté: ${difficulty}. La liste parts doit contenir exactement ${exerciseCount} éléments, avec body et eyes au début, puis des éléments révélables variés. Renseigne aussi rarity et visuals avec des valeurs du schéma. Choisis un biome cohérent, un mouvement compatible, une palette douce et un nom français court en rapport avec son profil.`,
+      prompt: `Génère une créature unique pour une session de ${exerciseCount} exercices. Difficulté: ${difficulty}. La liste parts doit contenir exactement ${exerciseCount} éléments, avec body et eyes au début, puis des éléments révélables variés. Renseigne aussi rarity et visuals avec des valeurs du schéma. Choisis un biome cohérent, un mouvement compatible, une palette douce et un nom français court en rapport avec son profil.`,
     })
 
     const creature = creatureFromManifest(result.object, exerciseCount)

@@ -1,4 +1,5 @@
 import type { Creature, CreaturePartKind, Direction } from '@/lib/types'
+import { CatalogCreatureView } from '@/components/CatalogCreatureView'
 
 type CreatureViewProps = {
   creature: Creature
@@ -6,6 +7,7 @@ type CreatureViewProps = {
   alive?: boolean
   direction?: Direction
   className?: string
+  label?: string
 }
 
 function isRevealed(creature: Creature, kind: CreaturePartKind) {
@@ -81,7 +83,8 @@ function eyesNode(creature: Creature, side: boolean) {
   return <><ellipse cx="123" cy="129" rx={rx} ry="17" fill={p.dark} /><ellipse cx="177" cy="129" rx={rx} ry="17" fill={p.dark} /><circle cx="127" cy="123" r="4" fill="#fff" /><circle cx="181" cy="123" r="4" fill="#fff" /></>
 }
 
-export function CreatureView({ creature, compact = false, alive = false, direction = 'down', className = '' }: CreatureViewProps) {
+export function CreatureView({ creature, compact = false, alive = false, direction = 'down', className = '', label }: CreatureViewProps) {
+  if (creature.catalogArt) return <CatalogCreatureView creature={creature} alive={alive} direction={direction} className={className} label={label}/>
   const p = creature.palette
   const visuals = creature.visuals ?? {
     eyeStyle: 'round',
@@ -122,7 +125,7 @@ export function CreatureView({ creature, compact = false, alive = false, directi
     : ''
 
   return (
-    <svg viewBox="0 0 300 280" className={`creature-svg ${animation} ${className}`} role="img" aria-label={creature.name} style={{ transform: `scale(${sizeScale})` }}>
+    <svg viewBox="0 0 300 280" className={`creature-svg ${animation} ${className}`} role="img" aria-label={label ?? creature.name} style={{ transform: `scale(${sizeScale})` }}>
       <defs>
         <radialGradient id={`${creature.id}-shine`} cx="35%" cy="25%" r="70%">
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0.58" />

@@ -1,4 +1,8 @@
-export type ExerciseKind = 'addition_crossing_ten'
+import type { ExerciseOptions } from '@/lib/exercises/contracts'
+import type { CatalogCreatureArt, CatalogDecorArt } from '@/lib/rewards/vector'
+
+/** Persisted identifiers stay readable even after a module is unregistered. */
+export type ExerciseKind = string
 
 export type ExerciseDifficulty = 'easy' | 'medium' | 'hard'
 
@@ -36,7 +40,12 @@ export type Exercise = {
   id: string
   kind: ExerciseKind
   prompt: string
-  operands: [number, number]
+  /** Legacy numerical operands; not required by other exercise families. */
+  operands?: [number, number]
+  /** Self-contained presentation survives removal of the originating module. */
+  instruction?: string
+  choices?: number[]
+  data?: Record<string, unknown>
   expectedAnswer: number
   childAnswer?: number
   attempts: number
@@ -45,6 +54,7 @@ export type Exercise = {
 }
 
 export type CreaturePartKind =
+  | 'catalog_group'
   | 'body'
   | 'eyes'
   | 'mouth'
@@ -98,6 +108,7 @@ export type CreatureVisuals = {
 export type Creature = {
   id: string
   catalogId?: string
+  catalogArt?: CatalogCreatureArt
   name: string
   description: string
   personality: string
@@ -121,10 +132,14 @@ export type HomeworkSession = {
   status: 'draft' | 'active' | 'completed'
   title: string
   exerciseKind: ExerciseKind
-  generationOptions?: AdditionGenerationOptions
+  generationOptions?: AdditionGenerationOptions | ExerciseOptions
   solvedAt?: string
   exercises: Exercise[]
-  creature: Creature
+  /** Absent for new décor sessions; legacy creature sessions remain unchanged. */
+  creature?: Creature
+  decor?: GardenDecor
+  /** Only new reward sessions participate in the ten-décor cycle. */
+  rewardSequence?: number
   currentExerciseIndex: number
 }
 
@@ -135,11 +150,50 @@ export type GardenPlacement = {
   direction: Direction
 }
 
+export type DecorVariant = 'round' | 'willow' | 'birch' | 'pine' | 'fruit' | 'fan' | 'buttons' | 'bells' | 'stump' | 'cluster' | 'shelf' | 'lantern' | 'moss' | 'pebbles' | 'standing' | 'arch' | 'slate' | 'fern' | 'daisies' | 'poppies' | 'lavender' | 'reeds' | 'lilies' | 'lotus'
+
+export type DecorRecipe = {
+  variant: DecorVariant
+  palette: 'sage' | 'gold' | 'rose' | 'lilac'
+  seed: number
+}
+
+export type DecorElementKind = 'pebble' | 'moss' | 'fern' | 'flower' | 'grass'
+export type DecorBuildElement = {
+  kind: DecorElementKind
+  x: number
+  y: number
+  size: number
+  angle: number
+  tone: 0 | 1 | 2
+}
+export type DecorBuildPlan = {
+  version: 1
+  steps: { elements: DecorBuildElement[] }[]
+}
+
+export type GardenDecor = {
+  id: string
+  recipe: DecorRecipe
+  /** Saved construction instructions, not an image or a moving reveal mask. */
+  buildPlan?: DecorBuildPlan
+  /** Versioned whole-group illustration snapshot for new catalogue gifts. */
+  catalogArt?: CatalogDecorArt
+  /** One deterministic reveal step per exercise, independent of the AI. */
+  stepCount: number
+  revealedSteps: number
+}
+
+export type DecorPlacement = { decorId: string; x: number; y: number }
+
 export type GardenState = {
   placements: GardenPlacement[]
+  decorPlacements?: DecorPlacement[]
 }
 
 export type AppState = {
+  /** Permanent local composition reservations, including stored/abandoned gifts. */
+  rewardHistory?: string[]
   sessions: HomeworkSession[]
   garden: GardenState
 }

@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "id": "souche-habitee-15",
+  "name": "La souche aux ombrelles",
+  "description": "Une souche unique avec des champignons implantés sur ses flancs et sur le bois coupé. Les raccords sont dessinés dans la recette, sans moteur d’assemblage.",
+  "viewBox": [0, 0, 320, 300],
+  "palette": ["#9B7E5C", "#80674D", "#BE9F76", "#D6BA91", "#E4D7B8", "#BC8E7B", "#D0A58A", "#F1DDBD", "#7C985E", "#AEC482", "#E1B9AE"],
+  "parts": [
+    {"id":"souche","label":"Le volume de la souche","shapes":[
+      {"tag":"path","attrs":{"d":"M96 249L101 143Q153 118 214 141L223 250Q172 275 96 249Z","fill":"#9B7E5C"}},
+      {"tag":"path","attrs":{"d":"M188 146L214 141L223 250Q208 261 189 262Q201 203 188 146Z","fill":"#80674D"}}
+    ]},
+    {"id":"bois-coupe","label":"Le bois coupé et ses cernes","shapes":[
+      {"tag":"ellipse","attrs":{"cx":158,"cy":142,"rx":57,"ry":20,"fill":"#D6BA91"}},
+      {"tag":"ellipse","attrs":{"cx":158,"cy":142,"rx":39,"ry":12,"fill":"none","stroke":"#BE9F76","stroke-width":3}},
+      {"tag":"ellipse","attrs":{"cx":158,"cy":142,"rx":19,"ry":6,"fill":"none","stroke":"#BE9F76","stroke-width":3}}
+    ]},
+    {"id":"racine-gauche","label":"La racine gauche prolonge la souche","shapes":[
+      {"tag":"path","attrs":{"d":"M111 222Q104 251 67 267Q63 276 84 274Q121 268 137 251Z","fill":"#9B7E5C"}},
+      {"tag":"path","attrs":{"d":"M108 249L87 263","fill":"none","stroke":"#BE9F76","stroke-width":4,"stroke-linecap":"round"}}
+    ]},
+    {"id":"racine-droite","label":"La racine droite","shapes":[
+      {"tag":"path","attrs":{"d":"M201 229Q216 250 247 263Q263 275 239 275Q205 271 183 252Z","fill":"#9B7E5C"}},
+      {"tag":"path","attrs":{"d":"M211 250L237 265","fill":"none","stroke":"#BE9F76","stroke-width":4,"stroke-linecap":"round"}}
+    ]},
+    {"id":"ecorce","label":"Les reliefs de l’écorce","shapes":[
+      {"tag":"path","attrs":{"d":"M119 165Q113 204 121 238M143 174L140 246M174 164Q182 197 171 233","fill":"none","stroke":"#80674D","stroke-width":5,"stroke-linecap":"round"}},
+      {"tag":"path","attrs":{"d":"M127 169L129 224M157 183L155 244","fill":"none","stroke":"#BE9F76","stroke-width":5,"stroke-linecap":"round"}}
+    ]},
+    {"id":"pied-gauche","label":"Un pied de champignon sort du flanc gauche","shapes":[
+      {"tag":"path","attrs":{"d":"M105 211Q85 192 73 161L85 157Q91 185 114 200Z","fill":"#E4D7B8"}},
+      {"tag":"path","attrs":{"d":"M104 203Q91 187 85 174","fill":"none","stroke":"#D6BA91","stroke-width":3,"stroke-linecap":"round"}}
+    ]},
+    {"id":"chapeau-gauche","label":"Son grand chapeau abricot","shapes":[
+      {"tag":"path","attrs":{"d":"M43 160Q43 125 75 120Q106 117 117 157Q86 177 43 160Z","fill":"#BC8E7B"}},
+      {"tag":"path","attrs":{"d":"M45 160Q82 173 114 158","fill":"none","stroke":"#F1DDBD","stroke-width":5,"stroke-linecap":"round"}},
+      {"tag":"ellipse","attrs":{"cx":65,"cy":141,"rx":5,"ry":3,"fill":"#F1DDBD"}},
+      {"tag":"ellipse","attrs":{"cx":86,"cy":133,"rx":5,"ry":3,"fill":"#F1DDBD"}},
+      {"tag":"ellipse","attrs":{"cx":98,"cy":150,"rx":4,"ry":3,"fill":"#F1DDBD"}}
+    ]},
+    {"id":"pied-droit","label":"Un pied courbe rejoint le flanc droit","shapes":[
+      {"tag":"path","attrs":{"d":"M209 216Q236 206 241 178L253 179Q247 211 217 227Z","fill":"#E4D7B8"}},
+      {"tag":"path","attrs":{"d":"M221 216Q239 204 243 190","fill":"none","stroke":"#D6BA91","stroke-width":3,"stroke-linecap":"round"}}
+    ]},
+    {"id":"chapeau-droit","label":"Le chapeau de droite","shapes":[
+      {"tag":"path","attrs":{"d":"M219 180Q225 145 249 143Q274 148 283 178Q257 193 219 180Z","fill":"#D0A58A"}},
+      {"tag":"path","attrs":{"d":"M221 181Q252 191 280 179","fill":"none","stroke":"#F1DDBD","stroke-width":4,"stroke-linecap":"round"}},
+      {"tag":"ellipse","attrs":{"cx":242,"cy":160,"rx":5,"ry":3,"fill":"#F1DDBD"}},
+      {"tag":"ellipse","attrs":{"cx":261,"cy":170,"rx":4,"ry":3,"fill":"#F1DDBD"}}
+    ]},
+    {"id":"pied-dessus","label":"Un petit pied pousse sur le bois coupé","shapes":[
+      {"tag":"path","attrs":{"d":"M137 144Q139 126 132 105L144 103Q150 126 148 144Z","fill":"#E4D7B8"}},
+      {"tag":"path","attrs":{"d":"M141 117L144 136","fill":"none","stroke":"#D6BA91","stroke-width":3,"stroke-linecap":"round"}}
+    ]},
+    {"id":"chapeau-dessus","label":"Une ombrelle au sommet","shapes":[
+      {"tag":"path","attrs":{"d":"M107 105Q107 78 136 75Q158 76 168 104Q143 117 107 105Z","fill":"#BC8E7B"}},
+      {"tag":"path","attrs":{"d":"M110 106Q140 115 165 105","fill":"none","stroke":"#F1DDBD","stroke-width":4,"stroke-linecap":"round"}},
+      {"tag":"circle","attrs":{"cx":130,"cy":90,"r":4,"fill":"#F1DDBD"}},
+      {"tag":"circle","attrs":{"cx":148,"cy":97,"r":3,"fill":"#F1DDBD"}}
+    ]},
+    {"id":"mousse","label":"La mousse épouse le pied de la souche","shapes":[
+      {"tag":"path","attrs":{"d":"M146 249Q137 238 149 230Q153 215 166 224Q181 211 188 227Q207 224 208 240Q210 256 189 255Q171 266 156 255Z","fill":"#7C985E"}},
+      {"tag":"path","attrs":{"d":"M151 240Q159 228 167 237M178 240Q185 230 194 237","fill":"none","stroke":"#AEC482","stroke-width":4,"stroke-linecap":"round"}}
+    ]},
+    {"id":"fougere","label":"Une fougère s’enracine dans la racine gauche","shapes":[
+      {"tag":"path","attrs":{"d":"M83 264Q70 237 82 220M83 264Q59 242 49 246M83 264Q97 239 104 235","fill":"none","stroke":"#7C985E","stroke-width":4,"stroke-linecap":"round"}},
+      {"tag":"path","attrs":{"d":"M77 245L68 238L69 251M78 232L74 224L85 229M65 251L55 247L56 257M94 249L94 238L103 243","fill":"none","stroke":"#7C985E","stroke-width":5,"stroke-linecap":"round"}}
+    ]},
+    {"id":"champignon-face","label":"Un champignon en éventail pousse sur l’écorce","shapes":[
+      {"tag":"path","attrs":{"d":"M154 213Q147 212 146 202Q125 210 122 196Q126 177 145 184Q157 171 172 185Q192 183 194 199Q190 214 170 208Q164 220 154 213Z","fill":"#D0A58A"}},
+      {"tag":"path","attrs":{"d":"M129 198Q146 204 158 195Q171 205 186 199","fill":"none","stroke":"#F1DDBD","stroke-width":4,"stroke-linecap":"round"}}
+    ]},
+    {"id":"fleurs-racine","label":"Deux fleurs au creux de la racine droite","shapes":[
+      {"tag":"path","attrs":{"d":"M235 270L232 245M244 270L252 253","fill":"none","stroke":"#7C985E","stroke-width":3,"stroke-linecap":"round"}},
+      {"tag":"path","attrs":{"d":"M231 244Q217 235 226 228Q235 224 238 236Q249 233 249 243Q246 253 237 248Q232 261 225 252Q220 248 231 244Z","fill":"#E1B9AE"}},
+      {"tag":"circle","attrs":{"cx":233,"cy":243,"r":4,"fill":"#D6BA91"}},
+      {"tag":"path","attrs":{"d":"M250 252Q240 245 247 239Q256 236 257 246Q267 243 268 252Q265 259 258 257Q255 267 249 260Q245 257 250 252Z","fill":"#F1DDBD"}}
+    ]}
+  ]
+}

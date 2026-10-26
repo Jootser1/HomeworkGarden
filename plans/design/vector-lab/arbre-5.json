@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "arbre-eventail-5",
+  "name": "Le petit arbre éventail",
+  "description": "Un arbre arrondi dont les deux éventails de feuilles rejoignent le tronc. Cinq groupes dessinés ensemble, sans calcul d’attaches à l’affichage.",
+  "viewBox": [0, 0, 320, 300],
+  "palette": ["#8B6D4E", "#BE9D74", "#7F9D66", "#A9BE7B", "#D0D8A3", "#EFDBB6", "#E1B9AE", "#617C50"],
+  "parts": [
+    {"id":"bois","label":"Le tronc, les branches et les racines","shapes":[
+      {"tag":"path","attrs":{"d":"M143 269Q153 224 147 143L164 137Q167 210 177 269Q161 277 143 269Z","fill":"#8B6D4E"}},
+      {"tag":"path","attrs":{"d":"M153 192Q125 171 112 142M160 180Q183 158 208 139","fill":"none","stroke":"#8B6D4E","stroke-width":10,"stroke-linecap":"round"}},
+      {"tag":"path","attrs":{"d":"M147 259Q125 262 113 278Q143 281 156 268M169 259Q194 266 205 279Q178 281 165 269","fill":"#8B6D4E"}},
+      {"tag":"path","attrs":{"d":"M155 207L157 248","fill":"none","stroke":"#BE9D74","stroke-width":4,"stroke-linecap":"round"}}
+    ]},
+    {"id":"eventail-gauche","label":"L’éventail de feuilles à gauche","shapes":[
+      {"tag":"path","attrs":{"d":"M159 178Q73 181 55 122Q57 86 94 78Q140 86 159 178Z","fill":"#7F9D66"}},
+      {"tag":"path","attrs":{"d":"M153 167L83 106M153 167L110 97M153 167L72 133","fill":"none","stroke":"#A9BE7B","stroke-width":5,"stroke-linecap":"round"}}
+    ]},
+    {"id":"eventail-droit","label":"L’éventail de feuilles à droite","shapes":[
+      {"tag":"path","attrs":{"d":"M161 178Q245 181 267 120Q265 84 229 77Q184 85 161 178Z","fill":"#A9BE7B"}},
+      {"tag":"path","attrs":{"d":"M168 167L241 107M168 167L211 96M168 167L251 133","fill":"none","stroke":"#D0D8A3","stroke-width":5,"stroke-linecap":"round"}}
+    ]},
+    {"id":"couronne","label":"La couronne centrale","shapes":[
+      {"tag":"path","attrs":{"d":"M161 159Q110 144 112 95Q121 49 160 43Q203 51 210 94Q207 140 161 159Z","fill":"#7F9D66"}},
+      {"tag":"path","attrs":{"d":"M161 145L160 67M160 125L137 88M161 125L185 87","fill":"none","stroke":"#A9BE7B","stroke-width":6,"stroke-linecap":"round"}}
+    ]},
+    {"id":"floraison","label":"Les fleurs s’ouvrent dans le feuillage","shapes":[
+      {"tag":"path","attrs":{"d":"M89 119Q72 104 83 95Q95 90 101 105Q116 96 120 109Q122 123 105 125Q109 141 95 142Q80 139 89 119Z","fill":"#EFDBB6"}},
+      {"tag":"circle","attrs":{"cx":99,"cy":117,"r":6,"fill":"#BE9D74"}},
+      {"tag":"path","attrs":{"d":"M219 123Q204 109 215 99Q228 95 231 109Q248 103 251 117Q249 130 234 128Q238 144 224 144Q211 139 219 123Z","fill":"#E1B9AE"}},
+      {"tag":"circle","attrs":{"cx":227,"cy":119,"r":6,"fill":"#BE9D74"}},
+      {"tag":"path","attrs":{"d":"M151 90Q135 80 145 69Q158 64 161 78Q175 70 180 84Q177 97 164 93Q167 108 154 108Q141 102 151 90Z","fill":"#EFDBB6"}},
+      {"tag":"circle","attrs":{"cx":159,"cy":88,"r":5,"fill":"#BE9D74"}}
+    ]}
+  ]
+}

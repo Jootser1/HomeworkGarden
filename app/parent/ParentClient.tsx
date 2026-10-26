@@ -2,16 +2,19 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import type { AdditionGenerationOptions, Creature, Exercise, ExerciseDifficulty, HomeworkSession } from '@/lib/types'
-import { createLocalCatalogCreature } from '@/lib/creatures/factory'
-import { defaultAdditionOptions, generateAdditionCrossingTen, parseManualAdditions } from '@/lib/exercises/additions'
-import { recommendAdditionSession, type SessionRecommendation } from '@/lib/exercises/adaptive-session'
-import { loadAppState, upsertSession } from '@/lib/storage/app-state'
-import { loadSettings } from '@/lib/storage/settings'
+import type { Exercise, ExerciseDifficulty } from '@/lib/types'
+import type { ExerciseModule, ExerciseOptions, Recommendation } from '@/lib/exercises/contracts'
+import { createCatalogSession } from '@/lib/rewards/create-session'
+import { CatalogUnavailableError, rewardAvailability } from '@/lib/rewards/catalog'
+import { exerciseRegistry } from '@/lib/exercises'
+import { recommendModuleSession } from '@/lib/exercises/recommendation'
+import { loadAppState } from '@/lib/storage/app-state'
 
-const uid = (prefix: string) => `${prefix}_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`
+const uid = (prefix: string) => `${prefix}_${crypto.randomUUID()}`
 const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms))
-const recommendationMessages: Record<SessionRecommendation['reason'], string> = {
+const initialModule = exerciseRegistry.all[0]
+const initialOptions: ExerciseOptions = initialModule?.defaults('medium') ?? { count: 10, difficulty: 'medium', parameters: {} }
+const recommendationMessages: Record<Recommendation<ExerciseOptions>['reason'], string> = {
   first: 'Un premier niveau pour commencer en douceur.',
   steady: 'Un niveau proche de la dernière session.',
   support: 'Des calculs plus accessibles pour consolider.',
@@ -19,38 +22,12 @@ const recommendationMessages: Record<SessionRecommendation['reason'], string> = 
   custom: 'Les réglages de la dernière session sont conservés.',
 }
 
-type CreationState = 'idle' | 'invalid' | 'generating' | 'success' | 'fallback'
+type CreationState = 'idle' | 'invalid' | 'generating' | 'success'
 type CreationFeedback = { state: CreationState; title: string; detail: string }
-
-function normalizeOptions(options: AdditionGenerationOptions): AdditionGenerationOptions {
-  const defaults = defaultAdditionOptions(options.difficulty)
-  const integer = (key: 'minBase' | 'maxBase' | 'addendMin' | 'addendMax') => Number.isFinite(options[key]) ? Math.floor(options[key]) : defaults[key]
-  const minBase = Math.max(0, Math.min(integer('minBase'), integer('maxBase')))
-  const maxBase = Math.max(minBase, integer('minBase'), integer('maxBase'))
-  const addendMin = Math.max(1, Math.min(99, integer('addendMin'), integer('addendMax')))
-  return {
-    difficulty: options.difficulty,
-    count: Math.max(1, Math.min(40, Math.floor(options.count) || 1)),
-    minBase,
-    maxBase,
-    addendMin,
-    addendMax: Math.max(addendMin, Math.min(99, Math.max(integer('addendMin'), integer('addendMax')))),
-  }
-}
-
-async function generateCreature(exerciseCount: number, difficulty: ExerciseDifficulty): Promise<{ creature: Creature; source: string }> {
-  const response = await fetch('/api/creatures/generate', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ exerciseCount, exerciseKind: 'addition_crossing_ten', difficulty }),
-  })
-  if (!response.ok) throw new Error('Generation failed')
-  return response.json()
-}
 
 function CreatureCreationOverlay({ feedback }: { feedback: CreationFeedback }) {
   if (feedback.state === 'idle') return null
-  const icon = feedback.state === 'invalid' ? '🌧️' : feedback.state === 'success' ? '✨' : feedback.state === 'fallback' ? '🌱' : '🪄'
+  const icon = feedback.state === 'invalid' ? '🌧️' : feedback.state === 'success' ? '✨' : '🪄'
   return (
     <div className="creation-overlay" role="status" aria-live="polite">
       <div className={`creation-modal creation-${feedback.state}`}>
@@ -70,11 +47,13 @@ function CreatureCreationOverlay({ feedback }: { feedback: CreationFeedback }) {
   )
 }
 
-export default function ParentPage({ offline = false, onStart }: { offline?: boolean; onStart?: (sessionId: string) => void }) {
+export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (sessionId: string) => void }) {
   const router = useRouter()
-  const [options, setOptions] = useState(defaultAdditionOptions('medium'))
+  const [kind, setKind] = useState(initialModule?.kind ?? '')
+  const activeModule = exerciseRegistry.get(kind)
+  const [options, setOptions] = useState(initialOptions)
   const [countText, setCountText] = useState('10')
-  const [recommendation, setRecommendation] = useState<SessionRecommendation>(() => recommendAdditionSession([]))
+  const [recommendation, setRecommendation] = useState<Recommendation<ExerciseOptions>>({ options: initialOptions, reason: 'first' })
   const [personalized, setPersonalized] = useState(false)
   const [manual, setManual] = useState('')
   const [mode, setMode] = useState<'generate' | 'manual'>('generate')
@@ -83,27 +62,44 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
   const [message, setMessage] = useState<string | null>(null)
   const [creationFeedback, setCreationFeedback] = useState<CreationFeedback>({ state: 'idle', title: '', detail: '' })
   const [clientReady, setClientReady] = useState(false)
-  const [aiCreatureGeneration, setAiCreatureGeneration] = useState(false)
+  const [rewardStatus, setRewardStatus] = useState<ReturnType<typeof rewardAvailability> | null>(null)
 
   useEffect(() => {
-    const suggested = recommendAdditionSession(loadAppState().sessions)
-    setRecommendation(suggested)
-    setOptions(suggested.options)
-    setCountText(String(suggested.options.count))
-    setPreview(generateAdditionCrossingTen(suggested.options))
-    setAiCreatureGeneration(loadSettings().aiCreatureGeneration)
+    if (!initialModule) { setClientReady(true); return }
+    const saved = loadAppState()
+    setRewardStatus(rewardAvailability(saved))
+    const suggested = recommendModuleSession(initialModule, saved.sessions)
+    const safe = initialModule.normalize(suggested.options)
+    setRecommendation({ ...suggested, options: safe })
+    setOptions(safe)
+    setCountText(String(safe.count))
+    setPreview(initialModule.generate(safe))
     setClientReady(true)
   }, [])
 
-  const parsedManual = useMemo(() => parseManualAdditions(manual), [manual])
+  const parsedManual = useMemo(() => activeModule?.manual?.parse(manual) ?? [], [manual, activeModule])
   const selectedExercises = mode === 'manual' ? parsedManual : preview
   const validCount = countText.trim() !== '' && Number.isInteger(Number(countText)) && Number(countText) >= 1 && Number(countText) <= 40
 
-  const applyOptions = (next: AdditionGenerationOptions) => {
-    const safe = normalizeOptions(next)
+  const applyOptions = (next: ExerciseOptions, definition: ExerciseModule | undefined = activeModule) => {
+    if (!definition) return
+    const safe = definition.normalize(next)
     setOptions(safe)
-    setPreview(generateAdditionCrossingTen(safe))
+    setPreview(definition.generate(safe))
     setMessage(null)
+  }
+
+  const changeModule = (nextKind: string) => {
+    const nextModule = exerciseRegistry.get(nextKind)
+    if (!nextModule) return
+    const suggested = recommendModuleSession(nextModule, loadAppState().sessions)
+    setKind(nextKind)
+    setRecommendation(suggested)
+    setPersonalized(false)
+    setMode('generate')
+    setManual('')
+    applyOptions({ ...suggested.options, count: options.count }, nextModule)
+    setCountText(String(options.count))
   }
 
   const changeCount = (value: string) => {
@@ -113,66 +109,58 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
   }
 
   const updateDifficulty = (difficulty: ExerciseDifficulty) => {
-    applyOptions({ ...defaultAdditionOptions(difficulty), count: options.count })
+    if (!activeModule) return
+    applyOptions({ ...activeModule.defaults(difficulty), count: options.count })
     setPersonalized(true)
   }
 
-  const updateOption = (key: 'minBase' | 'maxBase' | 'addendMin' | 'addendMax', value: number) => {
-    applyOptions({ ...options, [key]: value })
+  const updateOption = (key: string, value: number) => {
+    applyOptions({ ...options, parameters: { ...options.parameters, [key]: value } })
     setPersonalized(true)
   }
 
   const startSession = async () => {
-    if (loading || (mode === 'generate' && !validCount)) return
+    if (!activeModule || loading || (mode === 'generate' && !validCount)) return
     if (selectedExercises.length === 0) {
-      setCreationFeedback({ state: 'invalid', title: 'Ajoute une addition', detail: 'La créature a besoin d’au moins un calcul.' })
+      setCreationFeedback({ state: 'invalid', title: 'Ajoute un exercice', detail: 'Un petit lot de calculs pour découvrir un cadeau.' })
       await wait(1400)
       setCreationFeedback({ state: 'idle', title: '', detail: '' })
       return
     }
 
+    if (selectedExercises.length > 40) { setMessage('Choisis entre 1 et 40 exercices pour ce catalogue.'); return }
+    setMessage(null)
     setLoading(true)
-    setCreationFeedback({ state: 'generating', title: 'Création...', detail: `${selectedExercises.length} addition${selectedExercises.length > 1 ? 's' : ''} pour une créature.` })
+    setCreationFeedback({ state: 'generating', title: 'Création...', detail: `${selectedExercises.length} exercice${selectedExercises.length > 1 ? 's' : ''} et un cadeau à découvrir.` })
     try {
-      let creature: Creature
-      let usedFallback = false
-      if (offline || !navigator.onLine || !aiCreatureGeneration) {
-        creature = createLocalCatalogCreature(selectedExercises.length)
-      } else {
-        try {
-          const generated = await generateCreature(selectedExercises.length, options.difficulty)
-          creature = generated.creature
-          usedFallback = generated.source === 'fallback'
-        } catch {
-          creature = createLocalCatalogCreature(selectedExercises.length)
-          usedFallback = true
-        }
-      }
-      setCreationFeedback({ state: usedFallback ? 'fallback' : 'success', title: usedFallback ? 'Créature créée' : `${creature.name} apparaît !`, detail: 'C’est parti.' })
-      const session: HomeworkSession = {
+      const session = await createCatalogSession({
         id: uid('session'),
         createdAt: new Date().toISOString(),
         status: 'active',
-        title: 'Additions avec passage de dizaine',
-        exerciseKind: 'addition_crossing_ten',
-        generationOptions: mode === 'generate' ? { ...options } : undefined,
+        title: activeModule.label,
+        exerciseKind: activeModule.kind,
+        generationOptions: mode === 'generate' ? { ...options, parameters: { ...options.parameters } } : undefined,
         exercises: selectedExercises.map((exercise, index) => ({ ...exercise, id: uid(`exercise_${index + 1}`), status: 'pending', attempts: 0, childAnswer: undefined, revealedPartId: undefined })),
-        creature,
         currentExerciseIndex: 0,
-      }
-      upsertSession(session)
+      })
+      setCreationFeedback({ state: 'success', title: 'Un cadeau se cache ici…', detail: 'Chaque bonne réponse ajoute un élément entier.' })
       await wait(950)
       if (onStart) onStart(session.id)
       // Use the precached document shell, not an uncached App Router RSC request.
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       else if (!navigator.onLine) window.location.assign(`/offline#/play/${session.id}`)
       else router.push(`/play/${session.id}`)
+    } catch (error) {
+      if (error instanceof CatalogUnavailableError) setRewardStatus({ kind: error.kind, formats: error.availableFormats })
+      setCreationFeedback({ state: 'idle', title: '', detail: '' })
+      setMessage(error instanceof CatalogUnavailableError ? error.message : 'Impossible de réserver et d’enregistrer ce cadeau. Vérifie le stockage et la compatibilité du navigateur, puis réessaie.')
     } finally {
       setLoading(false)
     }
   }
 
   if (!clientReady) return null
+  if (!activeModule) return <main className="card panel"><h2>Aucun exercice disponible</h2><p>Les sessions enregistrées restent accessibles depuis l’accueil.</p></main>
 
   return (
     <>
@@ -189,6 +177,15 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
             </div>
           </div>
 
+          <p className="hint-text">Premier lot local : 10 décors et 3 créatures, sans génération payante. Les longueurs intermédiaires regroupent des éléments entiers ; une composition réservée n’est jamais réattribuée.</p>
+          {rewardStatus && <p className="hint-text" aria-live="polite">Prochain cadeau : {rewardStatus.kind === 'decor' ? 'décor' : 'créature'}. Formats disponibles : {rewardStatus.formats.length ? rewardStatus.formats.join(' / ') : 'lot épuisé'}.</p>}
+          <label className="form-row">
+            <span className="label">Type d’exercice</span>
+            <select className="select" value={kind} disabled={loading} onChange={event => changeModule(event.target.value)}>
+              {exerciseRegistry.all.map(definition => <option key={definition.kind} value={definition.kind}>{definition.label}</option>)}
+            </select>
+          </label>
+
           {mode === 'generate' ? (
             <label className="form-row session-count">
               <span className="label">Nombre de calculs</span>
@@ -199,8 +196,8 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
             </label>
           ) : (
             <label className="form-row">
-              <span className="label">Les calculs, un par ligne</span>
-              <textarea className="textarea" value={manual} onChange={(event) => setManual(event.target.value)} placeholder={'115 + 9\n127 + 8\n136 + 7'} />
+              <span className="label">{activeModule.manual?.label}</span>
+              <textarea className="textarea" value={manual} onChange={(event) => setManual(event.target.value)} placeholder={activeModule.manual?.placeholder} />
             </label>
           )}
 
@@ -208,9 +205,9 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
           <button className="btn btn-magic session-start" type="button" disabled={loading || (mode === 'generate' && !validCount)} onClick={startSession}>
             {loading ? 'Préparation magique...' : 'Commencer'}
           </button>
-          <button className="btn btn-ghost session-mode" type="button" disabled={loading} onClick={() => { setMode(mode === 'generate' ? 'manual' : 'generate'); setMessage(null) }}>
+          {activeModule.manual && <button className="btn btn-ghost session-mode" type="button" disabled={loading} onClick={() => { setMode(mode === 'generate' ? 'manual' : 'generate'); setMessage(null) }}>
             {mode === 'generate' ? 'Saisir mes calculs' : 'Revenir aux calculs proposés'}
-          </button>
+          </button>}
 
           {mode === 'generate' ? (
             <details className="session-details">
@@ -225,10 +222,7 @@ export default function ParentPage({ offline = false, onStart }: { offline?: boo
                   </select>
                 </div>
                 <div className="grid grid-2">
-                  <label className="form-row"><span className="label">Nombre minimum</span><input className="input" type="number" min={0} value={options.minBase} onChange={(event) => updateOption('minBase', Number(event.target.value))} /></label>
-                  <label className="form-row"><span className="label">Nombre maximum</span><input className="input" type="number" min={0} value={options.maxBase} onChange={(event) => updateOption('maxBase', Number(event.target.value))} /></label>
-                  <label className="form-row"><span className="label">Deuxième terme min.</span><input className="input" type="number" min={1} max={99} value={options.addendMin} onChange={(event) => updateOption('addendMin', Number(event.target.value))} /></label>
-                  <label className="form-row"><span className="label">Deuxième terme max.</span><input className="input" type="number" min={1} max={99} value={options.addendMax} onChange={(event) => updateOption('addendMax', Number(event.target.value))} /></label>
+                  {activeModule.fields.map(field => <label className="form-row" key={field.key}><span className="label">{field.label}</span><input className="input" type="number" min={field.min} max={field.max} value={options.parameters[field.key]} onChange={event => updateOption(field.key, Number(event.target.value))}/></label>)}
                 </div>
                 {personalized ? <button className="btn btn-ghost" type="button" onClick={() => { applyOptions({ ...recommendation.options, count: options.count }); setPersonalized(false) }}>Revenir au niveau proposé</button> : null}
               </div>

@@ -1,282 +1,236 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CreatureView } from '@/components/CreatureView'
-import { gardenTiles, isoPosition, randomAllowedTile, tileAt } from '@/lib/garden/map'
-import { loadAppState, resetAppState, saveAppState } from '@/lib/storage/app-state'
-import type { AppState, Creature, Direction, GardenPlacement, MovementType } from '@/lib/types'
+import { GardenVisitors } from '@/components/GardenVisitors'
+import { GardenResidents } from '@/components/GardenResidents'
+import { GardenVisitorInspector } from '@/components/GardenVisitorInspector'
+import type { GardenVisitorDefinition } from '@/lib/creatures/garden-visitors'
+import './visitors.css'
+import { DecorView } from '@/components/DecorView'
+import { GardenLandscape } from '@/components/GardenLandscape'
+import { decorDefinitions, decorName } from '@/lib/garden/decor'
+import { canPlaceDecor, footprint, isoPosition, randomAllowedTile, scenery, tileAt, tileFromPoint, worldSize } from '@/lib/garden/map'
+import { loadAppState, placeDecor, saveAppState, storeDecor } from '@/lib/storage/app-state'
+import type { AppState, Creature, Direction, GardenDecor } from '@/lib/types'
 
-const movementLabels: Record<MovementType, string> = {
-  walking: 'marche doucement',
-  hopping: 'sautille',
-  flying: 'vole tranquillement',
-  floating: 'flotte dans l’air',
-  swimming: 'nage',
-  amphibious: 'va sur la terre et dans l’eau',
+type Point = { x: number; y: number }
+type Camera = Point & { zoom: number }
+type Gesture = { type: 'pan'; start: Point; camera: Camera; decorId?: string; creatureId?: string } | { type: 'pinch'; distance: number; mid: Point; camera: Camera } | { type: 'decor' } | null
+const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(n, max))
+const midpoint = (a: Point, b: Point) => ({ x: (a.x+b.x)/2, y: (a.y+b.y)/2 })
+const distance = (a: Point, b: Point) => Math.hypot(a.x-b.x, a.y-b.y)
+function sceneryDecor(index: number): GardenDecor {
+  const item = scenery[index]
+  return { id: item.id, recipe: { variant: item.variant, palette: index % 3 ? 'sage' : 'gold', seed: index * 173 }, stepCount: 1, revealedSteps: 1 }
 }
-
-function directionFromDelta(dx: number, dy: number): Direction {
-  if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? 'right' : 'left'
-  return dy > 0 ? 'down' : 'up'
-}
-
-function nextPlacement(placement: GardenPlacement, creature: Creature): GardenPlacement {
-  const deltas = [
-    [1, 0],
-    [-1, 0],
-    [0, 1],
-    [0, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-    [-1, -1],
-  ].sort(() => Math.random() - .5)
-
-  for (const [dx, dy] of deltas) {
-    const target = tileAt(placement.x + dx, placement.y + dy)
-    if (target && creature.movement.allowedTerrain.includes(target.terrain)) {
-      return { ...placement, x: target.x, y: target.y, direction: directionFromDelta(dx, dy) }
-    }
-  }
-
-  const fallback = randomAllowedTile(creature.movement.allowedTerrain, creature.movement.preferredBiomes)
-  return { ...placement, x: fallback.x, y: fallback.y, direction: 'down' }
-}
-
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
-const distance = (a: PointerPoint, b: PointerPoint) => Math.hypot(a.x - b.x, a.y - b.y)
-const midpoint = (a: PointerPoint, b: PointerPoint) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 })
-
-type PointerPoint = { x: number; y: number }
-type Camera = { x: number; y: number; zoom: number }
-
-type GestureState =
-  | { type: 'none' }
-  | { type: 'drag'; pointerId: number; startPoint: PointerPoint; startCamera: Camera }
-  | { type: 'pinch'; startDistance: number; startCamera: Camera; contentPoint: PointerPoint }
 
 export default function GardenPage() {
   const [state, setState] = useState<AppState | null>(null)
-  const [selectedCreature, setSelectedCreature] = useState<Creature | null>(null)
-  const [camera, setCamera] = useState<Camera>({ x: 0, y: 20, zoom: 1 })
-  const pointersRef = useRef(new Map<number, PointerPoint>())
-  const gestureRef = useRef<GestureState>({ type: 'none' })
-  const movedRef = useRef(false)
+  const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: .8 })
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [inspectedId, setInspectedId] = useState<string | null>(null)
+  const [creatureInfo, setCreatureInfo] = useState<Creature | null>(null)
+  const [localPreview, setLocalPreview] = useState(false)
+  const [showVisitors, setShowVisitors] = useState(false)
+  const [visitorsPaused, setVisitorsPaused] = useState(false)
+  const [visitorDirection, setVisitorDirection] = useState<Direction | null>(null)
+  const [visitorInfo, setVisitorInfo] = useState<GardenVisitorDefinition | null>(null)
+  const [preview, setPreview] = useState<Point>({ x: 12, y: 9 })
+  const [message, setMessage] = useState('Explore ton jardin. Maintiens un décor pour le déplacer.')
+  const viewport = useRef<HTMLElement | null>(null)
+  const pointers = useRef(new Map<number, Point>())
+  const gesture = useRef<Gesture>(null)
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const moved = useRef(false)
+  const cancelHold = () => { if (holdTimer.current) clearTimeout(holdTimer.current); holdTimer.current = null }
 
-  useEffect(() => {
-    const mobile = window.innerWidth < 760
-    setCamera({ x: mobile ? -220 : 0, y: mobile ? 14 : 20, zoom: mobile ? 0.72 : 1 })
-  }, [])
+  const centre = () => {
+    const rect = viewport.current?.getBoundingClientRect()
+    if (!rect) return
+    const zoom = rect.width < 760 ? .65 : .9
+    const target = isoPosition(12, 9)
+    setCamera({ x: rect.width/2-target.left*zoom, y: rect.height*.5-target.top*zoom, zoom })
+  }
 
   useEffect(() => {
     const loaded = loadAppState()
-    const completedCreatures = loaded.sessions.map((session) => session.creature).filter((creature) => creature.state === 'alive_in_garden')
+    // Local trial only. Visitors never enter the reward history or saved collection.
+    const local = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname)
+    setLocalPreview(local)
+    if (local && new URLSearchParams(window.location.search).get('visitors') === '1') setShowVisitors(true)
     let changed = false
-    for (const creature of completedCreatures) {
-      if (!loaded.garden.placements.some((placement) => placement.creatureId === creature.id)) {
-        const tile = randomAllowedTile(creature.movement.allowedTerrain, creature.movement.preferredBiomes)
-        loaded.garden.placements.push({ creatureId: creature.id, x: tile.x, y: tile.y, direction: 'down' })
+    for (const session of loaded.sessions) {
+      const creature = session.creature
+      if (!creature || creature.state !== 'alive_in_garden') continue
+      const existing = loaded.garden.placements.find((item) => item.creatureId === creature.id)
+      const tile = existing && tileAt(existing.x, existing.y)
+      if (!tile || !creature.movement.allowedTerrain.includes(tile.terrain)) {
+        const next = randomAllowedTile(creature.movement.allowedTerrain, creature.movement.preferredBiomes)
+        if (existing) { existing.x = next.x; existing.y = next.y }
+        else loaded.garden.placements.push({ creatureId: creature.id, x: next.x, y: next.y, direction: 'down' })
         changed = true
       }
     }
     if (changed) saveAppState(loaded)
     setState(loaded)
+    const unplaced = loaded.sessions.find((session) => session.status === 'completed' && session.decor && !(loaded.garden.decorPlacements ?? []).some((item) => item.decorId === session.decor!.id))
+    if (unplaced?.decor) {
+      setSelectedId(unplaced.decor.id)
+      setMessage('Touche le sol pour installer ton cadeau, ou garde-le pour plus tard.')
+    }
+    centre()
+    const refresh = () => setState(loadAppState())
+    window.addEventListener('homework-garden-state-change', refresh)
+    window.addEventListener('storage', refresh)
+    const observer = new ResizeObserver(() => centre())
+    if (viewport.current) observer.observe(viewport.current)
+    return () => { window.removeEventListener('homework-garden-state-change', refresh); window.removeEventListener('storage', refresh); observer.disconnect(); if (holdTimer.current) clearTimeout(holdTimer.current) }
   }, [])
 
-  const creaturesById = useMemo(() => {
-    const map = new Map<string, Creature>()
-    state?.sessions.forEach((session) => {
-      if (session.creature.state === 'alive_in_garden') map.set(session.creature.id, session.creature)
-    })
-    return map
-  }, [state])
-
-  useEffect(() => {
-    if (!state) return
-    const timer = window.setInterval(() => {
-      setState((current) => {
-        if (!current) return current
-        const next: AppState = structuredClone(current)
-        next.garden.placements = next.garden.placements.map((placement) => {
-          const creature = creaturesById.get(placement.creatureId)
-          return creature ? nextPlacement(placement, creature) : placement
-        })
-        saveAppState(next)
-        return next
-      })
-    }, 2200)
-    return () => window.clearInterval(timer)
-  }, [state, creaturesById])
-
-  const placements = state?.garden.placements.filter((placement) => creaturesById.has(placement.creatureId)) ?? []
-
-  const clearGarden = () => {
-    if (!window.confirm('Effacer toutes les sessions et créatures locales ?')) return
-    resetAppState()
-    setState(loadAppState())
-  }
-
-  const pointFromEvent = (event: React.PointerEvent<HTMLElement>): PointerPoint => {
+  const decors = state?.sessions.flatMap((session) => session.status === 'completed' && session.decor ? [session.decor] : []) ?? []
+  const placements = state?.garden.decorPlacements ?? []
+  const selected = decors.find((decor) => decor.id === selectedId)
+  const inspected = decors.find((decor) => decor.id === inspectedId)
+  const valid = selected ? canPlaceDecor(selected, preview.x, preview.y, placements, decors) : false
+  const reserve = decors.filter((decor) => !placements.some((item) => item.decorId === decor.id))
+  const point = (event: React.PointerEvent<HTMLElement>): Point => {
     const rect = event.currentTarget.getBoundingClientRect()
-    return { x: event.clientX - rect.left, y: event.clientY - rect.top }
+    return { x: event.clientX-rect.left, y: event.clientY-rect.top }
   }
-
-  const startGesture = (pointers: Map<number, PointerPoint>, currentCamera: Camera) => {
-    movedRef.current = false
-    if (pointers.size === 1) {
-      const [pointerId, startPoint] = [...pointers.entries()][0]
-      gestureRef.current = { type: 'drag', pointerId, startPoint, startCamera: currentCamera }
-      return
-    }
-    if (pointers.size >= 2) {
-      const [first, second] = [...pointers.values()]
-      const mid = midpoint(first, second)
-      gestureRef.current = {
-        type: 'pinch',
-        startDistance: distance(first, second),
-        startCamera: currentCamera,
-        contentPoint: {
-          x: (mid.x - currentCamera.x) / currentCamera.zoom,
-          y: (mid.y - currentCamera.y) / currentCamera.zoom,
-        },
-      }
-      return
-    }
-    gestureRef.current = { type: 'none' }
+  const worldPoint = (p: Point) => ({ x: (p.x-camera.x)/camera.zoom, y: (p.y-camera.y)/camera.zoom })
+  const previewAt = (p: Point) => {
+    const world = worldPoint(p), tile = tileFromPoint(world.x, world.y)
+    if (tile) setPreview({ x: tile.x, y: tile.y })
+    return tile
   }
-
-  const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
+  const commit = (x: number, y: number) => {
+    if (!selected) return
+    if (placeDecor(selected.id, x, y)) {
+      setSelectedId(null); setInspectedId(null)
+      setMessage(`${decorName(selected)} a trouvé sa place. Maintiens-le pour le déplacer.`)
+    } else setMessage('Essaie un peu plus loin : il faut un terrain adapté et assez de place.')
+  }
+  const beginPinch = () => {
+    cancelHold()
+    if (gesture.current?.type === 'decor') {
+      setSelectedId(null)
+      setMessage('Déplacement annulé. Ton décor reste à sa place.')
+    }
+    const [a,b] = [...pointers.current.values()]
+    gesture.current = { type: 'pinch', distance: Math.max(1,distance(a,b)), mid: midpoint(a,b), camera }
+    moved.current = true
+  }
+  const down = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.button !== 0) return
     event.currentTarget.setPointerCapture(event.pointerId)
-    pointersRef.current.set(event.pointerId, pointFromEvent(event))
-    startGesture(pointersRef.current, camera)
+    const p = point(event)
+    pointers.current.set(event.pointerId,p)
+    if (pointers.current.size > 1) { beginPinch(); return }
+    moved.current = false
+    const target = event.target instanceof Element ? event.target.closest('[data-decor-id]') : null
+    const decorId = target?.getAttribute('data-decor-id') ?? undefined
+    const creatureTarget = event.target instanceof Element ? event.target.closest('[data-creature-id]') : null
+    const creatureId = creatureTarget?.getAttribute('data-creature-id') ?? undefined
+    gesture.current = { type: 'pan', start: p, camera, decorId, creatureId }
+    if (selected) previewAt(p)
+    if (decorId && !selected) {
+      holdTimer.current = setTimeout(() => {
+        gesture.current = { type: 'decor' }
+        moved.current = true
+        setSelectedId(decorId); setInspectedId(null)
+        const old = placements.find((item) => item.decorId === decorId)
+        if (old) setPreview({x:old.x,y:old.y})
+        setMessage('Fais glisser le décor, puis relâche pour le poser.')
+      }, 500)
+    }
   }
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
-    if (!pointersRef.current.has(event.pointerId)) return
-    pointersRef.current.set(event.pointerId, pointFromEvent(event))
-    const gesture = gestureRef.current
-
-    if (gesture.type === 'drag' && pointersRef.current.size === 1) {
-      const point = pointersRef.current.get(gesture.pointerId)
-      if (!point) return
-      const dx = point.x - gesture.startPoint.x
-      const dy = point.y - gesture.startPoint.y
-      if (Math.abs(dx) + Math.abs(dy) > 4) movedRef.current = true
-      setCamera({ ...gesture.startCamera, x: gesture.startCamera.x + dx, y: gesture.startCamera.y + dy })
+  const move = (event: React.PointerEvent<HTMLElement>) => {
+    const p = point(event)
+    if (selected && !pointers.current.has(event.pointerId)) previewAt(p)
+    if (!pointers.current.has(event.pointerId)) return
+    pointers.current.set(event.pointerId,p)
+    const g = gesture.current
+    if (g?.type === 'decor') { previewAt(p); return }
+    if (g?.type === 'pinch' && pointers.current.size > 1) {
+      const [a,b] = [...pointers.current.values()], mid = midpoint(a,b)
+      const zoom = clamp(g.camera.zoom * distance(a,b)/g.distance,.4,1.8)
+      setCamera({ zoom, x: mid.x-(g.mid.x-g.camera.x)/g.camera.zoom*zoom, y: mid.y-(g.mid.y-g.camera.y)/g.camera.zoom*zoom })
+    } else if (g?.type === 'pan') {
+      const dx = p.x-g.start.x, dy = p.y-g.start.y
+      if (Math.hypot(dx,dy)>7) { moved.current = true; cancelHold() }
+      if (moved.current) setCamera({ ...g.camera, x: g.camera.x+dx, y:g.camera.y+dy })
+    }
+  }
+  const end = (event: React.PointerEvent<HTMLElement>, cancelled = false) => {
+    cancelHold()
+    const g = gesture.current, p = point(event)
+    pointers.current.delete(event.pointerId)
+    if (cancelled) { gesture.current = null; if(g?.type==='decor') setSelectedId(null); setMessage('Déplacement annulé. Ton décor reste à sa place.'); return }
+    if (g?.type === 'pinch') {
+      if (pointers.current.size === 1) { const remaining=[...pointers.current.values()][0]; gesture.current={type:'pan',start:remaining,camera}; moved.current=true }
+      else gesture.current=null
       return
     }
-
-    if (gesture.type === 'pinch' && pointersRef.current.size >= 2) {
-      const [first, second] = [...pointersRef.current.values()]
-      const mid = midpoint(first, second)
-      const nextZoom = clamp(gesture.startCamera.zoom * (distance(first, second) / gesture.startDistance), 0.45, 1.85)
-      movedRef.current = true
-      setCamera({
-        zoom: nextZoom,
-        x: mid.x - gesture.contentPoint.x * nextZoom,
-        y: mid.y - gesture.contentPoint.y * nextZoom,
-      })
+    if (g?.type === 'decor') {
+      const tile = previewAt(p)
+      if (tile && selected && placeDecor(selected.id,tile.x,tile.y)) setMessage('Décor déplacé. Tu peux le reprendre à tout moment.')
+      else setMessage('Cet endroit ne convient pas. Ton décor reste à sa place.')
+      setSelectedId(null)
+    } else if (g?.type === 'pan' && !moved.current) {
+      if (selected) { const tile = previewAt(p); if(tile) commit(tile.x,tile.y); else setMessage('Choisis un endroit dans le jardin.') }
+      else if (g.decorId) setInspectedId(g.decorId)
+      else {
+        const creature = g.creatureId ? state?.sessions.find((session) => session.creature?.id === g.creatureId)?.creature : undefined
+        if(creature) setCreatureInfo(creature)
+      }
     }
+    gesture.current = null
+  }
+  const zoomBy = (factor: number) => {
+    const rect = viewport.current?.getBoundingClientRect(); if(!rect) return
+    const zoom=clamp(camera.zoom*factor,.4,1.8)
+    setCamera({zoom,x:rect.width/2-(rect.width/2-camera.x)/camera.zoom*zoom,y:rect.height/2-(rect.height/2-camera.y)/camera.zoom*zoom})
   }
 
-  const handlePointerEnd = (event: React.PointerEvent<HTMLElement>) => {
-    pointersRef.current.delete(event.pointerId)
-    startGesture(pointersRef.current, camera)
-  }
-
-  const handleWheel = (event: React.WheelEvent<HTMLElement>) => {
-    event.preventDefault()
-    const rect = event.currentTarget.getBoundingClientRect()
-    const point = { x: event.clientX - rect.left, y: event.clientY - rect.top }
-    const nextZoom = clamp(camera.zoom * (event.deltaY > 0 ? 0.92 : 1.08), 0.45, 1.85)
-    const contentPoint = { x: (point.x - camera.x) / camera.zoom, y: (point.y - camera.y) / camera.zoom }
-    setCamera({ zoom: nextZoom, x: point.x - contentPoint.x * nextZoom, y: point.y - contentPoint.y * nextZoom })
-  }
-
-  const openCreature = (creature: Creature) => {
-    if (movedRef.current) return
-    setSelectedCreature(creature)
-  }
-
-  return (
-    <main className="stack">
-      <section className="card panel spread">
-        <h2>Jardin</h2>
-        <div className="row">
-          <Link className="btn btn-primary" href="/parent">Nouvelle session</Link>
-          <button className="btn btn-danger" type="button" onClick={clearGarden}>Réinitialiser</button>
+  return <main className="stack garden-page">
+    <section className="card panel spread garden-heading"><div><span className="garden-eyebrow">Ton petit monde</span><h2>Le jardin</h2></div><Link className="btn btn-primary" href="/parent">Nouvelle session</Link></section>
+    {localPreview && <section className="card panel stack visitor-panel" aria-label="Essai local des créatures">
+      <div><span className="garden-eyebrow">Nouvelles rencontres · essai local</span><h3>Trois visiteurs dans ton jardin</h3></div>
+      <p>{showVisitors ? 'Visiteurs temporaires : ta collection reste intacte. Touche-les pour les voir de près.' : 'Pompon fouisseur, Raie-pétale et Oiseau des aurores viennent se promener sans ajouter de cadeaux ni modifier ta collection.'}</p>
+      <div className="row">
+        <button className="btn btn-primary" type="button" aria-pressed={showVisitors} onClick={() => { setShowVisitors(!showVisitors); setVisitorInfo(null); centre() }}>{showVisitors ? 'Retirer les visiteurs' : 'Inviter les trois visiteurs'}</button>
+        {showVisitors && <button className="btn btn-ghost" type="button" aria-label={visitorsPaused ? 'Reprendre la promenade' : 'Mettre les visiteurs en pause'} onClick={() => { setVisitorsPaused(!visitorsPaused); setVisitorDirection(null) }}>{visitorsPaused ? 'Reprendre' : 'Pause'}</button>}
+      </div>
+      {showVisitors && <div className="visitor-view-controls" aria-label="Observer les orientations"><span>Vues :</span>{([{ direction: 'down', label: 'Face' }, { direction: 'right', label: 'Droite' }, { direction: 'up', label: 'Dos' }, { direction: 'left', label: 'Gauche' }] as const).map(view => <button key={view.direction} type="button" className="btn btn-ghost" aria-pressed={visitorDirection === view.direction} onClick={() => { setVisitorsPaused(true); setVisitorDirection(view.direction) }}>{view.label}</button>)}</div>}
+    </section>}
+    <section ref={viewport} className="garden-wrap card garden-v2" aria-label="Jardin, fais glisser pour explorer. Maintiens un décor pour le déplacer." tabIndex={0}
+      onPointerDown={down} onPointerMove={move} onPointerUp={(event)=>end(event)} onPointerCancel={(event)=>end(event,true)} onContextMenu={(event)=>event.preventDefault()}
+      onKeyDown={(event)=>{
+        if(event.target !== event.currentTarget) return
+        const delta: Record<string,Point>={ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1}}
+        if(event.key==='Escape'){setSelectedId(null);setMessage('Placement annulé. Le cadeau est conservé.');return}
+        if(selected && event.key==='Enter'){event.preventDefault();commit(preview.x,preview.y);return}
+        if(delta[event.key]){event.preventDefault();const d=delta[event.key];if(selected)setPreview({x:clamp(preview.x+d.x,0,21),y:clamp(preview.y+d.y,0,17)});else setCamera({...camera,x:camera.x-d.x*50,y:camera.y-d.y*50})}
+      }}
+      onWheel={(event)=>{ if(event.ctrlKey){event.preventDefault();zoomBy(event.deltaY>0?.92:1.08)}else setCamera({...camera,x:camera.x-event.deltaX,y:camera.y-event.deltaY}) }}>
+      <div className="garden-camera" style={{ width:worldSize.width,height:worldSize.height,transform:`translate(${camera.x}px,${camera.y}px) scale(${camera.zoom})` }}>
+        <div className="iso-world garden-world" style={{width:worldSize.width,height:worldSize.height}}>
+          <GardenLandscape/>
+          {scenery.map((item,index)=>{const pos=isoPosition(item.x,item.y);return <div key={item.id} className="garden-object garden-scenery" style={{left:pos.left,top:pos.top,zIndex:Math.round(pos.top),scale:item.scale}}><DecorView decor={sceneryDecor(index)} complete/></div>})}
+          {placements.map((placement)=>{const decor=decors.find((item)=>item.id===placement.decorId);if(!decor)return null;const pos=isoPosition(placement.x,placement.y);return <button key={decor.id} data-decor-id={decor.id} className={`garden-object garden-placed ${selectedId===decor.id?'is-lifted':''}`} style={{left:pos.left,top:pos.top,zIndex:Math.round(pos.top)}} aria-label={`${decorName(decor)}, maintenir pour déplacer`} onClick={(event)=>{if(event.detail===0)setInspectedId(decor.id)}}><DecorView decor={decor} complete/></button>})}
+          {state && <GardenResidents state={state} onInspect={setCreatureInfo}/>}
+          {showVisitors && <GardenVisitors paused={visitorsPaused} direction={visitorDirection} onInspect={setVisitorInfo}/>}
+          {selected && <><svg className="garden-footprint" width={worldSize.width} height={worldSize.height} aria-hidden="true">{footprint(preview.x,preview.y,decorDefinitions[selected.recipe.variant].width,decorDefinitions[selected.recipe.variant].height).map((cell)=>{const pos=isoPosition(cell.x,cell.y);return <path key={`${cell.x}:${cell.y}`} d={`M${pos.left} ${pos.top-20}l38 20-38 20-38-20Z`} fill={valid?'#e8edc0':'#e6c2ac'} stroke={valid?'#648454':'#a4745e'} strokeWidth="2" strokeDasharray="5 5"/>})}</svg><div className="garden-object garden-preview" style={{left:isoPosition(preview.x,preview.y).left,top:isoPosition(preview.x,preview.y).top,zIndex:1100}}><DecorView decor={selected} complete/></div></>}
         </div>
-      </section>
-
-      <section
-        className="garden-wrap card"
-        aria-label="Jardin, fais glisser pour te déplacer. Écarte deux doigts pour zoomer."
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerEnd}
-        onPointerCancel={handlePointerEnd}
-        onWheel={handleWheel}
-      >
-        <div className="garden-camera" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
-        <div className="iso-world">
-          {gardenTiles.map((tile) => {
-            const pos = isoPosition(tile.x, tile.y)
-            return <div key={`${tile.x}-${tile.y}`} className={`iso-tile tile-${tile.terrain}`} style={{ left: pos.left, top: pos.top }} title={tile.terrain} />
-          })}
-          <span className="garden-deco" style={{ left: 430, top: 72 }}>🌳</span>
-          <span className="garden-deco" style={{ left: 668, top: 126 }}>🍄</span>
-          <span className="garden-deco" style={{ left: 548, top: 262 }}>🌼</span>
-          <span className="garden-deco" style={{ left: 786, top: 286 }}>🌲</span>
-          <span className="garden-deco" style={{ left: 356, top: 342 }}>🌸</span>
-          <span className="garden-deco" style={{ left: 908, top: 188 }}>🪨</span>
-          <span className="garden-deco" style={{ left: 244, top: 238 }}>🌿</span>
-          <span className="garden-deco" style={{ left: 626, top: 430 }}>🪷</span>
-          <span className="garden-deco" style={{ left: 858, top: 420 }}>✨</span>
-
-          {placements.map((placement) => {
-            const creature = creaturesById.get(placement.creatureId)
-            if (!creature) return null
-            const pos = isoPosition(placement.x, placement.y)
-            return (
-              <button
-                className="garden-creature"
-                key={placement.creatureId}
-                style={{ left: pos.left + 4, top: pos.top - 42 }}
-                title={`${creature.name} · ${creature.movement.type}`}
-                type="button"
-                onClick={() => openCreature(creature)}
-              >
-                <CreatureView creature={creature} compact alive direction={placement.direction} />
-              </button>
-            )
-          })}
-        </div>
-        </div>
-      </section>
-
-      {placements.length === 0 ? (
-        <section className="card panel stack">
-          <h2>Aucune créature</h2>
-          <Link className="btn btn-magic" href="/parent">Créer une session</Link>
-        </section>
-      ) : null}
-
-      {selectedCreature ? (
-        <div className="info-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="garden-creature-info" onClick={() => setSelectedCreature(null)}>
-          <div className="info-modal card panel stack" onClick={(event) => event.stopPropagation()}>
-            <div className="spread">
-              <h2 id="garden-creature-info">{selectedCreature.name}</h2>
-              <button className="info-close" type="button" aria-label="Fermer" onClick={() => setSelectedCreature(null)}>×</button>
-            </div>
-            <CreatureView creature={selectedCreature} alive direction="down" />
-            <p>{selectedCreature.description}</p>
-            <div className="info-fact">🚶 {movementLabels[selectedCreature.movement.type]}</div>
-            <div className="info-fact">✨ {selectedCreature.personality}</div>
-            <div className="info-fact">💎 {selectedCreature.rarity}</div>
-          </div>
-        </div>
-      ) : null}
-    </main>
-  )
+      </div>
+    </section>
+    <div className="garden-toolbar"><div className="row"><button className="btn btn-ghost" onClick={()=>zoomBy(1/1.2)} aria-label="Dézoomer">−</button><button className="btn btn-ghost" onClick={centre}>Recentrer</button><button className="btn btn-ghost" onClick={()=>zoomBy(1.2)} aria-label="Zoomer">+</button></div><p role="status" aria-live="polite">{message}</p></div>
+    {selected && <section className="card panel stack placement-panel"><h3>{decorName(selected)}</h3><p>Touche une place libre. Au clavier : flèches puis Entrée dans le jardin.</p><div className="row"><button className="btn btn-primary" disabled={!valid} onClick={()=>commit(preview.x,preview.y)}>Poser ici</button><button className="btn btn-ghost" onClick={()=>{setSelectedId(null);setMessage('Ton cadeau est conservé. Tu pourras le placer plus tard.')}}>Plus tard / Annuler</button></div></section>}
+    <section className="card panel stack garden-reserve"><div><span className="garden-eyebrow">Les cadeaux à installer</span><h3>Ta réserve</h3></div>{reserve.length ? <div className="reserve-items">{reserve.map((decor)=><button className="reserve-item" key={decor.id} onClick={()=>{setSelectedId(decor.id);setInspectedId(null);setMessage('Touche le sol pour installer ton cadeau.');viewport.current?.focus()}}><DecorView decor={decor} complete/><span>{decorName(decor)}</span></button>)}</div> : <p>Chaque session fait grandir ton jardin. Les cadeaux non placés restent ici.</p>}</section>
+    {inspected && <section className="card panel stack" aria-label="Actions du décor"><h3>{decorName(inspected)}</h3><div className="row"><button className="btn btn-primary" onClick={()=>{setSelectedId(inspected.id);const old=placements.find((item)=>item.decorId===inspected.id);if(old)setPreview(old);setInspectedId(null);viewport.current?.focus()}}>Déplacer</button><button className="btn btn-ghost" onClick={()=>{storeDecor(inspected.id);setInspectedId(null);setMessage('Décor rangé dans la réserve.')}}>Ranger</button><button className="btn btn-ghost" onClick={()=>setInspectedId(null)}>Fermer</button></div></section>}
+    {visitorInfo && <GardenVisitorInspector visitor={visitorInfo} onClose={() => setVisitorInfo(null)}/>}
+    {creatureInfo && <div className="info-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="garden-creature-info" onClick={()=>setCreatureInfo(null)}><div className="info-modal card panel stack" onClick={(event)=>event.stopPropagation()}><div className="spread"><h2 id="garden-creature-info">{creatureInfo.name}</h2><button className="info-close" aria-label="Fermer" onClick={()=>setCreatureInfo(null)}>×</button></div><CreatureView creature={creatureInfo} alive/><p>{creatureInfo.description}</p><p>{creatureInfo.personality}</p></div></div>}
+  </main>
 }

@@ -1,4 +1,5 @@
 import type { AdditionGenerationOptions, Exercise, ExerciseDifficulty } from '@/lib/types'
+import { fallbackHint } from '@/lib/exercises/shared'
 
 export type { AdditionGenerationOptions } from '@/lib/types'
 
@@ -84,6 +85,7 @@ export function parseManualAdditions(input: string): Exercise[] {
 }
 
 export function getCrossingTenHint(exercise: Exercise): string {
+  if (!exercise.operands) return fallbackHint
   const [a, b] = exercise.operands
   const ones = Math.abs(a) % 10
   const toNextTen = ones === 0 ? 0 : 10 - ones

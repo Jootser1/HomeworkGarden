@@ -59,8 +59,9 @@ test('create, resume and finish a new session offline, then visit its garden', a
   await expect(page.locator('.exercise-prompt')).toHaveText('127 + 8')
   for (const digit of '135') await page.getByRole('button', { name: digit, exact: true }).click()
   await page.getByRole('button', { name: '✓', exact: true }).click()
-  await page.getByRole('button', { name: 'Utiliser la baguette magique' }).click()
-  await expect(page.locator('.garden-creature')).toHaveCount(1)
+  await page.getByRole('button', { name: 'Installer dans le jardin' }).click()
+  await expect(page.locator('.placement-panel')).toBeVisible()
+  await expect(page.locator('.reserve-item')).toHaveCount(1)
   expect(errors).toEqual([])
 })
 

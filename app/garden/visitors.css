@@ -1,0 +1,58 @@
+/* Original visitor rigs. Motion and orientation use separate nested groups. */
+.garden-creature.garden-traveller { transition: none; }
+.visitor-panel { border: 1px solid #b8c7a7; background: #f0f3e8; }
+.visitor-panel h3 { margin: 3px 0; }
+.visitor-panel p { max-width: 760px; margin: 4px 0; font-size: .9rem; color: #53684b; }
+.visitor-panel .row { flex-wrap: wrap; }
+.visitor-view-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.visitor-view-controls span { font-size: .8rem; color: #53684b; }
+.visitor-view-controls .btn { min-height: 44px; padding: 8px 12px; }
+.visitor-view-controls [aria-pressed=true] { background: #d9e5ca; border-color: #7b9864; }
+.garden-visitor { position: absolute; padding: 0; border: 0; background: transparent; cursor: pointer; transition: none; touch-action: manipulation; }
+.garden-visitor:focus-visible { outline: 3px solid #b09c56; outline-offset: 4px; border-radius: 35%; }
+.garden-visitor[data-paused=true] { transition: none; }
+.garden-visitor-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.garden-visitor-svg .visitor-breath { transform-origin: 160px 224px; animation: visitorBreathe 4s ease-in-out infinite; }
+.garden-visitor-svg .visitor-eyes { transform-origin: center; transform-box: fill-box; animation: visitorBlink 7s linear infinite; }
+.garden-visitor-svg .visitor-hand-left { transform-origin: 89px 182px; animation: visitorHand 3.8s ease-in-out infinite; }
+.garden-visitor-svg .visitor-hand-right { transform-origin: 230px 182px; animation: visitorHand 3.8s ease-in-out infinite reverse; }
+.visitor-pompon[data-moving=true] .visitor-lift { animation: visitorHop .8s ease-in-out infinite; transform-origin: 160px 245px; }
+.visitor-pompon[data-moving=true] .visitor-feet { transform-origin: 160px 230px; animation: visitorFeet .8s ease-in-out infinite; }
+.visitor-raie .visitor-lift { transform: translateY(-36px); animation: visitorGlide 4.6s ease-in-out infinite; }
+.visitor-raie .raie-wing-left { transform-origin: 148px 140px; animation: visitorRayLeft 3.4s ease-in-out infinite; }
+.visitor-raie .raie-wing-right { transform-origin: 172px 140px; animation: visitorRayRight 3.4s ease-in-out infinite; }
+.visitor-raie .raie-tail { transform-origin: 155px 166px; animation: visitorTail 4.6s ease-in-out infinite; }
+.visitor-aurores .visitor-lift { transform: translateY(-42px); animation: visitorBirdFloat 4s ease-in-out infinite; }
+.visitor-aurores .bird-wing-left { transform-origin: 148px 133px; animation: visitorBirdLeft 2.4s ease-in-out infinite; }
+.visitor-aurores .bird-wing-right { transform-origin: 172px 133px; animation: visitorBirdRight 2.4s ease-in-out infinite; }
+.visitor-aurores .bird-tail { transform-origin: 160px 174px; animation: visitorTail 3.6s ease-in-out infinite; }
+.visitor-aurores .visitor-crest { transform-origin: 154px 63px; animation: visitorTail 4s ease-in-out infinite reverse; }
+.garden-visitor-svg[data-paused=true] * { animation-play-state: paused !important; }
+.visitor-dialog { margin: auto; width: min(860px, calc(100vw - 28px)); max-height: 90dvh; overflow: auto; color: #304b3a; border: 1px solid #b5c6a7; }
+.visitor-dialog::backdrop { background: #21372766; backdrop-filter: blur(4px); }
+.visitor-dialog > p { max-width: 720px; }
+.visitor-views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 25px 0 15px; }
+.visitor-views figure { margin: 0; border-radius: 60px 60px 12px 12px; background: #e8eddf; padding: 20px 7px 12px; text-align: center; overflow: visible; }
+.visitor-views figcaption { font-size: .8rem; }
+.visitor-views .garden-visitor-svg { margin-top: 20px; }
+@keyframes visitorBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.018, 1.025); } }
+@keyframes visitorBlink { 0%,44%,48%,100% { transform: scaleY(1); } 46% { transform: scaleY(.08); } }
+@keyframes visitorHand { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+@keyframes visitorHop { 0%,100% { transform: translateY(0) scaleY(.98); } 45% { transform: translateY(-22px) scaleY(1.02); } 80% { transform: translateY(0) scaleY(.96); } }
+@keyframes visitorFeet { 0%,100% { transform: scaleX(1.03); } 45% { transform: scaleX(.9); } }
+@keyframes visitorGlide { 0%,100% { transform: translateY(-36px); } 50% { transform: translateY(-48px); } }
+@keyframes visitorBirdFloat { 0%,100% { transform: translateY(-42px); } 50% { transform: translateY(-54px); } }
+@keyframes visitorRayLeft { 0%,100% { transform: rotate(3deg) scaleY(.97); } 50% { transform: rotate(-5deg) scaleY(.88); } }
+@keyframes visitorRayRight { 0%,100% { transform: rotate(-3deg) scaleY(.97); } 50% { transform: rotate(5deg) scaleY(.88); } }
+@keyframes visitorBirdLeft { 0%,100% { transform: rotate(4deg) scaleY(1); } 50% { transform: rotate(-9deg) scaleY(.84); } }
+@keyframes visitorBirdRight { 0%,100% { transform: rotate(-4deg) scaleY(1); } 50% { transform: rotate(9deg) scaleY(.84); } }
+@keyframes visitorTail { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+/* Discovery uses the same anatomy, but not the garden's flight-height offset.
+ * A fixed viewBox fits the available frame even on short phone screens. */
+.catalog-creature-stage { grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); }
+.catalog-creature-stage .garden-visitor-svg { width: 100%; height: 100%; max-width: 330px; max-height: 100%; min-width: 0; min-height: 0; }
+.catalog-creature-stage .visitor-lift { transform: none; animation: none; }
+@media (max-width: 600px) { .visitor-views { grid-template-columns: repeat(2, minmax(0, 1fr)); } .visitor-panel .btn { font-size: .8rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .garden-visitor, .garden-visitor-svg * { animation: none !important; transition: none !important; }
+}

@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CreatureView } from '@/components/CreatureView'
-import { NumericKeypad } from '@/components/NumericKeypad'
-import { getCrossingTenHint } from '@/lib/exercises/additions'
+import { DecorView } from '@/components/DecorView'
+import { decorName } from '@/lib/garden/decor'
+import { ExerciseAnswer } from '@/components/ExerciseAnswer'
+import { exerciseRegistry } from '@/lib/exercises'
+import { isCorrectAnswer } from '@/lib/exercises/shared'
 import { addCreatureToGarden, getSession, upsertSession } from '@/lib/storage/app-state'
 import type { HomeworkSession, MovementType } from '@/lib/types'
 
@@ -56,8 +59,9 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
   const completedCount = session.exercises.filter((exercise) => exercise.status === 'correct').length
   const total = session.exercises.length
   const complete = completedCount === total
-  const revealedPartCount = session.creature.parts.filter((part) => part.revealed).length
-  const totalPartCount = session.creature.parts.length
+  const revealedPartCount = session.decor?.revealedSteps ?? session.creature?.parts.filter((part) => part.revealed).length ?? 0
+  const totalPartCount = session.decor?.stepCount ?? session.creature?.parts.length ?? 1
+  const rewardName = session.decor ? decorName(session.decor) : session.creature?.name ?? 'Ton cadeau'
   const discoveryProgress = totalPartCount > 0 ? Math.round((revealedPartCount / totalPartCount) * 100) : 0
 
   const persist = (next: HomeworkSession) => {
@@ -65,24 +69,28 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
     upsertSession(next)
   }
 
-  const submit = () => {
-    if (!currentExercise || !answer || isAdvancing || currentExercise.status !== 'pending') return
-    const numeric = Number(answer)
+  const submit = (value: string) => {
+    if (!currentExercise || !value || isAdvancing || currentExercise.status !== 'pending') return
+    const numeric = Number(value)
     const next: HomeworkSession = structuredClone(session)
     const exercise = next.exercises[next.currentExerciseIndex]
     exercise.attempts += 1
     exercise.childAnswer = numeric
 
-    if (numeric === exercise.expectedAnswer) {
+    if (isCorrectAnswer(exercise, numeric)) {
       exercise.status = 'correct'
-      const part = next.creature.parts.find((candidate) => !candidate.revealed)
+      const part = next.creature?.parts.find((candidate) => !candidate.revealed)
       if (part) {
         part.revealed = true
         exercise.revealedPartId = part.id
-        setJustRevealed(part.label)
       }
+      if (next.decor) {
+        next.decor.revealedSteps = next.exercises.filter((item) => item.status === 'correct').length
+        exercise.revealedPartId = `${next.decor.id}_step_${next.decor.revealedSteps}`
+      }
+      setJustRevealed('Une nouvelle découverte !')
       if (next.exercises.every((item) => item.status === 'correct')) {
-        next.creature.state = 'complete_static'
+        if (next.creature) next.creature.state = 'complete_static'
         next.solvedAt ??= new Date().toISOString()
       }
       setFeedback('Bravo !')
@@ -102,7 +110,7 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
         persist(advanced)
       }, 850)
     } else {
-      const hint = exercise.attempts >= 2 ? ` Indice : ${getCrossingTenHint(exercise)}` : ''
+      const hint = exercise.attempts >= 2 ? ` Indice : ${exerciseRegistry.hint(exercise)}` : ''
       setFeedback(`Presque, essaie encore.${hint}`)
       setAnswer('')
       setAnswerState('wrong')
@@ -117,8 +125,10 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
     advanceTimer.current = null
     const next: HomeworkSession = structuredClone(session)
     next.status = 'completed'
-    next.creature.state = 'alive_in_garden'
-    addCreatureToGarden(next.creature)
+    if (next.creature) {
+      next.creature.state = 'alive_in_garden'
+      addCreatureToGarden(next.creature)
+    }
     upsertSession(next)
     if (onGarden) onGarden()
     // Full document navigation is required to use the precached offline shell.
@@ -131,49 +141,52 @@ export function PlaySession({ sessionId: offlineSessionId, onGarden }: { session
     <main className="grid grid-2 play-screen">
       <section className="card panel stack play-exercise-panel">
         <div className="spread">
-          <h2>Additions</h2>
+          <h2>{exerciseRegistry.get(session.exerciseKind)?.shortLabel ?? session.title ?? 'Exercices'}</h2>
           <span className="badge">{completedCount}/{total}</span>
         </div>
         {complete ? (
           <div className="exercise-card card stack">
             <span className="badge">✨ Complète</span>
-            <h2>{session.creature.name}</h2>
-            <button className="btn btn-magic" type="button" onClick={sendToGarden}>Utiliser la baguette magique</button>
+            <h2>{rewardName}</h2>
+            <button className="btn btn-magic" type="button" onClick={sendToGarden}>{session.decor ? 'Installer dans le jardin' : 'Utiliser la baguette magique'}</button>
           </div>
         ) : currentExercise ? (
           <>
             <div className={`exercise-card card stack play-current-exercise answer-${answerState}`}>
-              <div className="exercise-prompt">{currentExercise.prompt}</div>
-              <div className="answer-display">{answer || ' '}</div>
+              {currentExercise.instruction && <p>{currentExercise.instruction}</p>}
+              <div className={`exercise-prompt${currentExercise.prompt.length > 14 ? ' exercise-prompt-long' : ''}`}>{currentExercise.prompt}</div>
+              {!currentExercise.choices?.length && <div className="answer-display">{answer || ' '}</div>}
               {feedback ? <p>{feedback}</p> : null}
             </div>
-            <NumericKeypad value={answer} onChange={setAnswer} onSubmit={submit} disabled={isAdvancing} />
+            <ExerciseAnswer exercise={currentExercise} answer={answer} onChange={setAnswer} onSubmit={submit} disabled={isAdvancing}/>
           </>
         ) : null}
       </section>
 
       <section className="card panel stack play-creature-panel">
         <div className="spread">
-          <h2>{session.creature.name}</h2>
-          <button className="info-button" type="button" aria-label="Infos sur la créature" onClick={() => setInfoOpen(true)}>ℹ️</button>
+          <h2>{complete ? rewardName : 'Un cadeau à découvrir'}</h2>
+          {complete && session.creature ? <button className="info-button" type="button" aria-label="Infos sur la créature" onClick={() => setInfoOpen(true)}>ℹ️</button> : null}
         </div>
-        <div className="discovery-gauge" aria-label="Progression de découverte de la créature">
+        <div className="discovery-gauge" aria-label="Progression de découverte du cadeau">
           <div className="discovery-gauge-label">
-            <span>Créature</span>
+            <span>Découverte</span>
           </div>
           <div className="progress-track"><div className="progress-bar" style={{ width: `${discoveryProgress}%` }} /></div>
         </div>
-        <div className={`creature-stage ${justRevealed ? 'magic-burst' : ''}`} onAnimationEnd={() => setJustRevealed(null)}>
+        <div className={`creature-stage ${session.creature?.catalogArt ? 'catalog-creature-stage' : ''} ${justRevealed && !session.decor?.buildPlan && !session.decor?.catalogArt && !session.creature?.catalogArt ? 'magic-burst' : ''}`} onAnimationEnd={() => setJustRevealed(null)}>
           {revealedPartCount === 0 ? (
-            <div className="creature-seed-placeholder" aria-label="Graine magique pas encore révélée">🌱</div>
-          ) : (
-            <CreatureView creature={session.creature} alive={complete} />
-          )}
+            <div className="creature-seed-placeholder" aria-label="Le cadeau est encore caché">🌱</div>
+          ) : session.decor ? (
+            <DecorView decor={session.decor} />
+          ) : session.creature ? (
+            <CreatureView creature={session.creature} alive={complete} label={complete ? undefined : 'Un cadeau se découvre'} />
+          ) : null}
         </div>
         {justRevealed ? <p className="badge">✨ Nouvelle partie découverte !</p> : null}
       </section>
 
-      {infoOpen ? (
+      {infoOpen && session.creature ? (
         <div className="info-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="creature-info-title" onClick={() => setInfoOpen(false)}>
           <div className="info-modal card panel stack" onClick={(event) => event.stopPropagation()}>
             <div className="spread">

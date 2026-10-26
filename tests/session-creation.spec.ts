@@ -41,7 +41,7 @@ test('automatically softens a struggling finished session and keeps its length',
   const session = await activeSession(page)
   expect(session.generationOptions?.difficulty).toBe('easy')
   expect(session.exercises).toHaveLength(8)
-  expect(session.exercises.every((exercise) => exercise.operands[0] >= 10 && exercise.operands[0] <= 60)).toBe(true)
+  expect(session.exercises.every((exercise) => exercise.operands && exercise.operands[0] >= 10 && exercise.operands[0] <= 60)).toBe(true)
 })
 
 test('three easy finished sessions allow progression without adding exercises', async ({ page }) => {
@@ -88,7 +88,7 @@ test('errors and solving date survive immediate awakening and drive the next ses
   await expect(page.getByText('Presque, essaie encore.', { exact: true })).toBeVisible()
   for (const digit of String(initial.exercises[0].expectedAnswer)) await page.getByRole('button', { name: digit, exact: true }).click()
   await page.getByRole('button', { name: '✓', exact: true }).click()
-  await page.getByRole('button', { name: 'Utiliser la baguette magique' }).click()
+  await page.getByRole('button', { name: 'Installer dans le jardin' }).click()
   await expect(page.locator('.garden-camera')).toBeVisible()
   // The reveal timer must not overwrite the completed session after navigation.
   await page.waitForTimeout(1000)

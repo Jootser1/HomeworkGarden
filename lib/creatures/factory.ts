@@ -6,6 +6,7 @@ const uid = (prefix: string) => `${prefix}_${Math.random().toString(36).slice(2,
 const USED_CREATURES_KEY = 'homework-garden-used-local-creatures-v2'
 
 const partLabels: Record<CreaturePartKind, string> = {
+  catalog_group: 'Un groupe de la composition',
   body: 'Corps',
   eyes: 'Yeux',
   mouth: 'Sourire',
