@@ -20,6 +20,9 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  experimental: {
+    agentUpgrade: 'security',
+  },
   async headers() {
     return [{
       source: '/sw.js',
