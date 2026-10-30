@@ -12,7 +12,7 @@ export function makeExercise(content: Pick<Exercise, 'kind' | 'prompt' | 'expect
 /** Shared bounds/whitelisting, with module-specific relationships kept in modules. */
 export function normalizeFields(options: ExerciseOptions, defaults: ExerciseOptions, fields: readonly ExerciseField[]): ExerciseOptions {
   return {
-    count: boundedInteger(options.count, defaults.count, 1, 40),
+    count: boundedInteger(options.count, defaults.count, 1, 50),
     difficulty: difficulties.includes(options.difficulty) ? options.difficulty : defaults.difficulty,
     parameters: Object.fromEntries(fields.map(field => [field.key, boundedInteger(options.parameters[field.key], defaults.parameters[field.key], field.min, field.max)])),
   }

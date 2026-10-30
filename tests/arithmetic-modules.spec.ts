@@ -52,8 +52,8 @@ for (const kind of ['subtraction', 'multiplication_tables']) {
     const invalid = { ...defaults, count: Infinity, parameters: Object.fromEntries(definition.fields.map(field => [field.key, NaN])) }
     expect(definition.normalize(invalid)).toEqual(defaults)
     const reversed: Record<string, number> = kind === 'subtraction' ? { minimum: 50, maximum: 10 } : { tableMin: 12, tableMax: 0, multiplierMin: 12, multiplierMax: 0 }
-    const normalized = definition.normalize({ ...defaults, count: 41, parameters: { ...reversed, unused: 1 } })
-    expect(normalized.count).toBe(40)
+    const normalized = definition.normalize({ ...defaults, count: 51, parameters: { ...reversed, unused: 1 } })
+    expect(normalized.count).toBe(50)
     expect(normalized.parameters).not.toHaveProperty('unused')
     const keys = kind === 'subtraction' ? ['minimum', 'maximum'] : ['tableMin', 'tableMax']
     expect(normalized.parameters[keys[0]]).toBeLessThanOrEqual(normalized.parameters[keys[1]])

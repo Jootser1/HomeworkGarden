@@ -11,7 +11,7 @@ Lecture, écriture et reconnaissance de devoirs restent pour un second temps. Qu
 
 Les niveaux facile/moyen/costaud et les bornes personnalisées appartiennent à chaque module. Le parent choisit le type dans le formulaire de création ; les réglages et l’aperçu suivent ce choix. Chaque bonne réponse utilise la même mécanique de cadeau. Génération et correction des exercices entièrement locales, sans IA, y compris hors ligne.
 
-Restent à réaliser notamment les additions sans passage de dizaine, les compléments à 10/100 et les calculs à trous. Les séries décroissantes, décimales, négatives ou à règle variable ne sont pas incluses. La longueur de session 1–40 actuelle est conservée : cette modification ne réalise pas encore le catalogue de récompenses 10/15/20/40.
+Restent à réaliser notamment les additions sans passage de dizaine, les compléments à 10/100 et les calculs à trous. Les séries décroissantes, décimales, négatives ou à règle variable ne sont pas incluses. Le raccord du catalogue version 2 étend les sessions de 1 à 50 sans modifier l’indépendance des familles ni augmenter automatiquement la charge. Les formats proposés sont 10/20/30/50 ; voir `REWARD-CATALOG-V2.md` pour la règle et la compatibilité historique.
 
 ## Frontières d’architecture
 

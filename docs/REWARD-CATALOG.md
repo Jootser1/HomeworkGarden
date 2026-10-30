@@ -2,11 +2,19 @@
 
 ## Statut et périmètre
 
-Document de référence des décisions prises avec le parent dans la conversation du 26 octobre 2026. Il décrit la cible produit. Un **premier raccord local de 10 décors et 3 créatures est maintenant livré dans les vraies sessions**, sans masque pour les nouvelles attributions ; ce n’est pas encore le catalogue complet 240 / 40. État, formats disponibles, réservations, limites et 122 tests : voir `docs/REWARD-CATALOG-INTEGRATION.md`. Les essais ci-dessous conservent leur contexte historique.
+Document de référence des décisions prises avec le parent dans la conversation du 26 octobre 2026. Le premier lot de 10 décors et 3 créatures a été publié par `9e4e28b`. Le lot suivant de **56 nouvelles compositions 10/20/30/50 est raccordé dans le code** : contrat, réservations, validation et limites dans `REWARD-CATALOG-V2.md`. L’état d’une publication Git/Vercel se vérifie séparément ; ce n’est pas encore le catalogue cible complet 240 / 40. Les essais ci-dessous conservent leur contexte historique.
 
-## Boucle de jeu
+## Nouvelle décision après usage — 10 / 20 / 30 / 50
 
-- Formats retenus : **10 / 15 / 20 / 40 calculs**, soit exactement autant de groupes de révélation. L’option 50 est abandonnée.
+Le parent confirme que la longueur d’une session détermine directement le cadeau : **10 et 20 bonnes réponses → décor ; 30 → créature ; 50 → créature exceptionnelle**. La session peut être interrompue puis reprise ; ce ne sont pas des points cumulés entre sessions. Cette règle remplace la cadence dix décors puis une créature pour les nouvelles attributions, sans modifier les anciennes récompenses ni effacer leurs réservations.
+
+Volume approuvé et réalisé dans le code : **20 décors à 10 + 20 décors à 20 + 12 créatures à 30 + 4 exceptionnelles à 50 = 56 nouvelles compositions**. Les quatre pilotes ont été approuvés avant les 52 dessins suivants. Le lot comprend 1 160 ajouts natifs et utilise `lib/rewards/art/collection.v2.json`, ressource éditoriale canonique préparée avant les devoirs. Plan et état exact : `plans/rewards-10-20-30-50.md`.
+
+Les formats 15/40 restent lisibles dans les archives ; ils ne sont plus la cible des nouvelles compositions. Le sélecteur des nouvelles sessions utilise la règle par longueur, sans modifier les anciens cadeaux ; une mise en production n’est déclarée qu’après vérification de son SHA et de son statut. Les décisions antérieures ci-dessous sont conservées pour leur historique, pas comme politique d’attribution à réimplémenter.
+
+## Historique — boucle du premier lot
+
+- Formats initialement retenus : **10 / 15 / 20 / 40 calculs**, soit exactement autant de groupes de révélation. L’option 50 avait alors été abandonnée.
 - Chaque bonne réponse ajoute quelque chose de visible et intéressant. Pas de balayage « imprimante », de masque spatial ou d’étape vide.
 - Le cadeau est une composition cohérente : supports avant éléments portés, positions définitives, pas d’objets arbitrairement dispersés.
 - Une session longue produit un cadeau plus impressionnant : silhouette, composition et richesse. Pas seulement le même dessin découpé plus finement, ni des détails insignifiants pour atteindre le compte.

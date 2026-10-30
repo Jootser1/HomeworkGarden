@@ -91,8 +91,9 @@ test('missing attempt evidence cannot count as a successful progress streak', ()
 })
 
 test('very long legacy homework stays inside the supported generated count', () => {
-  const result = recommendAdditionSession([solvedSession({ count: 45, legacy: true })])
-  expect(result.options.count).toBe(40)
+  const result = recommendAdditionSession([solvedSession({ count: 55, legacy: true })])
+  expect(result.options.count).toBe(50)
+  expect(recommendAdditionSession([solvedSession({ count: 45, legacy: true })]).options.count).toBe(45)
 })
 
 test('40 percent retries softens but just below the threshold preserves the level', () => {

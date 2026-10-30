@@ -23,7 +23,7 @@ function isValidOptions(options: HomeworkSession['generationOptions']): options 
     && options.addendMin >= 1 && options.addendMax >= options.addendMin && options.addendMax <= 99
 }
 function optionsFor(session: HomeworkSession): AdditionGenerationOptions {
-  const count = Math.min(40, Math.max(1, session.exercises.length))
+  const count = Math.min(50, Math.max(1, session.exercises.length))
   const stored = session.generationOptions
   const candidate = stored && 'parameters' in stored ? {
     count, difficulty: stored.difficulty, minBase: stored.parameters.minBase, maxBase: stored.parameters.maxBase,

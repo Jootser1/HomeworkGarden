@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import './garden/visitors.css'
+import './garden/collection.css'
 import { Header } from '@/components/Header'
 import { PwaManager } from '@/components/PwaManager'
 

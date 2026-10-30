@@ -25,13 +25,32 @@ export const vectorDrawingSchema = z.object({
 })
 export type VectorShape = z.infer<typeof vectorShapeSchema>
 export type VectorDrawing = z.infer<typeof vectorDrawingSchema>
-export const rewardFormatSchema = z.union([z.literal(10), z.literal(15), z.literal(20), z.literal(40)])
+const legacyFormatSchema = z.union([z.literal(10), z.literal(15), z.literal(20), z.literal(40)])
+export const rewardFormatSchema = z.union([z.literal(10), z.literal(20), z.literal(30), z.literal(50)])
 export type RewardFormat = z.infer<typeof rewardFormatSchema>
-export const rewardFormats: RewardFormat[] = [10, 15, 20, 40]
+export const rewardFormats: RewardFormat[] = [10, 20, 30, 50]
 export function formatForCount(count: number): RewardFormat {
-  if (!Number.isSafeInteger(count) || count < 1 || count > 40) throw new Error('Choisis entre 1 et 40 exercices.')
+  if (!Number.isSafeInteger(count) || count < 1 || count > 50) throw new Error('Choisis entre 1 et 50 exercices.')
   return rewardFormats.find(format => count <= format)!
 }
+export function rewardKindForCount(count: number): 'decor' | 'creature' {
+  return formatForCount(count) <= 20 ? 'decor' : 'creature'
+}
+const shapeList = z.array(vectorShapeSchema).max(30)
+export const collectionDrawingSchema = z.object({
+  version: z.literal(2), id: z.string().regex(/^[a-z0-9-]{1,80}$/), name: z.string().min(1).max(100), description: z.string().max(500),
+  viewBox: z.tuple([z.literal(0), z.literal(0), z.literal(320), z.literal(300)]), palette: z.array(color).min(1).max(24),
+  facing: z.enum(['front', 'left', 'right']),
+  parts: z.array(z.object({
+    id: z.string().regex(/^[a-z0-9-]{1,80}$/), label: z.string().min(1).max(150), shapes: shapeList.min(1),
+    motion: z.enum(['tail', 'gill-left', 'gill-right', 'flipper', 'moon', 'sway', 'wing-left', 'wing-right']).optional(),
+    back: shapeList.optional(), profile: shapeList.optional(),
+  }).strict()).min(1).max(50),
+}).strict().superRefine((drawing, ctx) => {
+  if (new Set(drawing.parts.map(part => part.id)).size !== drawing.parts.length) ctx.addIssue({ code: 'custom', message: 'Groupes dupliqués' })
+  if (drawing.parts.reduce((n, part) => n + part.shapes.length + (part.back?.length ?? 0) + (part.profile?.length ?? 0), 0) > 800) ctx.addIssue({ code: 'custom', message: 'Dessin trop complexe' })
+})
+export type CollectionDrawing = z.infer<typeof collectionDrawingSchema>
 /** Whole, ordered groups only. Custom short sessions combine groups, never slice art. */
 export function revealGroups(partIds: string[], count: number): string[][] {
   if (!Number.isSafeInteger(count) || count < 1 || count > partIds.length) throw new Error('Nombre de groupes incompatible')
@@ -39,19 +58,32 @@ export function revealGroups(partIds: string[], count: number): string[][] {
   partIds.forEach((id, index) => groups[Math.floor(index * count / partIds.length)].push(id))
   return groups
 }
-export const catalogDecorArtSchema = z.object({
-  version: z.literal(1), compositionId: z.string().min(1).max(100), nativeFormat: rewardFormatSchema,
+const legacyDecorSchema = z.object({
+  version: z.literal(1), compositionId: z.string().min(1).max(100), nativeFormat: legacyFormatSchema,
   drawing: vectorDrawingSchema, groups: z.array(z.array(z.string()).min(1)).min(1).max(40),
-}).strict().superRefine((art, ctx) => {
+}).strict()
+const newDecorSchema = z.object({
+  version: z.literal(2), compositionId: z.string().min(1).max(100), nativeFormat: z.union([z.literal(10), z.literal(20)]),
+  drawing: collectionDrawingSchema, groups: z.array(z.array(z.string()).min(1)).min(1).max(20),
+}).strict()
+export const catalogDecorArtSchema = z.discriminatedUnion('version', [legacyDecorSchema, newDecorSchema]).superRefine((art, ctx) => {
   const ids = art.groups.flat()
   if (art.drawing.parts.length !== art.nativeFormat || ids.length !== art.drawing.parts.length || new Set(ids).size !== ids.length || ids.some(id => !art.drawing.parts.some(part => part.id === id))) ctx.addIssue({ code: 'custom', message: 'Plan de révélation incohérent' })
 })
 export type CatalogDecorArt = z.infer<typeof catalogDecorArtSchema>
-export const catalogCreatureArtSchema = z.object({
+const legacyCreatureSchema = z.object({
   version: z.literal(1), compositionId: z.string().min(1).max(100), rig: z.enum(['pompon', 'raie', 'aurores']),
   nativeFormat: z.union([z.literal(10), z.literal(40)]), groups: z.array(z.array(z.string().regex(/^\d{1,2}$/)).min(1).max(40)).min(1).max(40),
 }).strict().superRefine((art, ctx) => {
   const ids = art.groups.flat().map(Number)
   if (art.nativeFormat !== (art.rig === 'aurores' ? 40 : 10) || ids.length !== art.nativeFormat || new Set(ids).size !== ids.length || ids.some(id => id < 1 || id > art.nativeFormat)) ctx.addIssue({ code: 'custom', message: 'Plan de créature incohérent' })
 })
+const newCreatureSchema = z.object({
+  version: z.literal(2), compositionId: z.string().min(1).max(100), nativeFormat: z.union([z.literal(30), z.literal(50)]),
+  drawing: collectionDrawingSchema, groups: z.array(z.array(z.string()).min(1)).min(1).max(50),
+}).strict().superRefine((art, ctx) => {
+  const ids = art.groups.flat()
+  if (art.drawing.parts.length !== art.nativeFormat || ids.length !== art.nativeFormat || new Set(ids).size !== ids.length || ids.some(id => !art.drawing.parts.some(part => part.id === id))) ctx.addIssue({ code: 'custom', message: 'Plan de créature incohérent' })
+})
+export const catalogCreatureArtSchema = z.discriminatedUnion('version', [legacyCreatureSchema, newCreatureSchema])
 export type CatalogCreatureArt = z.infer<typeof catalogCreatureArtSchema>

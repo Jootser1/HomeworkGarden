@@ -1,0 +1,16 @@
+.reward-lengths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.reward-lengths .btn { font-size: .85rem; padding: 12px 8px; min-height: 48px; }
+.reward-lengths [aria-pressed="true"] { background: #dceccf; box-shadow: inset 0 0 0 2px #678959; }
+.collection-creature .collection-motion { transform-box: fill-box; transform-origin: center; animation: collectionSway 4s ease-in-out infinite alternate; }
+.collection-creature .motion-tail { transform-origin: left center; animation-name: collectionTail; }
+.collection-creature .motion-gill-left, .collection-creature .motion-wing-left { transform-origin: right center; animation-name: collectionWing; }
+.collection-creature .motion-gill-right, .collection-creature .motion-wing-right { transform-origin: left center; animation-name: collectionWingRight; }
+.collection-creature .motion-flipper { transform-origin: center top; animation-name: collectionTail; }
+.collection-creature .motion-moon { animation-name: collectionMoon; animation-duration: 6s; }
+.collection-creature.is-paused .collection-motion { animation-play-state: paused; }
+@keyframes collectionSway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(2deg); } }
+@keyframes collectionTail { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(5deg); } }
+@keyframes collectionWing { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg); } }
+@keyframes collectionWingRight { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-6deg); } }
+@keyframes collectionMoon { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .collection-creature .collection-motion { animation: none !important; } }

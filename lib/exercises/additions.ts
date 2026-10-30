@@ -20,7 +20,7 @@ export function defaultAdditionOptions(difficulty: ExerciseDifficulty = 'medium'
 }
 
 export function generateAdditionCrossingTen(options: AdditionGenerationOptions): Exercise[] {
-  const count = clamp(Math.floor(options.count || 1), 1, 40)
+  const count = clamp(Math.floor(options.count || 1), 1, 50)
   const minBase = Math.floor(Math.min(options.minBase, options.maxBase))
   const maxBase = Math.floor(Math.max(options.minBase, options.maxBase))
   const addendMin = clamp(Math.floor(Math.min(options.addendMin, options.addendMax)), 1, 99)

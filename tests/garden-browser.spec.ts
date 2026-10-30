@@ -145,16 +145,15 @@ test('legacy creature sessions can still finish and join the garden',async({page
   expect((await saved(page)).sessions[0].creature?.state).toBe('alive_in_garden')
 })
 
-test('the session after ten completed décor gifts reveals a creature',async({page})=>{
+test('ten historical decor gifts no longer override a short session reward',async({page})=>{
   const history=Array.from({length:10},(_,i)=>({...decorSession(`reward-${i}`),rewardSequence:i+1}))
   await seed(page,{sessions:history,garden:{placements:[]}})
   await startManual(page,'115 + 9')
   const session=(await saved(page)).sessions[0]
-  expect(session.creature).toBeDefined();expect(session.decor).toBeUndefined();expect(session.rewardSequence).toBe(11)
-  await expect(page.locator('.play-creature-panel')).not.toContainText(session.creature!.name)
+  expect(session.decor).toBeDefined();expect(session.creature).toBeUndefined();expect(session.rewardSequence).toBe(11)
+  await expect(page.locator('.play-creature-panel')).not.toContainText(session.decor!.catalogArt!.drawing.name)
   await answer(page,124)
-  await page.getByRole('button',{name:'Utiliser la baguette magique'}).click()
-  await expect(page.locator('.garden-creature')).toHaveCount(1)
+  await expect(page.getByRole('button',{name:'Installer dans le jardin'})).toBeVisible()
 })
 
 test('historical AI preferences do not generate rewards at runtime and production rejects paid generation',async({page})=>{

@@ -2,7 +2,16 @@
 
 Ce document sert de référence pour les prochaines sessions de développement.
 
-## État le plus récent — premier lot de récompenses raccordé, local uniquement
+## État le plus récent — lot 10 / 20 / 30 / 50 intégré et validé
+
+- Après épuisement du premier lot publié (`9e4e28b`), le parent a confirmé la règle **10/20 = décors, 30 = créatures, 50 = exceptionnelles**, par session reprenable, puis approuvé les quatre pilotes et demandé le catalogue complet, son intégration et sa publication au dépôt, voire en production après vérification.
+- **56 nouvelles compositions raccordées : 20 décors 10, 20 décors 20, 12 créatures 30, 4 exceptionnelles 50**. Les pilotes sont inclus. Ressource éditoriale canonique : `lib/rewards/art/collection.v2.json` ; préparation manuelle seulement, jamais au build ou pendant les calculs.
+- Attribution directe selon la longueur, sans prérequis de dix décors. Longueurs personnalisées 1–50 conservées ; cinquante est un défi facultatif, jamais une augmentation automatique de charge. Les cinq familles restent indépendantes.
+- **Validation finale : 139 tests réussis**, lint, TypeScript et build production réussis ; **1 160 ajouts** mesurés à 150 px (minimum 24 pixels modifiés), 64 vues directionnelles bornées, 56 cadeaux complets stockés simultanément, seize nouveaux résidents dans le vrai jardin et parcours cinquante avec reprise hors ligne.
+- Lecteurs historiques, sessions 15/40, réservations, journal, verrou entre onglets et navigation continue préservés. Aucun reset, migration destructive, nouvelle dépendance ou appel payant. Les vues 2,5D, chevauchements possibles entre résidents et l’absence de recette sur iPhone/Safari physique sont explicités dans `docs/REWARD-CATALOG-V2.md`.
+- La publication fait l’objet d’un contrôle distinct du SHA distant et du statut Vercel de `https://homework-garden-two.vercel.app` ; un build local ne suffit pas à la déclarer. Les anciennes notes et captures locales restent exclues du commit, sans suppression. Les sections suivantes sont historiques, pas des instructions de livraison actuelles.
+
+## Historique — premier lot raccordé avant publication
 
 - **10 décors et 3 créatures** désormais attribuables dans les vraies sessions ; nouvelles attributions exclusivement par groupes entiers, sans balayage vertical ni génération payante.
 - Formats natifs décors 10 / 15 / 20 / 40 ; créatures du premier lot : Pompon et Raie en 10, Oiseau en 40. Créatures 15 / 20 encore absentes. Pas de prétention à un catalogue 240 / 40 terminé.

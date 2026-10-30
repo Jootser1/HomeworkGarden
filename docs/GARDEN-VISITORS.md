@@ -2,6 +2,8 @@
 
 ## Mise à jour — personnages désormais gagnables aussi
 
+Les nouvelles attributions utilisent désormais les seize créatures du catalogue version 2 : voir `REWARD-CATALOG-V2.md`. Les trois personnages et leurs rigs décrits ici restent lisibles dans les récompenses déjà sauvegardées.
+
 Le mode visiteur décrit ici reste disponible, sans récompense ni écriture de collection. Les **mêmes trois dessins** sont maintenant aussi raccordés aux vraies sessions comme récompenses du premier lot : Pompon et Raie en 10 groupes, Oiseau en 40. Les résidents gagnés utilisent leurs dimensions, ancrages, vues et navigation continue. Réservations, distinction avec les anciennes sessions et état du catalogue : `docs/REWARD-CATALOG-INTEGRATION.md` (122 tests réussis). Le catalogue cible 240 / 40 et la validation artistique finale ne sont pas terminés.
 
 ## Livré lors de l’essai initial

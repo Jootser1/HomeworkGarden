@@ -107,12 +107,12 @@ test('invalid or cleared counts cannot silently start a different session', asyn
   const start = page.getByRole('button', { name: 'Commencer', exact: true })
   await input.fill('')
   await expect(start).toBeDisabled()
-  await input.fill('41')
+  await input.fill('51')
   await expect(start).toBeDisabled()
-  await expect(page.getByText('Choisis entre 1 et 40 calculs.')).toBeVisible()
-  await input.fill('40')
+  await expect(page.getByText('Choisis entre 1 et 50 calculs.')).toBeVisible()
+  await input.fill('50')
   await expect(start).toBeEnabled()
-  await expect(page.getByText('Voir les 40 calculs', { exact: true })).toBeVisible()
+  await expect(page.getByText('Voir les 50 calculs', { exact: true })).toBeVisible()
 })
 
 test('history-based setup and persistence work offline without any generation API', async ({ page, context }) => {

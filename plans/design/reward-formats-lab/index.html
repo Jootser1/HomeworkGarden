@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Jardin des Devoirs · Les quatre nouveaux formats</title>
+<link rel="stylesheet" href="pilot.css">
+</head>
+<body>
+<main>
+  <header class="masthead"><a href="../../../docs/REWARD-CATALOG-INTEGRATION.md" class="wordmark">Le Jardin des Devoirs <span>atelier des récompenses</span></a><span class="edition">Étude 02 · 10 / 20 / 30 / 50</span></header>
+  <section class="intro"><p class="eyebrow">D’abord choisir les bons dessins</p><h1>De petites trouvailles.<br>De grandes rencontres.</h1><div class="intro-copy"><p>Deux décors pour les séances du quotidien. Une rencontre à trente réponses. À cinquante, un petit monde exceptionnel.</p><p class="small">Quatre compositions pilotes pour préparer le lot de <strong>56 nouvelles récompenses</strong>. Ces exemples ne sont pas encore installés dans le jeu. Aucun accès à ta collection, aucune génération, aucun réseau.</p></div></section>
+  <section aria-label="Les quatre compositions" id="collection" class="collection"></section>
+  <section class="study" aria-labelledby="study-title">
+    <div class="drawing-sheet"><span class="sheet-number" id="sheet-number">01</span><svg id="specimen" viewBox="0 0 320 300" role="img" aria-label="Un cadeau se construit"></svg><p class="sheet-foot">Un ajout entier par bonne réponse · aucun masque</p></div>
+    <div class="study-notes"><p class="eyebrow" id="study-kind">Décor · 10 réponses</p><h2 id="study-title" tabindex="-1"></h2><p id="study-description"></p>
+      <div class="progress-heading"><label for="progress">Réponses justes</label><output id="counter" for="progress">0 / 10</output></div>
+      <input id="progress" type="range" min="0" max="10" step="1" value="0">
+      <p id="addition" role="status" class="addition" aria-live="polite">Le cadeau est encore caché.</p>
+      <div class="buttons"><button type="button" id="next" class="primary">Ajout suivant</button><button type="button" id="complete">Tout révéler</button><button type="button" id="restart">Recommencer</button></div>
+      <div class="review-tools"><button type="button" id="silhouette" aria-pressed="false">Voir les silhouettes</button><button type="button" id="motion" aria-pressed="true">Mettre au repos</button><label for="size">Examiner à <select id="size"><option value="150">150 px · taille compacte</option><option value="300" selected>300 px · découverte</option></select></label></div>
+      <details><summary>Ce qu’il faut juger</summary><ul><li>Est-ce que chaque réponse ajoute quelque chose de visible ?</li><li>Les éléments rejoignent-ils bien leur support ?</li><li>La créature exceptionnelle mérite-t-elle réellement un défi de cinquante réponses ?</li><li>Le dessin reste-t-il reconnaissable à 150 pixels, sans ses couleurs ?</li></ul><p class="small">Les deux créatures présentent ici une première vue animée. Leurs autres orientations et leur raccord au jardin ne sont pas encore réalisés.</p></details>
+    </div>
+  </section>
+  <footer><p><strong>Étape de validation artistique.</strong> Les dessins existants, les réservations et les sessions de production ne sont pas modifiés.</p><p><a href="README.md">Méthode et suite du lot</a> · <a href="drawings.js">Dessins et ordre des ajouts</a></p></footer>
+</main>
+<script src="drawings.js"></script><script src="pilot.js"></script>
+</body>
+</html>

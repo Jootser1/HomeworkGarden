@@ -57,14 +57,14 @@ test('shared normalization handles invalid ranges and a constant RNG cannot hang
     const parameters = Object.fromEntries(definition.fields.map(field => [field.key, Number.NaN]))
     const safe = definition.normalize({ ...defaults, count: Infinity, parameters })
     expect(safe).toEqual(defaults)
-    const reversed = definition.normalize({ ...defaults, count: 41, parameters: { ...defaults.parameters, minimum: 100, maximum: 1, minStep: 10, maxStep: 1 } })
-    expect(reversed.count).toBe(40)
+    const reversed = definition.normalize({ ...defaults, count: 51, parameters: { ...defaults.parameters, minimum: 100, maximum: 1, minStep: 10, maxStep: 1 } })
+    expect(reversed.count).toBe(50)
     expect(reversed.parameters.minimum).toBeLessThanOrEqual(reversed.parameters.maximum)
     for (const roll of [0, .5, .99999]) {
       const exercises = definition.generate(reversed, () => roll)
-      expect(exercises).toHaveLength(40)
+      expect(exercises).toHaveLength(50)
       expect(exercises.every(definition.isValidExercise)).toBe(true)
-      expect(new Set(exercises.map(exercise => exercise.id)).size).toBe(40)
+      expect(new Set(exercises.map(exercise => exercise.id)).size).toBe(50)
     }
   }
   const equal = comparisonModule.generate({ count: 10, difficulty: 'easy', parameters: { minimum: 999999, maximum: 999999 } }, () => 0)

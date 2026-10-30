@@ -1,6 +1,8 @@
-# Récompenses du catalogue — premier raccord local
+# Récompenses du catalogue — historique du premier raccord
 
-## État livré
+> Ce document conserve les décisions et preuves du premier lot, ensuite publié par `9e4e28b`. Le lot suivant de 56 compositions et la politique des nouvelles sessions 10/20/30/50 sont documentés dans `REWARD-CATALOG-V2.md`. Les règles 15/40 et dix décors puis créature ci-dessous sont historiques, pas la politique actuelle. Les mentions « aucun push » décrivent l’état avant publication du premier lot.
+
+## État livré à cette étape
 
 Les **nouvelles sessions** passent désormais par le catalogue de compositions, dans la vraie application. Ce n’est plus seulement un laboratoire graphique : attribution → exercices → révélation par groupes entiers → installation / éveil dans le jardin.
 

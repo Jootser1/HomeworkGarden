@@ -6,6 +6,7 @@ import type { Exercise, ExerciseDifficulty } from '@/lib/types'
 import type { ExerciseModule, ExerciseOptions, Recommendation } from '@/lib/exercises/contracts'
 import { createCatalogSession } from '@/lib/rewards/create-session'
 import { CatalogUnavailableError, rewardAvailability } from '@/lib/rewards/catalog'
+import { formatForCount, rewardFormats } from '@/lib/rewards/vector'
 import { exerciseRegistry } from '@/lib/exercises'
 import { recommendModuleSession } from '@/lib/exercises/recommendation'
 import { loadAppState } from '@/lib/storage/app-state'
@@ -79,7 +80,7 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
 
   const parsedManual = useMemo(() => activeModule?.manual?.parse(manual) ?? [], [manual, activeModule])
   const selectedExercises = mode === 'manual' ? parsedManual : preview
-  const validCount = countText.trim() !== '' && Number.isInteger(Number(countText)) && Number(countText) >= 1 && Number(countText) <= 40
+  const validCount = countText.trim() !== '' && Number.isInteger(Number(countText)) && Number(countText) >= 1 && Number(countText) <= 50
 
   const applyOptions = (next: ExerciseOptions, definition: ExerciseModule | undefined = activeModule) => {
     if (!definition) return
@@ -105,7 +106,7 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
   const changeCount = (value: string) => {
     setCountText(value)
     const count = Number(value)
-    if (value.trim() && Number.isInteger(count) && count >= 1 && count <= 40) applyOptions({ ...options, count })
+    if (value.trim() && Number.isInteger(count) && count >= 1 && count <= 50) applyOptions({ ...options, count })
   }
 
   const updateDifficulty = (difficulty: ExerciseDifficulty) => {
@@ -128,7 +129,7 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
       return
     }
 
-    if (selectedExercises.length > 40) { setMessage('Choisis entre 1 et 40 exercices pour ce catalogue.'); return }
+    if (selectedExercises.length > 50) { setMessage('Choisis entre 1 et 50 exercices pour ce catalogue.'); return }
     setMessage(null)
     setLoading(true)
     setCreationFeedback({ state: 'generating', title: 'Création...', detail: `${selectedExercises.length} exercice${selectedExercises.length > 1 ? 's' : ''} et un cadeau à découvrir.` })
@@ -151,7 +152,7 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
       else if (!navigator.onLine) window.location.assign(`/offline#/play/${session.id}`)
       else router.push(`/play/${session.id}`)
     } catch (error) {
-      if (error instanceof CatalogUnavailableError) setRewardStatus({ kind: error.kind, formats: error.availableFormats })
+      if (error instanceof CatalogUnavailableError) setRewardStatus({ formats: error.availableFormats })
       setCreationFeedback({ state: 'idle', title: '', detail: '' })
       setMessage(error instanceof CatalogUnavailableError ? error.message : 'Impossible de réserver et d’enregistrer ce cadeau. Vérifie le stockage et la compatibilité du navigateur, puis réessaie.')
     } finally {
@@ -177,8 +178,10 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
             </div>
           </div>
 
-          <p className="hint-text">Premier lot local : 10 décors et 3 créatures, sans génération payante. Les longueurs intermédiaires regroupent des éléments entiers ; une composition réservée n’est jamais réattribuée.</p>
-          {rewardStatus && <p className="hint-text" aria-live="polite">Prochain cadeau : {rewardStatus.kind === 'decor' ? 'décor' : 'créature'}. Formats disponibles : {rewardStatus.formats.length ? rewardStatus.formats.join(' / ') : 'lot épuisé'}.</p>}
+          <p className="hint-text">10 réponses : un décor. 20 : un décor plus riche. 30 : une créature. 50 : une créature exceptionnelle. Chaque session se reprend plus tard ; cinquante est un défi facultatif, pas un objectif quotidien.</p>
+          <p className="hint-text">56 compositions préparées à l’avance, sans génération payante. Aucun cadeau réservé ou déjà gagné n’est réattribué.</p>
+          {mode === 'generate' && <div className="reward-lengths" role="group" aria-label="Formats de récompense">{rewardFormats.map(count => <button type="button" className="btn btn-ghost" key={count} disabled={loading} aria-pressed={validCount && Number(countText) === count} onClick={() => changeCount(String(count))}>{count} · {count <= 20 ? 'Décor' : count === 30 ? 'Créature' : 'Exceptionnelle'}{rewardStatus && !rewardStatus.formats.includes(count) ? ' — épuisé' : ''}</button>)}</div>}
+          <p className="hint-text" aria-live="polite">{selectedExercises.length > 0 && selectedExercises.length <= 50 ? `Cadeau de cette session : ${formatForCount(selectedExercises.length) <= 20 ? 'décor' : formatForCount(selectedExercises.length) === 30 ? 'créature' : 'créature exceptionnelle'}. ` : ''}{rewardStatus ? `Formats disponibles : ${rewardStatus.formats.length ? rewardStatus.formats.join(' / ') : 'lot épuisé'}.` : ''} Les longueurs intermédiaires regroupent des éléments entiers, sans changer le nombre de calculs demandé.</p>
           <label className="form-row">
             <span className="label">Type d’exercice</span>
             <select className="select" value={kind} disabled={loading} onChange={event => changeModule(event.target.value)}>
@@ -189,10 +192,10 @@ export default function ParentPage({ onStart }: { offline?: boolean; onStart?: (
           {mode === 'generate' ? (
             <label className="form-row session-count">
               <span className="label">Nombre de calculs</span>
-              <input className="input" type="number" inputMode="numeric" min={1} max={40} step={1} value={countText}
+              <input className="input" type="number" inputMode="numeric" min={1} max={50} step={1} value={countText}
                 aria-invalid={!validCount} aria-describedby={!validCount ? 'count-error' : undefined}
                 onChange={(event) => changeCount(event.target.value)} />
-              {!validCount ? <span id="count-error" className="small" role="status">Choisis entre 1 et 40 calculs.</span> : null}
+              {!validCount ? <span id="count-error" className="small" role="status">Choisis entre 1 et 50 calculs.</span> : null}
             </label>
           ) : (
             <label className="form-row">
